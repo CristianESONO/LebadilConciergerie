@@ -1871,9 +1871,10 @@
             </table>
           </div>
         </div>
+      </div>
 
-        <!-- ==================== TAB 6: PARAMÈTRES GÉNÉRAUX & CONFIGURATION ==================== -->
-        <div id="tab-settings" class="tab-pane">
+      <!-- ==================== TAB 6: PARAMÈTRES GÉNÉRAUX & CONFIGURATION ==================== -->
+      <div id="tab-settings" class="tab-pane">
           <div class="card-container" style="margin-bottom: 2rem;">
             <div class="card-header">
               <div>
@@ -2045,8 +2046,6 @@
           </div>
         </div>
 
-      </div>
-
     </main>
   </div>
 
@@ -2087,6 +2086,10 @@
 
         if (currentBreadcrumb && tabLabels[targetTab]) {
           currentBreadcrumb.textContent = tabLabels[targetTab];
+        }
+
+        if (targetTab === 'tab-settings') {
+          loadSettings();
         }
       });
     });
