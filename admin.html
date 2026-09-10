@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accès Sécurisé Direction — Le BADIL Conciergerie Dakar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+
+      --navy-950: #061124;
+      --navy-900: #0A1D3C;
+      --navy-800: #0F2C59;
+      --navy-700: #183B70;
+
+      --gold-600: #A88656;
+      --gold-500: #C5A880;
+      --gold-400: #DAC0A3;
+      --gold-100: #FAF5EF;
+
+      --slate-500: #64748B;
+      --slate-400: #94A3B8;
+      --slate-300: #CBD5E1;
+      --slate-200: #E2E8F0;
+      --slate-100: #F1F5F9;
+
+      --white: #FFFFFF;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: radial-gradient(circle at 50% 20%, #153260 0%, var(--navy-900) 60%, var(--navy-950) 100%);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .login-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(255, 255, 255, 0.98);
+      color: #0F172A;
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      box-shadow: 0 25px 50px -12px rgba(6, 17, 36, 0.5), 0 0 0 1px rgba(218, 192, 163, 0.3);
+      position: relative;
+    }
+
+    .login-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--gold-400), var(--gold-600));
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    .brand-section {
+      text-align: center;
+      margin-bottom: 2.25rem;
+    }
+
+    .brand-crest {
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 1rem;
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--navy-950);
+      box-shadow: 0 8px 20px rgba(197, 168, 128, 0.35);
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      letter-spacing: 0.5px;
+    }
+
+    .brand-subtitle {
+      font-size: 0.72rem;
+      color: var(--gold-600);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .portal-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.85rem;
+      background: var(--navy-100);
+      color: var(--navy-800);
+      padding: 0.3rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .portal-tag .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--navy-800);
+    }
+
+    .form-group {
+      margin-bottom: 1.35rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 0.45rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--slate-300);
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: #0F172A;
+      background: var(--white);
+      transition: all 0.2s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--navy-800);
+      box-shadow: 0 0 0 3px rgba(15, 44, 89, 0.1);
+    }
+
+    .btn-submit {
+      width: 100%;
+      margin-top: 0.75rem;
+      background: linear-gradient(135deg, var(--navy-800), var(--navy-900));
+      color: var(--white);
+      padding: 0.9rem;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(15, 44, 89, 0.25);
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, var(--navy-900), var(--navy-950));
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(15, 44, 89, 0.35);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .alert-box {
+      background: #FFF1F2;
+      border: 1px solid #FECDD3;
+      color: #BE123C;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+    }
+
+    .public-link-container {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--slate-200);
+    }
+
+    .public-link-container a {
+      color: var(--slate-500);
+      font-size: 0.825rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s ease;
+    }
+
+    .public-link-container a:hover {
+      color: var(--navy-800);
+    }
+
+    .footer-note {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.4);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-box">
+      <div class="brand-section">
+        <div class="brand-crest">B</div>
+        <h1 class="brand-title">LE BADIL</h1>
+        <div class="brand-subtitle">Conciergerie Dakar</div>
+        <div class="portal-tag">
+          <span class="dot"></span>
+          <span>Espace Direction & Exploitation</span>
+        </div>
+      </div>
+
+      <div class="alert-box" id="errorBox">
+        <span>⚠️</span>
+        <span id="errorMessage">Identifiants non reconnus.</span>
+      </div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label" for="login">Identifiant Administrateur</label>
+          <input 
+            type="text" 
+            id="login" 
+            class="form-input" 
+            placeholder="Ex: admin" 
+            required 
+            autocomplete="username"
+            autofocus
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Mot de passe de sécurité</label>
+          <input 
+            type="password" 
+            id="password" 
+            class="form-input" 
+            placeholder="••••••••••••" 
+            required 
+            autocomplete="current-password"
+          >
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <span>Accéder au Dashboard</span>
+        </button>
+      </form>
+
+      <div class="public-link-container">
+        <a href="/">
+          <span>←</span>
+          <span>Retour au portail public Le BADIL Conciergerie</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer-note">
+    © 2026 Le BADIL Conciergerie SARL • Dakar, Sénégal • Accès strictement restreint au personnel accrédité
+  </footer>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorBox = document.getElementById('errorBox');
+    const errorMessage = document.getElementById('errorMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorBox.style.display = 'none';
+
+      const login = document.getElementById('login').value.trim();
+      const password = document.getElementById('password').value;
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Vérification sécurisée...</span>';
+
+      try {
+        const response = await fetch('/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ login, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          submitBtn.innerHTML = '<span>Connexion autorisée...</span>';
+          window.location.href = data.redirect || '/admin/dashboard';
+        } else {
+          errorBox.style.display = 'flex';
+          errorMessage.textContent = data.message || 'Identifiant ou mot de passe incorrect.';
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            <span>Accéder au Dashboard</span>
+          `;
+        }
+      } catch (err) {
+        errorBox.style.display = 'flex';
+        errorMessage.textContent = 'Erreur de connexion au serveur.';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <span>Accéder au Dashboard</span>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>

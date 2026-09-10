@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": "usr-1",
+      "name": "Direction Générale",
+      "login": "admin",
+      "password": "LeBadil2026!",
+      "role": "Directeur Général",
+      "phone": "+221 77 000 00 00",
+      "status": "active",
+      "createdAt": "2026-09-10T12:00:00.000Z"
+    },
+    {
+      "id": "usr-2",
+      "name": "Moussa SOW",
+      "login": "moussa.sow",
+      "password": "BadilEquipe2026!",
+      "role": "Chargé d'Affaires B2B (Dakar)",
+      "phone": "+221 77 123 45 67",
+      "status": "active",
+      "createdAt": "2026-09-10T13:00:00.000Z"
+    },
+    {
+      "id": "usr-3",
+      "name": "Aminata DIOP",
+      "login": "aminata.diop",
+      "password": "BadilAibd2026!",
+      "role": "Superviseur Accueil AIBD",
+      "phone": "+221 77 234 56 78",
+      "status": "active",
+      "createdAt": "2026-09-10T13:30:00.000Z"
+    }
+  ]
+}

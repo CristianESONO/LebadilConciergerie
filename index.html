@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le BADIL Conciergerie Dakar — Excellence, Étudiants & Business au Sénégal</title>
+  <meta name="description" content="Le BADIL Conciergerie Dakar : Conciergerie haut de gamme au Sénégal. Services clés en main pour l'installation d'étudiants internationaux et l'organisation de séminaires corporate d'exception.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Informational Bar -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="badge-flag">🇸🇳 Dakar, Sénégal</span>
+      <span>📞 Standard WhatsApp Pro : <strong>+221 77 000 00 00</strong></span>
+      <span>✉️ lebadilconciergerie@gmail.com</span>
+    </div>
+    <div class="top-bar-right">
+      <span>NINEA: 009876543 • RCCM: SN.DKR.2026.B.1234</span>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="header-main">
+    <div class="brand-logo">
+      <div class="brand-icon">B</div>
+      <div class="brand-text">
+        <h1>LE BADIL</h1>
+        <span>CONCIERGERIE DAKAR</span>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <button class="nav-tab-btn active" data-tab="tab-etudiants">
+        🎓 Pôle Étudiants
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-entreprises">
+        💼 Pôle Entreprises
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-logistique">
+        ✈️ Jour-J AIBD
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-tarifs">
+        📊 Grille FCFA
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <div class="hero-text">
+        <div class="hero-badge">✨ L'Excellence du Service & De l'Accueil Teranga</div>
+        <h2 class="hero-title">Faciliter votre quotidien, <span>sublimer vos événements.</span></h2>
+        <p class="hero-subtitle">
+          Le BADIL Conciergerie est votre partenaire institutionnel de confiance à Dakar. Nous apportons de la sérénité aux familles d'étudiants internationaux et de la rigueur d'horloger aux séminaires d'entreprises.
+        </p>
+        <div class="hero-cta-group">
+          <button class="btn-primary" id="open-booking-modal-hero">
+            💳 Réserver un Pack Étudiant en Ligne
+          </button>
+          <button class="btn-outline-light" id="open-seminar-calc-hero">
+            📊 Simuler un Devis Séminaire Business
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-stats-card">
+        <div class="stat-item">
+          <div class="stat-icon">🎓</div>
+          <div class="stat-text">
+            <h4>Pôle Étudiants Key-in-Hand</h4>
+            <p>Accueil AIBD, chasse immobilière à Almadies/Mermoz/Fann, activation Senelec/Sen'Eau/Internet & suivi 7j/7.</p>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">💼</div>
+          <div class="stat-text">
+            <h4>Pôle Corporate & Séminaires</h4>
+            <p>Organisation A à Z : Plateau, Saly, Île de Gorée. Logistique VIP, régie Jour-J & Team Building RSE.</p>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">💳</div>
+          <div class="stat-text">
+            <h4>Paiement Local Sécurisé</h4>
+            <p>Intégration directe Wave Sénégal, Orange Money & Cartes Bancaires (Visa/Mastercard) en FCFA et Euros.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Wrapper -->
+  <main class="main-wrapper">
+
+    <!-- ==================== TAB 1: PÔLE ÉTUDIANTS ==================== -->
+    <div id="tab-etudiants" class="tab-content active">
+      <div class="card-panel">
+        <div class="section-header">
+          <span class="section-tag">Pôle Installation & Accueil Teranga</span>
+          <h2 class="section-title">Étudiez à Dakar l'esprit 100% tranquille</h2>
+          <p class="section-desc">
+            Pour les étudiants internationaux (et leurs parents), nous prenons en charge la totalité de la logistique de rentrée dès l'atterrissage à l'AIBD jusqu'à l'entrée dans le logement dakarois.
+          </p>
+        </div>
+
+        <div class="grid-4" id="student-packs-grid">
+          <!-- Pack Teranga -->
+          <div class="pack-card">
+            <div>
+              <div class="pack-icon">✈️</div>
+              <h3 class="pack-name">Pack Teranga</h3>
+              <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Accueil AIBD & Transfert</p>
+              <div class="pack-price-box">
+                <div class="price-fcfa">75 000 FCFA</div>
+                <div class="price-eur">~ 115 € TTC</div>
+              </div>
+              <ul class="pack-features">
+                <li>Accueil nominatif sortie terminal AIBD</li>
+                <li>Transfert privatif climatisé (Péage inclus)</li>
+                <li>Puce SIM locale activée 4G (20 Go Data)</li>
+                <li>Panier de bienvenue Teranga (eau, encas)</li>
+              </ul>
+            </div>
+            <button class="btn-primary select-pack-btn" data-pack="teranga" style="width:100%;">Réserver ce Pack</button>
+          </div>
+
+          <!-- Pack Logement Serein -->
+          <div class="pack-card">
+            <div>
+              <div class="pack-icon">🏠</div>
+              <h3 class="pack-name">Pack Logement</h3>
+              <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Chasse & Abonnements</p>
+              <div class="pack-price-box">
+                <div class="price-fcfa">150 000 FCFA</div>
+                <div class="price-eur">~ 230 € TTC</div>
+              </div>
+              <ul class="pack-features">
+                <li>Recherche ciblée Mermoz/Fann/Almadies/Sacré-Cœur</li>
+                <li>Visites physiques + vidéos 4K pour parents</li>
+                <li>Négociation du bail & état des lieux</li>
+                <li>Activation Senelec, Sen'Eau & Box Internet</li>
+              </ul>
+            </div>
+            <button class="btn-primary select-pack-btn" data-pack="logement" style="width:100%;">Réserver ce Pack</button>
+          </div>
+
+          <!-- Pack VIP All-Inclusive -->
+          <div class="pack-card popular">
+            <div class="popular-badge">Populaire • Recommandé</div>
+            <div>
+              <div class="pack-icon">⭐</div>
+              <h3 class="pack-name">Pack VIP All-Inclusive</h3>
+              <p style="font-size:0.85rem; color:var(--color-gold-dark); font-weight:700; margin-bottom:0.75rem;">Sérénité Totale Clé en Main</p>
+              <div class="pack-price-box">
+                <div class="price-fcfa">250 000 FCFA</div>
+                <div class="price-eur">~ 380 € TTC</div>
+              </div>
+              <ul class="pack-features">
+                <li><strong>Inclus 100% des Packs Teranga + Logement + Intégration</strong></li>
+                <li>Ménage complet d'entrée & désinfection</li>
+                <li>Premières courses alimentaires dans le frigo</li>
+                <li>Ligne directe Concierge dédié pendant 3 mois</li>
+              </ul>
+            </div>
+            <button class="btn-primary select-pack-btn" data-pack="vip" style="width:100%;">Réserver ce Pack VIP</button>
+          </div>
+
+          <!-- Pack Intégration -->
+          <div class="pack-card">
+            <div>
+              <div class="pack-icon">🧭</div>
+              <h3 class="pack-name">Pack Intégration</h3>
+              <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Vie Locale & Santé</p>
+              <div class="pack-price-box">
+                <div class="price-fcfa">60 000 FCFA</div>
+                <div class="price-eur">~ 90 € TTC</div>
+              </div>
+              <ul class="pack-features">
+                <li>Guide des transports (BRT, Dem Dikk)</li>
+                <li>Répertoire santé & cliniques de confiance</li>
+                <li>Réseaux étudiants & parrainage dakarois</li>
+                <li>Assistance Hotline Conciergerie 7j/7 (30j)</li>
+              </ul>
+            </div>
+            <button class="btn-primary select-pack-btn" data-pack="integration" style="width:100%;">Réserver ce Pack</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 2: PÔLE ENTREPRISES ==================== -->
+    <div id="tab-entreprises" class="tab-content">
+      <div class="card-panel">
+        <div class="section-header">
+          <span class="section-tag">Corporate Events & Logistics</span>
+          <h2 class="section-title">Des séminaires professionnels d'exception au Sénégal</h2>
+          <p class="section-desc">
+            De la réunion de direction au Plateau à l'incentive résidentiel sur la Petite Côte (Saly, Somone) ou l'Île de Gorée, Le BADIL prend en charge l'intégralité de la régie logistique.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <!-- Corporate Services Overview -->
+          <div>
+            <h3 style="font-size:1.3rem; margin-bottom:1rem; color:var(--color-navy-primary);">Nos Solutions sur-mesure pour Entreprises</h3>
+            <div class="stat-item corp-service-card">
+              <div class="stat-icon">🏛️</div>
+              <div class="stat-text">
+                <h4>Journée d'Étude & Conférences</h4>
+                <p>Salles équipées au Plateau / Almadies, pauses gourmandes Teranga, traiteur d'exception et régie technique.</p>
+              </div>
+            </div>
+            <div class="stat-item corp-service-card">
+              <div class="stat-icon">🏝️</div>
+              <div class="stat-text">
+                <h4>Séminaires Résidentiels Saly / Petite Côte</h4>
+                <p>Hôtels 4-5★ ou lodges de charme, restauration pension complète, soirées de gala & activités team building.</p>
+              </div>
+            </div>
+            <div class="stat-item corp-service-card">
+              <div class="stat-icon">🚗</div>
+              <div class="stat-text">
+                <h4>Transport VIP & Flotte Dédiée</h4>
+                <p>Coordination des transferts AIBD, berlines avec chauffeur privatif et vans pour délégations.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Estimator -->
+          <div style="background:linear-gradient(135deg, var(--color-navy-dark), var(--color-navy-primary)); color:var(--color-white); padding:1.75rem; border-radius:var(--radius-md); border:1px solid var(--color-gold-primary);">
+            <h3 style="color:var(--color-gold-primary); font-size:1.3rem; margin-bottom:1rem;">📊 Simuler votre Devis Séminaire</h3>
+
+            <div class="form-group">
+              <label class="form-label" style="color:var(--color-gold-light);">Type d'Événement</label>
+              <select class="form-control" id="sim-event-type">
+                <option value="journee">Journée d'Étude Dakar (35 000 FCFA / pers.)</option>
+                <option value="saly">Séminaire Résidentiel Saly / Petite Côte (95 000 FCFA / pers./j)</option>
+                <option value="goree">Team Building Immersion Gorée / Saloum (40 000 FCFA / pers.)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="color:var(--color-gold-light);">Nombre de Participants</label>
+              <input type="number" id="sim-participants" class="form-control" value="20" min="5" max="200">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="color:var(--color-gold-light);">Durée (Jours)</label>
+              <input type="number" id="sim-days" class="form-control" value="2" min="1" max="7">
+            </div>
+
+            <div style="background:rgba(255,255,255,0.1); padding:1rem; border-radius:var(--radius-sm); margin:1.25rem 0; border:1px solid var(--color-gold-primary);">
+              <div style="font-size:0.85rem; color:var(--color-gold-light);">Estimation Budgétaire Globale HT</div>
+              <div id="sim-total-fcfa" style="font-size:1.75rem; font-weight:800; color:var(--color-gold-primary);">2 231 000 FCFA</div>
+              <div id="sim-total-eur" style="font-size:0.85rem; color:rgba(255,255,255,0.8);">~ 3 400 € (Coordination 15% incluse)</div>
+            </div>
+
+            <button class="btn-primary" id="btn-request-seminar-proposal" style="width:100%;">
+              ✉️ Recevoir la Proposition Sous 24h
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: SCÉNARIO LOGISTIQUE JOUR-J ==================== -->
+    <div id="tab-logistique" class="tab-content">
+      <div class="card-panel">
+        <div class="section-header">
+          <span class="section-tag">Opérations Terrain Dakar</span>
+          <h2 class="section-title">Scénario Logistique Pas à Pas : Jour-J AIBD ➔ Dakar</h2>
+          <p class="section-desc">
+            Visualisez le déroulement chrono d'une prise en charge standard pour un étudiant arrivant à l'Aéroport International Blaise Diagne (AIBD).
+          </p>
+        </div>
+
+        <!-- Interactive Stepper -->
+        <div class="timeline-stepper">
+          <div class="timeline-step-item active" data-step="1">
+            <div class="step-circle">1</div>
+            <div class="step-label">H-24h à H-2h</div>
+            <div class="step-time">Préparation & Suivi Vol</div>
+          </div>
+          <div class="timeline-step-item" data-step="2">
+            <div class="step-circle">2</div>
+            <div class="step-label">H0 à H+30m</div>
+            <div class="step-time">Accueil AIBD & SIM</div>
+          </div>
+          <div class="timeline-step-item" data-step="3">
+            <div class="step-circle">3</div>
+            <div class="step-label">H+30m à H+1h30</div>
+            <div class="step-time">Transfert Autoroute</div>
+          </div>
+          <div class="timeline-step-item" data-step="4">
+            <div class="step-circle">4</div>
+            <div class="step-label">H+1h30 à H+2h30</div>
+            <div class="step-time">Installation & Clés</div>
+          </div>
+        </div>
+
+        <!-- Step Details Display -->
+        <div class="step-details-card" id="step-details-display">
+          <div class="step-details-text">
+            <h3 id="step-title">Étape 1 : Préparation & Suivi du Vol (H-24h à H-2h)</h3>
+            <p id="step-desc" style="color:rgba(255,255,255,0.85); font-size:0.95rem; margin-bottom:1rem;">
+              Avant l'atterrissage du vol client à l'AIBD, notre système centralisé suit la trajectoire en temps réel pour ajuster la position du chauffeur et du concierge.
+            </p>
+            <ul class="step-checklist" id="step-list">
+              <li>Vérification numéro de vol & statut de l'atterrissage AIBD</li>
+              <li>Briefing du chauffeur privé & inspection véhicule climatisé</li>
+              <li>Positionnement en zone arrivées avec pancarte nominative Gold Le BADIL</li>
+              <li>Préparation de la puce SIM 4G locale & du panier Teranga</li>
+            </ul>
+          </div>
+          <div style="text-align:center; background:rgba(255,255,255,0.06); padding:1.5rem; border-radius:var(--radius-md); border:1px stroke var(--color-gold-primary);">
+            <div style="font-size:3rem; margin-bottom:0.5rem;" id="step-icon">🛫</div>
+            <div style="font-weight:700; color:var(--color-gold-primary);" id="step-badge">Statut : Prêt & Planifié</div>
+            <div style="font-size:0.8rem; color:rgba(255,255,255,0.7); margin-top:0.5rem;" id="step-loc">Localisation : Aéroport Blaise Diagne (Diass)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: GRILLE TARIFAIRE FCFA ==================== -->
+    <div id="tab-tarifs" class="tab-content">
+      <div class="card-panel">
+        <div class="section-header">
+          <span class="section-tag">Transparence Budgétaire</span>
+          <h2 class="section-title">Grille Tarifaire Indicative (FCFA / XOF & EUR)</h2>
+          <p class="section-desc">
+            Ensemble de nos tarifs transparents appliqués sur la région de Dakar (Almadies, Mermoz, Fann, Plateau, Sacré-Cœur) et la Petite Côte (Saly).
+          </p>
+        </div>
+
+        <div class="pricing-table-container">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Pôle / Prestation</th>
+                <th>Service Inclus & Détails</th>
+                <th>Tarif (FCFA)</th>
+                <th>Indicatif (EUR)</th>
+                <th>Cible</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Pack Teranga</strong></td>
+                <td>Accueil AIBD + Transfert privatif péage inclus + Puce SIM 20 Go + Panier Teranga</td>
+                <td><strong style="color:var(--color-navy-primary);">75 000 FCFA</strong></td>
+                <td>115 €</td>
+                <td><span class="badge-tag etudiant">Étudiants</span></td>
+              </tr>
+              <tr>
+                <td><strong>Pack Logement Serein</strong></td>
+                <td>Chasse immobilière à Dakar + Visites physiques/vidéo 4K + Bail + Abonnements Senelec/Sen'Eau/Box Internet</td>
+                <td><strong style="color:var(--color-navy-primary);">150 000 FCFA</strong></td>
+                <td>230 €</td>
+                <td><span class="badge-tag etudiant">Étudiants</span></td>
+              </tr>
+              <tr>
+                <td><strong>Pack Intégration</strong></td>
+                <td>Pass BRT/Dem Dikk + Repertoires de santé & cliniques + Assistance Hotline 7j/7 (30j)</td>
+                <td><strong style="color:var(--color-navy-primary);">60 000 FCFA</strong></td>
+                <td>90 €</td>
+                <td><span class="badge-tag etudiant">Étudiants</span></td>
+              </tr>
+              <tr>
+                <td><strong>Pack VIP All-Inclusive</strong></td>
+                <td>Clé en main complet (Teranga + Logement + Intégration) + Ménage d'entrée + Frigo rempli + Concierge 3 mois</td>
+                <td><strong style="color:var(--color-gold-dark);">250 000 FCFA</strong></td>
+                <td>380 €</td>
+                <td><span class="badge-tag etudiant">Étudiants</span></td>
+              </tr>
+              <tr>
+                <td><strong>Journée d'Étude Business</strong></td>
+                <td>Salle de réunion équipée Dakar + Pauses gourmandes Teranga + Déjeuner traiteur + Concierge régie</td>
+                <td><strong style="color:var(--color-navy-primary);">35 000 FCFA / pers.</strong></td>
+                <td>53 €</td>
+                <td><span class="badge-tag enterprise">Entreprises</span></td>
+              </tr>
+              <tr>
+                <td><strong>Séminaire Résidentiel Saly</strong></td>
+                <td>Hôtel 4-5★ Petite Côte + Pension complète + Salle de conférence + Activité Team building</td>
+                <td><strong style="color:var(--color-navy-primary);">95 000 FCFA / pers./j</strong></td>
+                <td>145 €</td>
+                <td><span class="badge-tag enterprise">Entreprises</span></td>
+              </tr>
+              <tr>
+                <td><strong>Team Building Gorée / Saloum</strong></td>
+                <td>Chaloupe privatisée / Pirogue + Guide conférencier + Déjeuner typique + Atelier RSE</td>
+                <td><strong style="color:var(--color-navy-primary);">40 000 FCFA / pers.</strong></td>
+                <td>61 €</td>
+                <td><span class="badge-tag enterprise">Entreprises</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==================== BOOKING MODAL (WAVE / ORANGE MONEY / CB) ==================== -->
+  <div class="modal-overlay" id="booking-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-title">💳 Réservation en Ligne - Pack Étudiant</h3>
+        <button class="modal-close-btn" id="close-booking-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="checkout-form">
+          <div class="form-group">
+            <label class="form-label">Pack Sélectionné</label>
+            <select class="form-control" id="checkout-pack-select">
+              <option value="teranga" data-price="75000">Pack Teranga (Accueil AIBD & Transfert) — 75 000 FCFA (~115 €)</option>
+              <option value="logement" data-price="150000">Pack Logement Serein (Chasse & Abonnements) — 150 000 FCFA (~230 €)</option>
+              <option value="integration" data-price="60000">Pack Intégration (Transport & Santé) — 60 000 FCFA (~90 €)</option>
+              <option value="vip" data-price="250000" selected>Pack VIP All-Inclusive (Clé en main complet) — 250 000 FCFA (~380 €)</option>
+            </select>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Prénom & Nom de l'Étudiant</label>
+              <input type="text" class="form-control" id="checkout-student-name" placeholder="Ex: Mamadou Diop" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Adresse Email (Étudiant / Parents)</label>
+              <input type="email" class="form-control" id="checkout-email" placeholder="etudiant@domaine.com" required>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Téléphone WhatsApp (Parents / Étudiant)</label>
+              <input type="tel" class="form-control" id="checkout-whatsapp" placeholder="+221 77 123 45 67" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Établissement d'Accueil à Dakar</label>
+              <select class="form-control" id="checkout-school" required>
+                <option value="">-- Choisissez votre établissement d'accueil --</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Date d'Arrivée Prévue AIBD</label>
+            <input type="date" class="form-control" id="checkout-date" required>
+          </div>
+
+          <!-- Total Amount Box -->
+          <div style="background: var(--color-gray-100); padding: 1.1rem; border-radius: var(--radius-sm); margin: 1.25rem 0; text-align: center; border: 1px solid var(--color-gray-200);">
+            <div style="font-size: 0.85rem; color: var(--color-gray-600); font-weight: 600;">Montant Total du Pack :</div>
+            <div id="checkout-total-fcfa" style="font-size: 1.9rem; font-weight: 800; color: var(--color-navy-primary); line-height: 1.2; margin: 0.25rem 0;">250 000 FCFA</div>
+            <div id="checkout-total-eur" style="font-size: 0.85rem; color: var(--color-gold-dark); font-weight: 600;">Contrevaleur : 380 € TTC</div>
+          </div>
+
+          <button type="submit" class="btn-primary" id="btn-pay-online" style="width: 100%; font-size: 1rem; padding: 1rem; justify-content: center;">
+            🔒 Valider et Payer le Pack
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="brand-logo" style="margin-bottom:1rem;">
+          <div class="brand-icon">B</div>
+          <div class="brand-text">
+            <h1 style="color:var(--color-white);">LE BADIL</h1>
+            <span>CONCIERGERIE DAKAR</span>
+          </div>
+        </div>
+        <p>
+          L'art de la conciergerie haut de gamme au Sénégal. Interlocuteur unique pour l'installation d'étudiants internationaux et l'organisation d'événements d'affaires d'exception.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Pôle Étudiants</h4>
+        <ul class="footer-links">
+          <li><a href="#">Pack Teranga (AIBD)</a></li>
+          <li><a href="#">Pack Logement Serein</a></li>
+          <li><a href="#">Pack Intégration</a></li>
+          <li><a href="#">Pack VIP All-Inclusive</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Pôle Business</h4>
+        <ul class="footer-links">
+          <li><a href="#">Séminaires au Plateau</a></li>
+          <li><a href="#">Incentives à Saly</a></li>
+          <li><a href="#">Team Building Gorée</a></li>
+          <li><a href="#">Flotte VIP & Chauffeurs</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Siège Social Dakar</h4>
+        <p>📍 Dakar, Sénégal (Zone Almadies / Plateau)</p>
+        <p style="margin-top:0.4rem;">📞 WhatsApp Pro : +221 77 000 00 00</p>
+        <p style="margin-top:0.4rem;">✉️ lebadilconciergerie@gmail.com</p>
+        <p style="margin-top:0.4rem;">🌐 www.lebadilconciergerie.sn</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 Le BADIL Conciergerie SARL. Tous droits réservés.</div>
+      <div>NINEA: 009876543 • RCCM: SN.DKR.2026.B.1234</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

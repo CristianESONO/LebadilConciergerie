@@ -1,0 +1,69 @@
+{
+  "schools": [
+    {
+      "id": "bem",
+      "name": "BEM Business School Dakar",
+      "city": "Dakar"
+    },
+    {
+      "id": "ism",
+      "name": "ISM — Institut Supérieur de Management",
+      "city": "Dakar"
+    },
+    {
+      "id": "ucad",
+      "name": "UCAD — Université Cheikh Anta Diop",
+      "city": "Dakar"
+    },
+    {
+      "id": "esp",
+      "name": "ESP — École Supérieure Polytechnique",
+      "city": "Dakar"
+    },
+    {
+      "id": "ugb",
+      "name": "UGB — Université Gaston Berger",
+      "city": "Saint-Louis"
+    },
+    {
+      "id": "iesa",
+      "name": "IESA Multimédia Dakar",
+      "city": "Dakar"
+    },
+    {
+      "id": "ied",
+      "name": "IED — Institut de l'Entreprise et du Développement",
+      "city": "Dakar"
+    },
+    {
+      "id": "iseg",
+      "name": "ISEG — Institut Supérieur de l'Entreprise et de Gestion",
+      "city": "Dakar"
+    },
+    {
+      "id": "sup-de-co",
+      "name": "Sup de Co Dakar",
+      "city": "Dakar"
+    },
+    {
+      "id": "iba",
+      "name": "IBA — Institut de Business Administration",
+      "city": "Dakar"
+    },
+    {
+      "id": "3il",
+      "name": "3iL Ingénieurs Dakar",
+      "city": "Dakar"
+    },
+    {
+      "id": "csm",
+      "name": "CSM — Centre de Santé Mentale (Médecine)",
+      "city": "Dakar"
+    },
+    {
+      "id": "autre",
+      "name": "Autre établissement",
+      "city": "Sénégal"
+    }
+  ]
+}

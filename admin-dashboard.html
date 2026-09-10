@@ -1,0 +1,2505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direction & Exploitation — Le BADIL Conciergerie Dakar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       LE BADIL CONCIERGERIE DAKAR — EXECUTIVE ADMIN DESIGN SYSTEM
+       Aesthetic: Modern Luxury Executive Suite (Navy #0A1D3C & Champagne Gold #C5A880)
+       ========================================================================== */
+    :root {
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+
+      --navy-950: #061124;
+      --navy-900: #0A1D3C;
+      --navy-800: #0F2C59;
+      --navy-700: #183B70;
+      --navy-600: #234E91;
+      --navy-100: #E9EFF8;
+      --navy-50:  #F4F7FC;
+
+      --gold-600: #A88656;
+      --gold-500: #C5A880;
+      --gold-400: #DAC0A3;
+      --gold-200: #F3E9DD;
+      --gold-100: #FAF5EF;
+      --gold-50:  #FCFAF7;
+
+      --slate-900: #0F172A;
+      --slate-800: #1E293B;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748B;
+      --slate-400: #94A3B8;
+      --slate-300: #CBD5E1;
+      --slate-200: #E2E8F0;
+      --slate-100: #F1F5F9;
+      --slate-50:  #F8FAFC;
+
+      --white: #FFFFFF;
+      --emerald-600: #059669;
+      --emerald-500: #10B981;
+      --emerald-100: #D1FAE5;
+      --emerald-50:  #ECFDF5;
+
+      --rose-600: #E11D48;
+      --rose-500: #F43F5E;
+      --rose-100: #FFE4E6;
+      --rose-50:  #FFF1F2;
+
+      --sidebar-width: 280px;
+      --radius-xl: 18px;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+
+      --shadow-subtle: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+      --shadow-card: 0 4px 20px -2px rgba(15, 44, 89, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+      --shadow-hover: 0 12px 28px -4px rgba(15, 44, 89, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+      --shadow-gold: 0 4px 16px rgba(197, 168, 128, 0.25);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: #F8FAFC;
+      color: var(--slate-800);
+      min-height: 100vh;
+      display: flex;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       SIDEBAR NAVIGATION (LUXURY EXECUTIVE STYLE)
+       ========================================================================== */
+    .app-sidebar {
+      width: var(--sidebar-width);
+      background: var(--navy-900);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 50;
+      border-right: 1px solid rgba(218, 192, 163, 0.15);
+    }
+
+    .sidebar-header {
+      padding: 1.75rem 1.5rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .brand-crest {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--navy-950);
+      box-shadow: var(--shadow-gold);
+      flex-shrink: 0;
+    }
+
+    .brand-meta h1 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .brand-meta span {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-400);
+      font-weight: 600;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .sidebar-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin: 1rem 1.5rem 0.5rem;
+      padding: 0.35rem 0.75rem;
+      background: rgba(218, 192, 163, 0.1);
+      border: 1px solid rgba(218, 192, 163, 0.2);
+      border-radius: var(--radius-full, 9999px);
+      font-size: 0.725rem;
+      color: var(--gold-400);
+      font-weight: 600;
+    }
+
+    .sidebar-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emerald-500);
+      box-shadow: 0 0 8px var(--emerald-500);
+    }
+
+    /* Navigation items */
+    .sidebar-nav {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      overflow-y: auto;
+    }
+
+    .nav-category-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--slate-400);
+      padding: 0.75rem 0.75rem 0.35rem;
+    }
+
+    .admin-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      color: var(--slate-300);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: transparent;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: left;
+      width: 100%;
+    }
+
+    .admin-nav-item svg {
+      width: 19px;
+      height: 19px;
+      stroke-width: 2;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+      color: var(--slate-400);
+    }
+
+    .admin-nav-item:hover {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .admin-nav-item:hover svg {
+      color: var(--gold-400);
+      transform: translateX(2px);
+    }
+
+    .admin-nav-item.active {
+      background: linear-gradient(135deg, rgba(218, 192, 163, 0.2), rgba(218, 192, 163, 0.08));
+      color: var(--gold-400);
+      border-color: rgba(218, 192, 163, 0.3);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .admin-nav-item.active svg {
+      color: var(--gold-400);
+    }
+
+    .admin-nav-item .nav-pill {
+      margin-left: auto;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    /* Sidebar Footer */
+    .sidebar-footer {
+      padding: 1.25rem 1.25rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .external-link-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 0.85rem;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--slate-300);
+      font-size: 0.8rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .external-link-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+    }
+
+    .user-profile-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--navy-700);
+      border: 1.5px solid var(--gold-400);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--gold-400);
+      flex-shrink: 0;
+    }
+
+    .user-info {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .user-name {
+      font-size: 0.825rem;
+      font-weight: 700;
+      color: var(--white);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .user-role {
+      font-size: 0.7rem;
+      color: var(--gold-400);
+    }
+
+    .btn-logout-icon {
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      color: #FDA4AF;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-logout-icon:hover {
+      background: var(--rose-600);
+      color: var(--white);
+      border-color: var(--rose-600);
+    }
+
+    /* ==========================================================================
+       MAIN VIEWPORT & HEADER
+       ========================================================================== */
+    .app-main {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .top-header {
+      height: 72px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--slate-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.25rem;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .header-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .breadcrumb-root {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--slate-500);
+    }
+
+    .breadcrumb-separator {
+      color: var(--slate-400);
+      font-size: 0.75rem;
+    }
+
+    .breadcrumb-current {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy-900);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .live-status-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.4rem 0.85rem;
+      background: var(--emerald-50);
+      border: 1px solid #A7F3D0;
+      color: var(--emerald-600);
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .live-status-pill .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--emerald-500);
+      animation: pulseGreen 2s infinite;
+    }
+
+    @keyframes pulseGreen {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    /* Content Area */
+    .content-area {
+      flex: 1;
+      padding: 2.25rem;
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+      animation: fadeInContent 0.25s ease-out;
+    }
+
+    @keyframes fadeInContent {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       LUXURY KPI CARDS GRID
+       ========================================================================== */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .kpi-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--navy-800), var(--gold-500));
+    }
+
+    .kpi-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .kpi-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--slate-500);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .kpi-value {
+      font-family: var(--font-heading);
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      line-height: 1.1;
+    }
+
+    .kpi-subtext {
+      font-size: 0.775rem;
+      color: var(--slate-500);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .kpi-icon-wrapper {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--navy-50);
+      border: 1px solid var(--navy-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy-800);
+      flex-shrink: 0;
+    }
+
+    .kpi-icon-wrapper svg {
+      width: 26px;
+      height: 26px;
+      stroke-width: 2;
+    }
+
+    .kpi-icon-gold {
+      background: var(--gold-100);
+      border-color: var(--gold-200);
+      color: var(--gold-600);
+    }
+
+    .kpi-icon-emerald {
+      background: var(--emerald-50);
+      border-color: #A7F3D0;
+      color: var(--emerald-600);
+    }
+
+    /* ==========================================================================
+       MAIN PANELS & SECTION CARDS
+       ========================================================================== */
+    .executive-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .card-top-bar {
+      padding: 1.35rem 1.75rem;
+      border-bottom: 1px solid var(--slate-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .card-title-group h2 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-title-group p {
+      font-size: 0.85rem;
+      color: var(--slate-500);
+      margin-top: 2px;
+    }
+
+    .card-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Buttons */
+    .btn-clean {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      border: none;
+      outline: none;
+      font-family: var(--font-body);
+    }
+
+    .btn-clean svg {
+      width: 16px;
+      height: 16px;
+      stroke-width: 2;
+    }
+
+    .btn-clean-secondary {
+      background: var(--slate-100);
+      color: var(--slate-700);
+      border: 1px solid var(--slate-200);
+    }
+
+    .btn-clean-secondary:hover {
+      background: var(--slate-200);
+      color: var(--slate-900);
+    }
+
+    .btn-clean-primary {
+      background: linear-gradient(135deg, var(--navy-800), var(--navy-900));
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(15, 44, 89, 0.2);
+    }
+
+    .btn-clean-primary:hover {
+      background: linear-gradient(135deg, var(--navy-900), var(--navy-950));
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(15, 44, 89, 0.3);
+    }
+
+    .btn-clean-gold {
+      background: linear-gradient(135deg, var(--gold-500), var(--gold-600));
+      color: var(--navy-950);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .btn-clean-gold:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    /* Search and filter toolbar */
+    .table-toolbar {
+      padding: 1rem 1.75rem;
+      background: var(--slate-50);
+      border-bottom: 1px solid var(--slate-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .search-input-box {
+      position: relative;
+      max-width: 380px;
+      width: 100%;
+    }
+
+    .search-input-box svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 17px;
+      height: 17px;
+      color: var(--slate-400);
+    }
+
+    .search-input-box input {
+      width: 100%;
+      padding: 0.6rem 1rem 0.6rem 2.4rem;
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      background: var(--white);
+      color: var(--slate-800);
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .search-input-box input:focus {
+      outline: none;
+      border-color: var(--navy-800);
+      box-shadow: 0 0 0 3px rgba(15, 44, 89, 0.08);
+    }
+
+    /* Add school luxury inline card */
+    .add-school-container {
+      padding: 1.25rem 1.75rem;
+      background: var(--gold-50);
+      border-bottom: 1px solid rgba(218, 192, 163, 0.3);
+    }
+
+    .add-school-card-form {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr auto;
+      gap: 0.85rem;
+      align-items: center;
+    }
+
+    .input-with-label {
+      position: relative;
+    }
+
+    .input-with-label input, .input-with-label select {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border: 1px solid rgba(218, 192, 163, 0.5);
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      background: var(--white);
+      color: var(--slate-800);
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .input-with-label input:focus, .input-with-label select:focus {
+      outline: none;
+      border-color: var(--navy-800);
+      box-shadow: 0 0 0 3px rgba(197, 168, 128, 0.25);
+    }
+
+    /* ==========================================================================
+       DATA TABLES (MODERN EXECUTIVE BORDERLESS WITH HOVER)
+       ========================================================================== */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    .luxury-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+
+    .luxury-table th {
+      background: var(--slate-50);
+      color: var(--slate-500);
+      padding: 0.85rem 1.75rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .luxury-table td {
+      padding: 1.1rem 1.75rem;
+      border-bottom: 1px solid var(--slate-100);
+      color: var(--slate-700);
+      vertical-align: middle;
+      transition: background-color 0.15s ease;
+    }
+
+    .luxury-table tbody tr:hover td {
+      background-color: var(--navy-50);
+    }
+
+    .luxury-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* School table specific items */
+    .school-title-cell {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .school-avatar-letter {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--navy-100);
+      color: var(--navy-800);
+      font-weight: 800;
+      font-family: var(--font-heading);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      border: 1px solid rgba(15, 44, 89, 0.1);
+    }
+
+    .school-name-text {
+      font-weight: 700;
+      color: var(--navy-900);
+      font-size: 0.92rem;
+    }
+
+    .school-type-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      color: var(--slate-500);
+      margin-top: 1px;
+    }
+
+    .location-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      background: var(--slate-100);
+      color: var(--slate-700);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .status-confirmed {
+      background: var(--emerald-50);
+      color: var(--emerald-600);
+      border: 1px solid #A7F3D0;
+    }
+
+    .status-confirmed .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emerald-500);
+    }
+
+    /* Pack badges */
+    .pack-badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .pack-vip {
+      background: var(--gold-100);
+      color: var(--gold-600);
+      border: 1px solid var(--gold-400);
+    }
+
+    .pack-logement {
+      background: var(--navy-50);
+      color: var(--navy-800);
+      border: 1px solid var(--navy-100);
+    }
+
+    .pack-teranga {
+      background: var(--emerald-50);
+      color: var(--emerald-600);
+      border: 1px solid #A7F3D0;
+    }
+
+    .pack-integration {
+      background: #EEF2FF;
+      color: #4F46E5;
+      border: 1px solid #C7D2FE;
+    }
+
+    .btn-delete-row {
+      background: transparent;
+      border: 1px solid var(--slate-200);
+      color: var(--slate-400);
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-delete-row:hover {
+      background: var(--rose-50);
+      border-color: var(--rose-500);
+      color: var(--rose-600);
+    }
+
+    /* Feedback messages */
+    .feedback-alert {
+      margin: 1rem 1.75rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: none;
+      animation: fadeInContent 0.2s ease;
+    }
+
+    /* Empty state */
+    .empty-card-state {
+      padding: 4.5rem 2rem;
+      text-align: center;
+      color: var(--slate-500);
+    }
+
+    .empty-card-state svg {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 0.85rem;
+      color: var(--slate-300);
+      stroke-width: 1.5;
+    }
+
+    .empty-card-state h3 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 0.35rem;
+    }
+
+    /* ==========================================================================
+       COMMERCIAL QUALIFIER MODULE (EXECUTIVE FORM)
+       ========================================================================== */
+    .qualifier-form-wrapper {
+      padding: 2rem 2.25rem;
+    }
+
+    .form-grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .form-section-box {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+
+    .form-section-header {
+      font-family: var(--font-heading);
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-field {
+      margin-bottom: 1.15rem;
+    }
+
+    .form-field:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-label-clean {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--slate-700);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-input-clean {
+      width: 100%;
+      padding: 0.7rem 0.95rem;
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      background: var(--white);
+      color: var(--slate-900);
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .form-input-clean:focus {
+      outline: none;
+      border-color: var(--navy-800);
+      box-shadow: 0 0 0 3px rgba(15, 44, 89, 0.08);
+    }
+
+    .options-pill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .option-checkbox-card {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.84rem;
+      font-weight: 500;
+    }
+
+    .option-checkbox-card:hover {
+      border-color: var(--gold-500);
+      background: var(--gold-50);
+    }
+
+    .option-checkbox-card input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--navy-800);
+      cursor: pointer;
+    }
+
+    .summary-preview-sheet {
+      margin-top: 2rem;
+      background: var(--navy-950);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      border: 1px solid rgba(218, 192, 163, 0.25);
+      box-shadow: var(--shadow-hover);
+      display: none;
+    }
+
+    .summary-sheet-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .summary-sheet-header h4 {
+      color: var(--gold-400);
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .summary-sheet-pre {
+      font-family: 'Consolas', 'Menlo', monospace;
+      font-size: 0.85rem;
+      color: #E2E8F0;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    /* ==========================================================================
+       BREVO EMAIL NOTIFICATIONS CARDS & TEST TOOL
+       ========================================================================== */
+    .test-dispatcher-box {
+      background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+      border: 1px solid #86EFAC;
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .test-dispatcher-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .test-dispatcher-header h4 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #14532D;
+    }
+
+    .test-dispatcher-desc {
+      font-size: 0.85rem;
+      color: #166534;
+      margin-bottom: 1rem;
+    }
+
+    .test-dispatcher-form {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .test-dispatcher-input {
+      flex: 1;
+      min-width: 260px;
+      padding: 0.7rem 1rem;
+      border: 1.5px solid #86EFAC;
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      background: var(--white);
+      color: var(--slate-900);
+    }
+
+    .test-dispatcher-input:focus {
+      outline: none;
+      border-color: #16A34A;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+    }
+
+    .email-mockup-card {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-subtle);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .email-mockup-top {
+      background: var(--slate-50);
+      padding: 0.85rem 1.5rem;
+      border-bottom: 1px solid var(--slate-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .email-mockup-top span {
+      font-size: 0.825rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .email-trigger-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      background: var(--gold-100);
+      color: var(--gold-600);
+      border: 1px solid var(--gold-400);
+    }
+
+    .email-mockup-content {
+      padding: 1.5rem;
+      font-size: 0.88rem;
+      color: var(--slate-700);
+      line-height: 1.6;
+    }
+
+    .email-subject-line {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid var(--slate-100);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .app-sidebar {
+        width: 76px;
+      }
+      .brand-meta, .sidebar-badge, .nav-category-title, .admin-nav-item span, .external-link-btn span, .user-info {
+        display: none;
+      }
+      .admin-nav-item {
+        justify-content: center;
+        padding: 0.75rem;
+      }
+      .app-main {
+        margin-left: 76px;
+      }
+      .form-grid-2col {
+        grid-template-columns: 1fr;
+      }
+      .add-school-card-form {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       SIDEBAR NAVIGATION
+       ========================================================================== -->
+  <aside class="app-sidebar">
+    <div class="sidebar-header">
+      <div class="brand-crest">B</div>
+      <div class="brand-meta">
+        <h1>LE BADIL</h1>
+        <span>Conciergerie Dakar</span>
+      </div>
+    </div>
+
+    <div class="sidebar-badge">
+      <span class="dot"></span>
+      <span>Direction & Exploitation</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-category-title">Espaces de Gestion</div>
+
+      <button class="admin-nav-item active" data-admin-tab="tab-schools">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+        </svg>
+        <span>Établissements & Écoles</span>
+        <span class="nav-pill" id="sidebarSchoolsCount">13</span>
+      </button>
+
+      <button class="admin-nav-item" data-admin-tab="tab-bookings">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+        </svg>
+        <span>Réservations PayTech</span>
+        <span class="nav-pill" id="sidebarBookingsCount">0</span>
+      </button>
+
+      <div class="nav-category-title">Outils Opérationnels</div>
+
+      <button class="admin-nav-item" data-admin-tab="tab-commercial">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        <span>Outil Commercial Dakar</span>
+      </button>
+
+      <button class="admin-nav-item" data-admin-tab="tab-emails">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        <span>Notifications & Brevo</span>
+      </button>
+
+      <div class="nav-category-title">Administration & Sécurité</div>
+
+      <button class="admin-nav-item" data-admin-tab="tab-team">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        <span>Équipe & Accès</span>
+        <span class="nav-pill" id="sidebarTeamCount">3</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="/" target="_blank" class="external-link-btn">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+        <span>Consulter le site public</span>
+      </a>
+
+      <div class="user-profile-row">
+        <div class="user-avatar" id="loggedUserAvatar">DG</div>
+        <div class="user-info">
+          <div class="user-name" id="loggedUserName">Direction Générale</div>
+          <div class="user-role" id="loggedUserRole">Directeur Général</div>
+        </div>
+        <a href="/admin/logout" class="btn-logout-icon" title="Se déconnecter">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       MAIN APP AREA
+       ========================================================================== -->
+  <div class="app-main">
+
+    <!-- Top Floating Header -->
+    <header class="top-header">
+      <div class="header-breadcrumb">
+        <span class="breadcrumb-root">Portail Direction</span>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current" id="currentBreadcrumb">Établissements & Universités</span>
+      </div>
+
+      <div class="header-actions">
+        <div class="live-status-pill">
+          <span class="pulse-dot"></span>
+          <span>Serveur Actif • Dakar (GMT)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="content-area">
+
+      <!-- =====================================================================
+           TAB 1: ÉTABLISSEMENTS & UNIVERSITÉS PARTENAIRES
+           ===================================================================== -->
+      <div id="tab-schools" class="tab-pane active">
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-content">
+              <span class="kpi-label">Établissements Répertoriés</span>
+              <span class="kpi-value" id="kpiSchoolsCount">13</span>
+              <span class="kpi-subtext">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Synchronisés en direct avec le formulaire
+              </span>
+            </div>
+            <div class="kpi-icon-wrapper kpi-icon-gold">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-content">
+              <span class="kpi-label">Couverture Territoriale</span>
+              <span class="kpi-value">Dakar & Régions</span>
+              <span class="kpi-subtext">Plateau, Fann, Almadies, Saint-Louis</span>
+            </div>
+            <div class="kpi-icon-wrapper">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-content">
+              <span class="kpi-label">Intégration Étudiante</span>
+              <span class="kpi-value">Temps Réel</span>
+              <span class="kpi-subtext">Option sélectionnée au checkout</span>
+            </div>
+            <div class="kpi-icon-wrapper kpi-icon-emerald">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section Card -->
+        <div class="executive-card">
+          <div class="card-top-bar">
+            <div class="card-title-group">
+              <h2>🏢 Annuaire des Grandes Écoles & Universités</h2>
+              <p>Gérez les établissements proposés aux nouveaux arrivants pour l'organisation de leur accueil à Dakar.</p>
+            </div>
+            <div class="card-controls">
+              <button class="btn-clean btn-clean-secondary" id="btnRefreshSchools">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <span>Actualiser</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Add School Inline Form -->
+          <div class="add-school-container">
+            <form id="addSchoolForm" class="add-school-card-form">
+              <div class="input-with-label">
+                <input 
+                  type="text" 
+                  id="newSchoolName" 
+                  placeholder="Nom de l'école (ex: Institut Supérieur d'Informatique — ISI)" 
+                  required
+                >
+              </div>
+              <div class="input-with-label">
+                <input 
+                  type="text" 
+                  id="newSchoolCity" 
+                  placeholder="Localisation (ex: Dakar Fann / Mermoz)" 
+                  value="Dakar" 
+                  required
+                >
+              </div>
+              <button type="submit" class="btn-clean btn-clean-primary" id="btnAddSchool">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                <span>Ajouter l'établissement</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Alert feedback -->
+          <div id="schoolActionFeedback" class="feedback-alert"></div>
+
+          <!-- Filter Toolbar -->
+          <div class="table-toolbar">
+            <div class="search-input-box">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input type="text" id="filterSchoolsInput" placeholder="Rechercher une école, un institut, une ville...">
+            </div>
+            <span style="font-size:0.8rem; color:var(--slate-500); font-weight:600;" id="tableCounterSchools">13 établissements</span>
+          </div>
+
+          <!-- Table -->
+          <div class="table-container">
+            <table class="luxury-table">
+              <thead>
+                <tr>
+                  <th style="width: 70px;">N°</th>
+                  <th>Établissement Universitaire</th>
+                  <th style="width: 220px;">Localisation</th>
+                  <th style="width: 150px;">Statut</th>
+                  <th style="width: 120px; text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="schoolsTableBody">
+                <tr>
+                  <td colspan="5" class="empty-card-state">
+                    <p>Chargement des établissements...</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- =====================================================================
+           TAB 2: RÉSERVATIONS CONFIRMÉES PAYTECH (WAVE / OM / CB)
+           ===================================================================== -->
+      <div id="tab-bookings" class="tab-pane">
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-content">
+              <span class="kpi-label">Réservations Encaissées</span>
+              <span class="kpi-value" id="kpiBookingsCount">0</span>
+              <span class="kpi-subtext">Packs étudiants souscrits en ligne</span>
+            </div>
+            <div class="kpi-icon-wrapper kpi-icon-emerald">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-content">
+              <span class="kpi-label">Volume Total Encaissé</span>
+              <span class="kpi-value" id="kpiTotalRevenue">0 FCFA</span>
+              <span class="kpi-subtext" id="kpiTotalEur">~ 0 € TTC</span>
+            </div>
+            <div class="kpi-icon-wrapper kpi-icon-gold">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-content">
+              <span class="kpi-label">Sécurité PayTech Sénégal</span>
+              <span class="kpi-value" style="font-size:1.35rem;">SHA-256 Validé</span>
+              <span class="kpi-subtext">Passerelle Wave, Orange Money & CB</span>
+            </div>
+            <div class="kpi-icon-wrapper">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="executive-card">
+          <div class="card-top-bar">
+            <div class="card-title-group">
+              <h2>💳 Journal des Commandes & Paiements Encaissés</h2>
+              <p>Historique horodaté des paiements confirmés en temps réel par les passerelles locales.</p>
+            </div>
+            <div class="card-controls">
+              <button class="btn-clean btn-clean-secondary" id="btnRefreshBookings">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <span>Actualiser</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="luxury-table">
+              <thead>
+                <tr>
+                  <th>Réf. Commande</th>
+                  <th>Étudiant & Contact</th>
+                  <th>Pack Souscrit</th>
+                  <th>Établissement</th>
+                  <th>Arrivée AIBD</th>
+                  <th>Montant Encaissé</th>
+                  <th>Statut</th>
+                  <th style="text-align: right;">Date & Heure</th>
+                </tr>
+              </thead>
+              <tbody id="bookingsTableBody">
+                <tr>
+                  <td colspan="8" class="empty-card-state">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                    <h3>Aucune réservation enregistrée pour l'instant</h3>
+                    <p>Les transactions validées apparaîtront automatiquement dès qu'un paiement PayTech sera complété.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- =====================================================================
+           TAB 3: OUTIL COMMERCIAL DAKAR (ENTRETIENS & SÉMINAIRES)
+           ===================================================================== -->
+      <div id="tab-commercial" class="tab-pane">
+
+        <div class="executive-card">
+          <div class="card-top-bar">
+            <div class="card-title-group">
+              <h2>📋 Fiche de Qualification Commerciale Séminaire (Dakar B2B)</h2>
+              <p>Outil d'entretien réservé aux chargés d'affaires pour structurer le cahier des charges lors des rendez-vous entreprises.</p>
+            </div>
+          </div>
+
+          <div class="qualifier-form-wrapper">
+            <form id="qualifier-form">
+              <div class="form-grid-2col">
+
+                <!-- Section 1 -->
+                <div class="form-section-box">
+                  <div class="form-section-header">
+                    <span>🏢 1. Identité Société & Interlocuteur</span>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Raison Sociale / Organisation</label>
+                    <input type="text" class="form-input-clean" id="q-company" placeholder="Ex: Ecobank Sénégal, TotalEnergies, Sonatel...">
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Nom & Fonction du Décideur</label>
+                    <input type="text" class="form-input-clean" id="q-contact" placeholder="Ex: Mme Aminata Ndoye — Directrice RH">
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Numéro WhatsApp Pro / Téléphone</label>
+                    <input type="text" class="form-input-clean" id="q-phone" placeholder="+221 77 XXX XX XX">
+                  </div>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="form-section-box">
+                  <div class="form-section-header">
+                    <span>📍 2. Spécifications de l'Événement</span>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Type de Projet</label>
+                    <select class="form-input-clean" id="q-event-type">
+                      <option value="Séminaire Stratégique Exécutif (5 à 15 personnes)">Séminaire Stratégique Exécutif (5 à 15 personnes)</option>
+                      <option value="Team Building & Cohésion Annuelle (15 à 50 personnes)">Team Building & Cohésion Annuelle (15 à 50 personnes)</option>
+                      <option value="Convention / Conférence / Gala Corporate (50 à 200+ personnes)">Convention / Conférence / Gala Corporate (50 à 200+ personnes)</option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Localisation Privilégiée</label>
+                    <select class="form-input-clean" id="q-location">
+                      <option value="Dakar Plateau / Centre d'Affaires">Dakar Plateau / Centre d'Affaires</option>
+                      <option value="Dakar Almadies / Ngor (Bord de mer)">Dakar Almadies / Ngor (Bord de mer)</option>
+                      <option value="Petite Côte / Saly / Somone (Résidentiel balnéaire)">Petite Côte / Saly / Somone (Résidentiel balnéaire)</option>
+                      <option value="Île de Gorée / Lac Rose (Culturel & Patrimoine)">Île de Gorée / Lac Rose (Culturel & Patrimoine)</option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Enveloppe Budgétaire Indicative (FCFA)</label>
+                    <select class="form-input-clean" id="q-budget">
+                      <option value="Moins de 3 000 000 FCFA (~4 500 €)">Moins de 3 000 000 FCFA (~4 500 €)</option>
+                      <option value="3 000 000 à 7 000 000 FCFA (~4 500 à 10 600 €)" selected>3 000 000 à 7 000 000 FCFA (~4 500 à 10 600 €)</option>
+                      <option value="7 000 000 à 15 000 000 FCFA (~10 600 à 22 800 €)">7 000 000 à 15 000 000 FCFA (~10 600 à 22 800 €)</option>
+                      <option value="Plus de 15 000 000 FCFA (+22 800 €)">Plus de 15 000 000 FCFA (+22 800 €)</option>
+                    </select>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Section 3 : Prestations -->
+              <div class="form-section-box" style="margin-bottom: 1.75rem;">
+                <div class="form-section-header">
+                  <span>✨ 3. Prestations Attendues par l'Entreprise</span>
+                </div>
+                <div class="options-pill-grid">
+                  <label class="option-checkbox-card">
+                    <input type="checkbox" checked id="q-opt-transports">
+                    <span>Transferts VIP Flotte & Chauffeurs AIBD</span>
+                  </label>
+                  <label class="option-checkbox-card">
+                    <input type="checkbox" checked id="q-opt-hebergement">
+                    <span>Hébergement Hôtel 4-5★ ou Lodge de Prestige</span>
+                  </label>
+                  <label class="option-checkbox-card">
+                    <input type="checkbox" checked id="q-opt-traiteur">
+                    <span>Restauration Gastronomique & Pauses Salées/Sucrées</span>
+                  </label>
+                  <label class="option-checkbox-card">
+                    <input type="checkbox" checked id="q-opt-teambuilding">
+                    <span>Animation Team Building, Coach & Volet RSE</span>
+                  </label>
+                </div>
+              </div>
+
+              <button type="button" class="btn-clean btn-clean-primary" id="btn-export-qualification" style="width: 100%; justify-content: center; padding: 0.95rem; font-size: 0.95rem;">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>Générer le Dossier de Qualification Commerciale</span>
+              </button>
+            </form>
+
+            <!-- Output sheet -->
+            <div id="qualifier-summary-box" class="summary-preview-sheet">
+              <div class="summary-sheet-header">
+                <h4>📄 Fiche Récapitulative Prête à l'Emploi</h4>
+                <button class="btn-clean btn-clean-gold" id="btnCopyQualifier">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <span id="copyBtnText">Copier pour WhatsApp</span>
+                </button>
+              </div>
+              <pre id="qualifier-summary-text" class="summary-sheet-pre"></pre>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- =====================================================================
+           TAB 4: NOTIFICATIONS & BREVO API DISPATCHER
+           ===================================================================== -->
+      <div id="tab-emails" class="tab-pane">
+
+        <!-- Live Brevo Dispatcher Card -->
+        <div class="test-dispatcher-box">
+          <div class="test-dispatcher-header">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#16A34A" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <h4>Banc d'Essai Brevo API (Envoi d'Email Réel)</h4>
+          </div>
+          <p class="test-dispatcher-desc">
+            Testez instantanément la délivrabilité et l'acheminement des emails de confirmation vers votre boîte de réception.
+          </p>
+          <div class="test-dispatcher-form">
+            <input 
+              type="email" 
+              id="testRecipientEmail" 
+              class="test-dispatcher-input" 
+              placeholder="Saisissez une adresse email de test (ex: direction@lebadil.sn)"
+            >
+            <button type="button" class="btn-clean" id="btnSendTestEmail" style="background:#16A34A; color:#FFFFFF;">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+              <span>Envoyer le test</span>
+            </button>
+          </div>
+          <div id="testEmailFeedback" class="feedback-alert" style="margin: 0.85rem 0 0;"></div>
+        </div>
+
+        <div class="executive-card">
+          <div class="card-top-bar">
+            <div class="card-title-group">
+              <h2>📧 Modèles d'Emails Transactionnels Automatisés</h2>
+              <p>Gabarits envoyés automatiquement lors de chaque événement client sur la plateforme.</p>
+            </div>
+          </div>
+
+          <div style="padding: 1.75rem;">
+            <!-- Email Template 1 -->
+            <div class="email-mockup-card">
+              <div class="email-mockup-top">
+                <span>🎓 Modèle 1.1 : Confirmation de Commande & Accueil AIBD</span>
+                <span class="email-trigger-tag">Trigger : IPN PayTech Validé (Wave / OM / CB)</span>
+              </div>
+              <div class="email-mockup-content">
+                <div class="email-subject-line">
+                  Objet : ✅ Confirmation de réservation — Pack VIP All-Inclusive | Le BADIL Conciergerie Dakar
+                </div>
+                <p>Bonjour <strong>[Nom de l'étudiant]</strong> (et chers parents),</p>
+                <p style="margin: 0.5rem 0;">Nous avons l'honneur de vous confirmer la validation définitive de votre commande pour le <strong>Pack VIP All-Inclusive</strong> (Réf: BADIL-2026-XXXX).</p>
+                <p>Dès à présent, votre concierge dédié prend en charge l'organisation de votre accueil à l'aéroport Blaise Diagne (AIBD) ainsi que la coordination des démarches d'installation à Dakar (recherche de logement, ouverture ligne 4G locale).</p>
+                <p style="margin-top: 0.85rem;">
+                  <em>Dalal ak jamm (Bienvenue) au Sénégal !</em><br>
+                  <strong>L'équipe Le BADIL Conciergerie Dakar</strong>
+                </p>
+              </div>
+            </div>
+
+            <!-- Email Template 2 -->
+            <div class="email-mockup-card" style="margin-bottom: 0;">
+              <div class="email-mockup-top">
+                <span>💼 Modèle 2.1 : Accusé de Réception Séminaire Corporate B2B</span>
+                <span class="email-trigger-tag">Trigger : Formulaire Séminaire Soumis</span>
+              </div>
+              <div class="email-mockup-content">
+                <div class="email-subject-line">
+                  Objet : 💼 Votre projet d'événement d'entreprise à Dakar / Petite Côte — Prise en charge Le BADIL
+                </div>
+                <p>Bonjour <strong>[Nom du Décideur]</strong>,</p>
+                <p style="margin: 0.5rem 0;">Nous avons bien enregistré les spécifications de votre projet d'événement d'entreprise.</p>
+                <p>Notre direction corporate étudie la disponibilité des réceptifs d'exception ainsi que la logistique de transport VIP requise. Un chef de projet vous contactera sous 24 heures ouvrées.</p>
+                <p style="margin-top: 0.85rem;">
+                  Bien cordialement,<br>
+                  <strong>Direction Événements — Le BADIL Conciergerie Dakar</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- =====================================================================
+           TAB 5: GESTION DE L'ÉQUIPE & ACCÈS COLLABORATEURS
+           ===================================================================== -->
+      <div id="tab-team" class="tab-pane">
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-content">
+              <span class="kpi-label">Collaborateurs Accrédités</span>
+              <span class="kpi-value" id="kpiTeamCount">3</span>
+              <span class="kpi-subtext">Membres actifs de la conciergerie</span>
+            </div>
+            <div class="kpi-icon-wrapper kpi-icon-gold">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-content">
+              <span class="kpi-label">Pôles d'Intervention</span>
+              <span class="kpi-value" style="font-size:1.35rem;">Direction • AIBD • B2B</span>
+              <span class="kpi-subtext">Accueil VIP, Chasse logement & Séminaires</span>
+            </div>
+            <div class="kpi-icon-wrapper">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-content">
+              <span class="kpi-label">Sécurité & Confidentialité</span>
+              <span class="kpi-value" style="font-size:1.35rem;">Sessions 8h</span>
+              <span class="kpi-subtext">Accès nominatifs & isolés</span>
+            </div>
+            <div class="kpi-icon-wrapper kpi-icon-emerald">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="executive-card">
+          <div class="card-top-bar">
+            <div class="card-title-group">
+              <h2>👥 Annuaire des Membres de l'Équipe & Rôles</h2>
+              <p>Créez et gérez les comptes d'accès pour les chargés d'affaires, les concierges AIBD et la direction.</p>
+            </div>
+            <div class="card-controls">
+              <button class="btn-clean btn-clean-secondary" id="btnRefreshTeam">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <span>Actualiser</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Add User Form -->
+          <div class="add-school-container">
+            <form id="addTeamForm" style="display:grid; grid-template-columns: 1.2fr 1fr 1fr 1.2fr 1fr auto; gap:0.75rem; align-items:center;">
+              <div class="input-with-label">
+                <input type="text" id="newUserName" placeholder="Nom complet (ex: Fatou Ndiaye)" required>
+              </div>
+              <div class="input-with-label">
+                <input type="text" id="newUserLogin" placeholder="Identifiant (ex: fatou.ndiaye)" required>
+              </div>
+              <div class="input-with-label">
+                <input type="password" id="newUserPassword" placeholder="Mot de passe" required>
+              </div>
+              <div class="input-with-label">
+                <select id="newUserRole">
+                  <option value="Chargé d'Affaires B2B (Dakar)">Chargé d'Affaires B2B (Dakar)</option>
+                  <option value="Superviseur Accueil AIBD">Superviseur Accueil AIBD</option>
+                  <option value="Responsable Chasse Logement">Responsable Chasse Logement</option>
+                  <option value="Concierge Opérationnel Terrain">Concierge Opérationnel Terrain</option>
+                  <option value="Directeur Général">Directeur Général</option>
+                </select>
+              </div>
+              <div class="input-with-label">
+                <input type="text" id="newUserPhone" placeholder="WhatsApp (+221 77...)">
+              </div>
+              <button type="submit" class="btn-clean btn-clean-primary" id="btnAddTeamMember">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                <span>Créer l'accès</span>
+              </button>
+            </form>
+          </div>
+
+          <div id="teamActionFeedback" class="feedback-alert"></div>
+
+          <!-- Team Table -->
+          <div class="table-container">
+            <table class="luxury-table">
+              <thead>
+                <tr>
+                  <th style="width: 70px;">N°</th>
+                  <th>Membre & Identifiant</th>
+                  <th>Pôle & Rôle Attribué</th>
+                  <th>WhatsApp Professionnel</th>
+                  <th>Statut</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="teamTableBody">
+                <tr>
+                  <td colspan="6" class="empty-card-state">
+                    <p>Chargement des membres de l'équipe...</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       CLIENT APPLICATION LOGIC
+       ========================================================================== -->
+  <script>
+    // State
+    let schoolsCache = [];
+
+    // ==========================================
+    // 1. TABS SWITCHER & BREADCRUMB
+    // ==========================================
+    const tabBtns = document.querySelectorAll('.admin-nav-item');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    const currentBreadcrumb = document.getElementById('currentBreadcrumb');
+
+    const tabLabels = {
+      'tab-schools': 'Établissements & Universités',
+      'tab-bookings': 'Réservations PayTech',
+      'tab-commercial': 'Outil Commercial Dakar',
+      'tab-emails': 'Notifications & Brevo API',
+      'tab-team': 'Équipe & Gestion des Accès'
+    };
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTab = btn.getAttribute('data-admin-tab');
+
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        tabPanes.forEach(p => {
+          p.classList.remove('active');
+          if (p.id === targetTab) p.classList.add('active');
+        });
+
+        if (currentBreadcrumb && tabLabels[targetTab]) {
+          currentBreadcrumb.textContent = tabLabels[targetTab];
+        }
+      });
+    });
+
+    // ==========================================
+    // 2. ÉTABLISSEMENTS (SCHOOLS) MANAGEMENT
+    // ==========================================
+    const schoolsTableBody = document.getElementById('schoolsTableBody');
+    const kpiSchoolsCount = document.getElementById('kpiSchoolsCount');
+    const sidebarSchoolsCount = document.getElementById('sidebarSchoolsCount');
+    const tableCounterSchools = document.getElementById('tableCounterSchools');
+    const addSchoolForm = document.getElementById('addSchoolForm');
+    const newSchoolName = document.getElementById('newSchoolName');
+    const newSchoolCity = document.getElementById('newSchoolCity');
+    const schoolActionFeedback = document.getElementById('schoolActionFeedback');
+    const btnRefreshSchools = document.getElementById('btnRefreshSchools');
+    const filterSchoolsInput = document.getElementById('filterSchoolsInput');
+
+    function renderSchoolsTable(schools) {
+      if (!schoolsTableBody) return;
+
+      if (schools.length === 0) {
+        schoolsTableBody.innerHTML = `
+          <tr>
+            <td colspan="5" class="empty-card-state">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+              <h3>Aucun établissement trouvé</h3>
+              <p>Ajoutez une nouvelle école partenaire ci-dessus pour la référencer.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      schoolsTableBody.innerHTML = schools.map((school, index) => {
+        const initial = (school.name || 'E').trim().charAt(0).toUpperCase();
+        return `
+          <tr data-school-id="${school.id}">
+            <td style="font-weight: 700; color: var(--slate-400);">${index + 1}</td>
+            <td>
+              <div class="school-title-cell">
+                <div class="school-avatar-letter">${initial}</div>
+                <div>
+                  <div class="school-name-text">${school.name}</div>
+                  <span class="school-type-tag">ID: ${school.id}</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="location-pill">
+                📍 ${school.city || 'Dakar'}
+              </span>
+            </td>
+            <td>
+              <span class="status-badge status-confirmed">
+                <span class="badge-dot"></span>
+                <span>Actif • Public</span>
+              </span>
+            </td>
+            <td style="text-align: right;">
+              <button class="btn-delete-row" onclick="deleteSchool('${school.id}', '${school.name.replace(/'/g, "\\'")}')">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                <span>Supprimer</span>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function loadSchools() {
+      try {
+        const res = await fetch('/api/admin/schools');
+        if (!res.ok) throw new Error('Impossible de charger les établissements.');
+        schoolsCache = await res.json();
+
+        if (kpiSchoolsCount) kpiSchoolsCount.textContent = schoolsCache.length;
+        if (sidebarSchoolsCount) sidebarSchoolsCount.textContent = schoolsCache.length;
+        if (tableCounterSchools) tableCounterSchools.textContent = `${schoolsCache.length} établissements`;
+
+        renderSchoolsTable(schoolsCache);
+
+      } catch (err) {
+        if (schoolsTableBody) {
+          schoolsTableBody.innerHTML = `
+            <tr>
+              <td colspan="5" style="text-align:center; color:var(--rose-600); padding:2rem;">
+                ⚠️ Erreur de chargement : ${err.message}
+              </td>
+            </tr>
+          `;
+        }
+      }
+    }
+
+    // Filter schools input
+    if (filterSchoolsInput) {
+      filterSchoolsInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        const filtered = schoolsCache.filter(s => 
+          (s.name && s.name.toLowerCase().includes(query)) ||
+          (s.city && s.city.toLowerCase().includes(query))
+        );
+        renderSchoolsTable(filtered);
+        if (tableCounterSchools) tableCounterSchools.textContent = `${filtered.length} / ${schoolsCache.length} affichés`;
+      });
+    }
+
+    if (addSchoolForm) {
+      addSchoolForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = newSchoolName.value.trim();
+        const city = newSchoolCity.value.trim() || 'Dakar';
+
+        if (!name) return;
+
+        const submitBtn = document.getElementById('btnAddSchool');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Patientez...</span>';
+
+        try {
+          const res = await fetch('/api/admin/schools', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, city })
+          });
+
+          const data = await res.json();
+
+          if (res.ok && data.success) {
+            showAlert(schoolActionFeedback, `✅ Établissement "${name}" ajouté avec succès !`, '#ECFDF5', '#059669');
+            newSchoolName.value = '';
+            loadSchools();
+          } else {
+            showAlert(schoolActionFeedback, `⚠️ Erreur : ${data.error || 'Ajout impossible'}`, '#FFF1F2', '#E11D48');
+          }
+        } catch (err) {
+          showAlert(schoolActionFeedback, `⚠️ Erreur réseau : ${err.message}`, '#FFF1F2', '#E11D48');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            <span>Ajouter l'établissement</span>
+          `;
+        }
+      });
+    }
+
+    window.deleteSchool = async function(id, name) {
+      if (!confirm(`Confirmez-vous la suppression de l'établissement :\n\n"${name}" ?\n\nIl sera instantanément retiré du formulaire de réservation public.`)) {
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/admin/schools/${encodeURIComponent(id)}`, {
+          method: 'DELETE'
+        });
+
+        if (res.ok) {
+          showAlert(schoolActionFeedback, `🗑️ Établissement "${name}" supprimé.`, '#FEF3C7', '#B45309');
+          loadSchools();
+        } else {
+          alert('Impossible de supprimer cet établissement.');
+        }
+      } catch (err) {
+        alert('Erreur lors de la suppression.');
+      }
+    };
+
+    if (btnRefreshSchools) btnRefreshSchools.addEventListener('click', loadSchools);
+
+    // ==========================================
+    // 3. RÉSERVATIONS PAYTECH
+    // ==========================================
+    const bookingsTableBody = document.getElementById('bookingsTableBody');
+    const kpiBookingsCount = document.getElementById('kpiBookingsCount');
+    const sidebarBookingsCount = document.getElementById('sidebarBookingsCount');
+    const kpiTotalRevenue = document.getElementById('kpiTotalRevenue');
+    const kpiTotalEur = document.getElementById('kpiTotalEur');
+    const btnRefreshBookings = document.getElementById('btnRefreshBookings');
+
+    async function loadBookings() {
+      try {
+        const res = await fetch('/api/admin/reservations');
+        if (!res.ok) throw new Error('Impossible de charger les réservations.');
+        const bookings = await res.json();
+
+        if (kpiBookingsCount) kpiBookingsCount.textContent = bookings.length;
+        if (sidebarBookingsCount) sidebarBookingsCount.textContent = bookings.length;
+
+        const totalFcfa = bookings.reduce((sum, b) => sum + (parseInt(b.amount) || 0), 0);
+        if (kpiTotalRevenue) kpiTotalRevenue.textContent = new Intl.NumberFormat('fr-FR').format(totalFcfa) + ' FCFA';
+        if (kpiTotalEur) {
+          const eur = Math.round(totalFcfa / 655.957);
+          kpiTotalEur.textContent = `~ ${new Intl.NumberFormat('fr-FR').format(eur)} € TTC`;
+        }
+
+        if (!bookingsTableBody) return;
+
+        if (bookings.length === 0) {
+          bookingsTableBody.innerHTML = `
+            <tr>
+              <td colspan="8" class="empty-card-state">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+                <h3>Aucune réservation enregistrée pour l'instant</h3>
+                <p>Les transactions validées apparaîtront automatiquement dès qu'un paiement PayTech sera complété.</p>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        bookingsTableBody.innerHTML = bookings.map(b => {
+          const dateStr = b.date ? new Date(b.date).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' }) : 'N/A';
+          const amountFormatted = new Intl.NumberFormat('fr-FR').format(b.amount || 0) + ' FCFA';
+
+          let packClass = 'pack-vip';
+          const pName = (b.packName || '').toLowerCase();
+          if (pName.includes('teranga')) packClass = 'pack-teranga';
+          else if (pName.includes('logement')) packClass = 'pack-logement';
+          else if (pName.includes('integration')) packClass = 'pack-integration';
+
+          return `
+            <tr>
+              <td>
+                <code style="font-size:0.8rem; background:var(--slate-100); padding:3px 8px; border-radius:6px; font-weight:700; color:var(--navy-900);">
+                  ${b.ref || 'N/A'}
+                </code>
+              </td>
+              <td>
+                <div>
+                  <strong style="color:var(--navy-900); font-size:0.92rem;">${b.studentName || 'Étudiant'}</strong>
+                  <div style="font-size:0.775rem; color:var(--slate-500); margin-top:2px;">
+                    <a href="mailto:${b.email}" style="color:var(--slate-600); text-decoration:none;">${b.email || 'Sans email'}</a>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="pack-badge ${packClass}">
+                  ${b.packName || 'Pack Étudiant'}
+                </span>
+              </td>
+              <td>
+                <span style="font-weight:600; color:var(--slate-700); font-size:0.85rem;">${b.school || 'Non précisé'}</span>
+              </td>
+              <td>
+                <span class="location-pill">📅 ${b.arrivalDate || 'À confirmer'}</span>
+              </td>
+              <td>
+                <strong style="color:var(--navy-900); font-size:0.95rem; font-family:var(--font-heading);">${amountFormatted}</strong>
+              </td>
+              <td>
+                <span class="status-badge status-confirmed">
+                  <span class="badge-dot"></span>
+                  <span>${b.status || 'CONFIRMED'}</span>
+                </span>
+              </td>
+              <td style="text-align: right; font-size:0.8rem; color:var(--slate-500); font-weight:500;">
+                ${dateStr}
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+      } catch (err) {
+        if (bookingsTableBody) {
+          bookingsTableBody.innerHTML = `
+            <tr>
+              <td colspan="8" style="text-align:center; color:var(--rose-600); padding:2rem;">
+                ⚠️ Erreur de chargement : ${err.message}
+              </td>
+            </tr>
+          `;
+        }
+      }
+    }
+
+    if (btnRefreshBookings) btnRefreshBookings.addEventListener('click', loadBookings);
+
+    // ==========================================
+    // 4. COMMERCIAL QUALIFICATION TOOL
+    // ==========================================
+    const btnExportQualification = document.getElementById('btn-export-qualification');
+    const qualifierSummaryBox = document.getElementById('qualifier-summary-box');
+    const qualifierSummaryText = document.getElementById('qualifier-summary-text');
+    const btnCopyQualifier = document.getElementById('btnCopyQualifier');
+    const copyBtnText = document.getElementById('copyBtnText');
+
+    if (btnExportQualification) {
+      btnExportQualification.addEventListener('click', () => {
+        const company = document.getElementById('q-company').value.trim() || "Société Prospect";
+        const contact = document.getElementById('q-contact').value.trim() || "Non spécifié";
+        const phone = document.getElementById('q-phone').value.trim() || "Non spécifié";
+        const eventType = document.getElementById('q-event-type').value;
+        const location = document.getElementById('q-location').value;
+        const budget = document.getElementById('q-budget').value;
+
+        const opts = [];
+        if (document.getElementById('q-opt-transports').checked) opts.push("Transferts VIP Flotte & Berlines AIBD");
+        if (document.getElementById('q-opt-hebergement').checked) opts.push("Hébergement Hôtel 4-5★ / Lodge de Prestige");
+        if (document.getElementById('q-opt-traiteur').checked) opts.push("Restauration Gastronomique & Pauses Salées/Sucrées");
+        if (document.getElementById('q-opt-teambuilding').checked) opts.push("Animation Team Building & Volet RSE");
+
+        const text = 
+`=============================================================
+LE BADIL CONCIERGERIE DAKAR — FICHE DE QUALIFICATION SÉMINAIRE
+=============================================================
+Date d'entretien       : ${new Date().toLocaleDateString('fr-FR')}
+Département            : Pôle Corporate & Événements Dakar
+
+1. IDENTITÉ DU CLIENT
+---------------------
+Société Prospect       : ${company}
+Décideur / Fonction    : ${contact}
+WhatsApp Pro           : ${phone}
+
+2. PARAMÈTRES DU PROJET
+-----------------------
+Format Requis          : ${eventType}
+Localisation           : ${location}
+Enveloppe Budgétaire   : ${budget}
+
+3. PRESTATIONS ATTENDUES
+------------------------
+- ${opts.join('\n- ')}
+
+4. PROCHAINES ÉTAPES
+--------------------
+Statut : Proposition technique et financière sous 24 heures.
+=============================================================`;
+
+        qualifierSummaryText.textContent = text;
+        qualifierSummaryBox.style.display = 'block';
+        qualifierSummaryBox.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    if (btnCopyQualifier) {
+      btnCopyQualifier.addEventListener('click', () => {
+        navigator.clipboard.writeText(qualifierSummaryText.textContent);
+        if (copyBtnText) copyBtnText.textContent = '✅ Copié dans le presse-papier !';
+        setTimeout(() => { if (copyBtnText) copyBtnText.textContent = 'Copier pour WhatsApp'; }, 2500);
+      });
+    }
+
+    // ==========================================
+    // 5. TEST EMAIL (BREVO)
+    // ==========================================
+    const btnSendTestEmail = document.getElementById('btnSendTestEmail');
+    const testRecipientEmail = document.getElementById('testRecipientEmail');
+    const testEmailFeedback = document.getElementById('testEmailFeedback');
+
+    if (btnSendTestEmail) {
+      btnSendTestEmail.addEventListener('click', async () => {
+        const email = testRecipientEmail.value.trim();
+        if (!email) {
+          alert('Veuillez renseigner une adresse email de test valide.');
+          return;
+        }
+
+        btnSendTestEmail.disabled = true;
+        btnSendTestEmail.innerHTML = '<span>Envoi en cours...</span>';
+        testEmailFeedback.style.display = 'none';
+
+        try {
+          const res = await fetch('/api/test-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+
+          const data = await res.json();
+
+          if (res.ok && data.success) {
+            showAlert(testEmailFeedback, `✅ ${data.message}`, '#DCFCE7', '#15803D');
+          } else {
+            showAlert(testEmailFeedback, `⚠️ ${data.message || 'Échec de l\'envoi Brevo.'}`, '#FEE2E2', '#DC2626');
+          }
+        } catch (err) {
+          showAlert(testEmailFeedback, `⚠️ Erreur réseau : ${err.message}`, '#FEE2E2', '#DC2626');
+        } finally {
+          btnSendTestEmail.disabled = false;
+          btnSendTestEmail.innerHTML = `
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+            <span>Envoyer le test</span>
+          `;
+        }
+      });
+    }
+
+    // Helper: Alert banner
+    function showAlert(element, text, bg, color) {
+      if (!element) return;
+      element.style.display = 'block';
+      element.style.backgroundColor = bg;
+      element.style.color = color;
+      element.style.border = `1px solid ${color}`;
+      element.textContent = text;
+      setTimeout(() => { element.style.display = 'none'; }, 6000);
+    }
+
+    // ==========================================
+    // 6. GESTION DE L'ÉQUIPE (USERS CRUD)
+    // ==========================================
+    const teamTableBody = document.getElementById('teamTableBody');
+    const kpiTeamCount = document.getElementById('kpiTeamCount');
+    const sidebarTeamCount = document.getElementById('sidebarTeamCount');
+    const addTeamForm = document.getElementById('addTeamForm');
+    const teamActionFeedback = document.getElementById('teamActionFeedback');
+    const btnRefreshTeam = document.getElementById('btnRefreshTeam');
+
+    async function loadCurrentUser() {
+      try {
+        const res = await fetch('/api/admin/me');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.user) {
+            const initial = (data.user.name || 'AD').trim().substring(0, 2).toUpperCase();
+            const avatarEl = document.getElementById('loggedUserAvatar');
+            const nameEl = document.getElementById('loggedUserName');
+            const roleEl = document.getElementById('loggedUserRole');
+            if (avatarEl) avatarEl.textContent = initial;
+            if (nameEl) nameEl.textContent = data.user.name || 'Direction';
+            if (roleEl) roleEl.textContent = data.user.role || 'Directeur Général';
+          }
+        }
+      } catch (e) {
+        console.warn('Could not load current user profile:', e);
+      }
+    }
+
+    async function loadTeam() {
+      try {
+        const res = await fetch('/api/admin/users');
+        if (!res.ok) throw new Error('Impossible de charger les utilisateurs.');
+        const users = await res.json();
+
+        if (kpiTeamCount) kpiTeamCount.textContent = users.length;
+        if (sidebarTeamCount) sidebarTeamCount.textContent = users.length;
+
+        if (!teamTableBody) return;
+
+        if (users.length === 0) {
+          teamTableBody.innerHTML = `
+            <tr>
+              <td colspan="6" class="empty-card-state">
+                <p>Aucun collaborateur enregistré.</p>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        teamTableBody.innerHTML = users.map((u, index) => {
+          const initial = (u.name || 'U').trim().substring(0, 2).toUpperCase();
+          let roleBadge = 'pack-vip';
+          const rLower = (u.role || '').toLowerCase();
+          if (rLower.includes('aibd') || rLower.includes('accueil')) roleBadge = 'pack-teranga';
+          else if (rLower.includes('commercial') || rLower.includes('b2b')) roleBadge = 'pack-logement';
+          else if (rLower.includes('logement')) roleBadge = 'pack-integration';
+
+          return `
+            <tr>
+              <td style="font-weight: 700; color: var(--slate-400);">${index + 1}</td>
+              <td>
+                <div class="school-title-cell">
+                  <div class="school-avatar-letter" style="background:var(--gold-100); color:var(--gold-600); border-color:var(--gold-200);">${initial}</div>
+                  <div>
+                    <div class="school-name-text">${u.name}</div>
+                    <span class="school-type-tag">@${u.login}</span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="pack-badge ${roleBadge}">${u.role}</span>
+              </td>
+              <td>
+                ${u.phone ? `
+                  <a href="https://wa.me/${u.phone.replace(/[^0-9]/g, '')}" target="_blank" class="location-pill" style="text-decoration:none; color:var(--emerald-600); background:var(--emerald-50); border:1px solid #A7F3D0;">
+                    💬 ${u.phone}
+                  </a>
+                ` : '<span style="color:var(--slate-400); font-size:0.8rem;">Non spécifié</span>'}
+              </td>
+              <td>
+                <span class="status-badge status-confirmed">
+                  <span class="badge-dot"></span>
+                  <span>Actif</span>
+                </span>
+              </td>
+              <td style="text-align: right;">
+                <button class="btn-delete-row" onclick="deleteTeamMember('${u.id}', '${u.name.replace(/'/g, "\\'")}')">
+                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                  <span>Retirer</span>
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+      } catch (err) {
+        if (teamTableBody) {
+          teamTableBody.innerHTML = `
+            <tr>
+              <td colspan="6" style="text-align:center; color:var(--rose-600); padding:2rem;">
+                ⚠️ Erreur : ${err.message}
+              </td>
+            </tr>
+          `;
+        }
+      }
+    }
+
+    if (addTeamForm) {
+      addTeamForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('newUserName').value.trim();
+        const login = document.getElementById('newUserLogin').value.trim();
+        const password = document.getElementById('newUserPassword').value;
+        const role = document.getElementById('newUserRole').value;
+        const phone = document.getElementById('newUserPhone').value.trim();
+
+        if (!name || !login || !password) return;
+
+        const submitBtn = document.getElementById('btnAddTeamMember');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Création...</span>';
+
+        try {
+          const res = await fetch('/api/admin/users', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, login, password, role, phone })
+          });
+
+          const data = await res.json();
+
+          if (res.ok && data.success) {
+            showAlert(teamActionFeedback, `✅ Accès créé avec succès pour ${name} (@${login}) !`, '#ECFDF5', '#059669');
+            addTeamForm.reset();
+            loadTeam();
+          } else {
+            showAlert(teamActionFeedback, `⚠️ Erreur : ${data.error || 'Impossible de créer ce compte'}`, '#FFF1F2', '#E11D48');
+          }
+        } catch (err) {
+          showAlert(teamActionFeedback, `⚠️ Erreur réseau : ${err.message}`, '#FFF1F2', '#E11D48');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            <span>Créer l'accès</span>
+          `;
+        }
+      });
+    }
+
+    window.deleteTeamMember = async function(id, name) {
+      if (!confirm(`Confirmez-vous la révocation des accès de :\n\n"${name}" ?\n\nCe collaborateur ne pourra plus se connecter au dashboard.`)) {
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/admin/users/${encodeURIComponent(id)}`, {
+          method: 'DELETE'
+        });
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          showAlert(teamActionFeedback, `🗑️ Accès de "${name}" révoqué.`, '#FEF3C7', '#B45309');
+          loadTeam();
+        } else {
+          alert(`⚠️ Erreur : ${data.error || 'Suppression impossible'}`);
+        }
+      } catch (err) {
+        alert('Erreur lors de la suppression.');
+      }
+    };
+
+    if (btnRefreshTeam) btnRefreshTeam.addEventListener('click', loadTeam);
+
+    // Initial load
+    loadCurrentUser();
+    loadSchools();
+    loadBookings();
+    loadTeam();
+  </script>
+</body>
+</html>
