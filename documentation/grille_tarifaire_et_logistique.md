@@ -11,7 +11,7 @@
 | :--- | :--- | :---: | :---: |
 | **Pack Teranga (Accueil AIBD)** | • Accueil personnalisé à la sortie de l'AIBD avec pancarte nominative<br>• Transfert en véhicule climatisé privatif AIBD ➔ Dakar (péage inclus)<br>• Puce SIM locale activée avec forfait Data (20 Go) + Appels<br>• Panier de bienvenue Teranga (eau, encas locaux, guide pratiques) | **75 000 FCFA** | **115 €** |
 | **Pack Logement Serein** | • Recherche ciblée selon critères et budget (Almadies, Mermoz, Fann, Sacré-Cœur, etc.)<br>• Organistion et réalisation des visites (physiques ou comptes-rendus vidéo 4K pour parents)<br>• Négociation du bail & état des lieux d'entrée rigoureux<br>• Activation des abonnements (Senelec, Sen'Eau, Box Internet Orange/Free) | **150 000 FCFA** | **230 €** |
-| **Pack Intégration & Vie Locale** | • Orientation transports : Pass BRT / Dem Dikk & repères trajets université<br>• Répertoire de santé de confiance (cliniques, médecins conventionnés, pharmacies de garde)<br>• Conciergerie Hotline / Assistance dédiée 7j/7 pendant 1 mois<br>• Mise en relation avec les associations et réseaux étudiants dakarois | **60 000 FCFA** | **90 €** |
+| **Pack Intégration & Vie Locale** | • Orientation transports : Pass BRT & TER Dakar & repères trajets université<br>• Répertoire de santé de confiance (cliniques, médecins conventionnés, pharmacies de garde)<br>• Conciergerie Hotline / Assistance dédiée 7j/7 pendant 1 mois<br>• Mise en relation avec les associations et réseaux étudiants dakarois | **60 000 FCFA** | **90 €** |
 | **Pack VIP "Sérénité Absolue" (All-Inclusive)** | • **Contient 100% des services des Packs Teranga + Logement Serein + Intégration**<br>• Ménage complet et désinfection du logement avant arrivée<br>• Livraison des premières courses alimentaires personnalisées dans le frigo<br>• Ligne directe prioritaire avec un concierge dédié pendant 3 mois | **250 000 FCFA** | **380 €** |
 
 #### Services À la Carte Étudiants
@@ -28,7 +28,8 @@
 | **Journée d'Étude Dakar (par participant)** | Salle VIP équipée + Pauses café locales gourmandes + Déjeuner traiteur + Concierge dédié | **35 000 FCFA / pers.** (~53 €) |
 | **Séminaire Résidentiel Petite Côte / Saly (par participant / jour)** | Hébergement 4-5★ + Pension complète + Salle de séminaire + Activité Team Building | **95 000 FCFA / pers./j** (~145 €) |
 | **Transfert VIP Flotte (AIBD ⇄ Dakar / Saly)** | Berline ou Van Premium climatisé avec chauffeur privé costumé | **45 000 à 85 000 FCFA / trajet** |
-| **Team Building Immersion Gorée / Saloum** | Chaloupe privatisée / Pirogue + Guide conférencier + Déjeuner typique + Atelier RSE | **40 000 FCFA / pers.** (~61 €) |
+| **Team Building Immersion Île de Gorée** | Chaloupe privatisée + Guide conférencier + Déjeuner typique + Atelier RSE | **40 000 FCFA / pers.** (~61 €) |
+| **Team Building Immersion Sine Saloum** | Transport privatif + Pirogue bolongs + Éco-lodge & Déjeuner grillades + Activités cohésion | **95 000 FCFA / pers.** (~145 €) |
 | **Frais de Coordination Jour-J Le BADIL** | Présence régie, gestion prestataires, conciergerie VIP sur place | **15% du budget total HT** |
 
 ---

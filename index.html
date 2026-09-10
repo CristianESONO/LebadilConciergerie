@@ -82,10 +82,10 @@
           </div>
         </div>
         <div class="stat-item">
-          <div class="stat-icon">💳</div>
+          <div class="stat-icon">🏦</div>
           <div class="stat-text">
             <h4>Paiement Local Sécurisé</h4>
-            <p>Intégration directe Wave Sénégal, Orange Money & Cartes Bancaires (Visa/Mastercard) en FCFA et Euros.</p>
+            <p>Intégration directe Wave Sénégal, Orange Money & Virement Bancaire en FCFA et Euros.</p>
           </div>
         </div>
       </div>
@@ -179,7 +179,7 @@
                 <div class="price-eur">~ 90 € TTC</div>
               </div>
               <ul class="pack-features">
-                <li>Guide des transports (BRT, Dem Dikk)</li>
+                <li>Pass & Guide des transports (BRT, TER Dakar)</li>
                 <li>Répertoire santé & cliniques de confiance</li>
                 <li>Réseaux étudiants & parrainage dakarois</li>
                 <li>Assistance Hotline Conciergerie 7j/7 (30j)</li>
@@ -238,7 +238,8 @@
               <select class="form-control" id="sim-event-type">
                 <option value="journee">Journée d'Étude Dakar (35 000 FCFA / pers.)</option>
                 <option value="saly">Séminaire Résidentiel Saly / Petite Côte (95 000 FCFA / pers./j)</option>
-                <option value="goree">Team Building Immersion Gorée / Saloum (40 000 FCFA / pers.)</option>
+                <option value="goree">Team Building Immersion Gorée (40 000 FCFA / pers.)</option>
+                <option value="saloum">Team Building Immersion Sine Saloum (95 000 FCFA / pers.)</option>
               </select>
             </div>
 
@@ -363,7 +364,7 @@
               </tr>
               <tr>
                 <td><strong>Pack Intégration</strong></td>
-                <td>Pass BRT/Dem Dikk + Repertoires de santé & cliniques + Assistance Hotline 7j/7 (30j)</td>
+                <td>Pass BRT & TER Dakar + Répertoires de santé & cliniques + Assistance Hotline 7j/7 (30j)</td>
                 <td><strong style="color:var(--color-navy-primary);">60 000 FCFA</strong></td>
                 <td>90 €</td>
                 <td><span class="badge-tag etudiant">Étudiants</span></td>
@@ -390,10 +391,17 @@
                 <td><span class="badge-tag enterprise">Entreprises</span></td>
               </tr>
               <tr>
-                <td><strong>Team Building Gorée / Saloum</strong></td>
-                <td>Chaloupe privatisée / Pirogue + Guide conférencier + Déjeuner typique + Atelier RSE</td>
+                <td><strong>Team Building Île de Gorée</strong></td>
+                <td>Chaloupe privatisée + Visite guidée historique & ruelles + Déjeuner gastronomique insulaire + Atelier cohésion RSE</td>
                 <td><strong style="color:var(--color-navy-primary);">40 000 FCFA / pers.</strong></td>
                 <td>61 €</td>
+                <td><span class="badge-tag enterprise">Entreprises</span></td>
+              </tr>
+              <tr>
+                <td><strong>Team Building Delta du Sine Saloum</strong></td>
+                <td>Transport privatif climatisé + Immersion bolongs en pirogue + Éco-lodge & Déjeuner grillades + Activités cohésion & régie</td>
+                <td><strong style="color:var(--color-navy-primary);">95 000 FCFA / pers.</strong></td>
+                <td>145 €</td>
                 <td><span class="badge-tag enterprise">Entreprises</span></td>
               </tr>
             </tbody>
@@ -408,7 +416,7 @@
   <div class="modal-overlay" id="booking-modal">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 id="modal-title">💳 Réservation en Ligne - Pack Étudiant</h3>
+        <h3 id="modal-title">💳 Réservation Sécurisée - Pack Étudiant</h3>
         <button class="modal-close-btn" id="close-booking-modal">&times;</button>
       </div>
       <div class="modal-body">
@@ -450,6 +458,66 @@
           <div class="form-group">
             <label class="form-label">Date d'Arrivée Prévue AIBD</label>
             <input type="date" class="form-control" id="checkout-date" required>
+          </div>
+
+          <!-- Choix du Mode de Paiement -->
+          <div class="form-group">
+            <label class="form-label">Mode de Règlement Préféré</label>
+            <div class="payment-methods-grid">
+              <label class="payment-method-card active" id="card-choice-paytech">
+                <input type="radio" name="payment_method_choice" value="paytech" checked>
+                <div class="payment-method-info">
+                  <span class="payment-badge">⚡ Immédiat</span>
+                  <div class="payment-title">📱 Wave / Orange Money</div>
+                  <div class="payment-desc">Paiement mobile instantané via PayTech Sénégal</div>
+                </div>
+              </label>
+              <label class="payment-method-card" id="card-choice-virement">
+                <input type="radio" name="payment_method_choice" value="virement">
+                <div class="payment-method-info">
+                  <span class="payment-badge-alt">🏛️ Entreprises & Parents</span>
+                  <div class="payment-title">🏦 Virement Bancaire</div>
+                  <div class="payment-desc">RIB / IBAN Le BADIL (Sénégal & International)</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Détails Virement Bancaire (dynamique) -->
+          <div id="virement-details-box" class="bank-details-box" style="display:none;">
+            <div class="bank-header">
+              <strong>📋 Coordonnées Bancaires Officielles</strong>
+              <span class="bank-currency">Compte Pro XOF / EUR</span>
+            </div>
+            <div class="bank-grid">
+              <div class="bank-field">
+                <span class="bank-label">Bénéficiaire :</span>
+                <span class="bank-val">LE BADIL CONCIERGERIE SUARL</span>
+              </div>
+              <div class="bank-field">
+                <span class="bank-label">Banque Partenaire :</span>
+                <span class="bank-val">CBAO Groupe Attijariwafa Bank (Dakar)</span>
+              </div>
+              <div class="bank-field">
+                <span class="bank-label">Code Banque / Guichet :</span>
+                <span class="bank-val font-mono">SN012 / 01234</span>
+              </div>
+              <div class="bank-field">
+                <span class="bank-label">Numéro de Compte :</span>
+                <span class="bank-val font-mono">012345678901 (Clé 45)</span>
+              </div>
+              <div class="bank-field">
+                <span class="bank-label">IBAN Sénégal :</span>
+                <span class="bank-val font-mono">SN12 SN01 2012 3412 3456 7890 145</span>
+              </div>
+              <div class="bank-field">
+                <span class="bank-label">Code SWIFT / BIC :</span>
+                <span class="bank-val font-mono">CBAOSNDA</span>
+              </div>
+            </div>
+            <div class="bank-notice">
+              💡 <strong>Consigne :</strong> Dès validation du formulaire, vous obtiendrez une référence unique à inscrire comme libellé de virement. Un concierge prendra ensuite contact avec vous sur WhatsApp.
+            </div>
           </div>
 
           <!-- Total Amount Box -->
@@ -498,7 +566,7 @@
         <ul class="footer-links">
           <li><a href="#">Séminaires au Plateau</a></li>
           <li><a href="#">Incentives à Saly</a></li>
-          <li><a href="#">Team Building Gorée</a></li>
+          <li><a href="#">Team Building Gorée & Saloum</a></li>
           <li><a href="#">Flotte VIP & Chauffeurs</a></li>
         </ul>
       </div>

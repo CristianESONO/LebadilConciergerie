@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const refParam = urlParams.get('ref') || '';
 
   if (paymentStatus === 'success') {
-    const successMsg = `🌟 CONFIRMATION DE PAIEMENT PAYTECH !\n\nMerci ${studentNameParam} !\nVotre paiement pour le Pack ${packNameParam.toUpperCase()} (Réf: ${refParam}) a été validé avec succès sur PayTech Sénégal (Wave / Orange Money / CB).\n\nCliquez ci-dessous pour contacter votre concierge Le BADIL sur WhatsApp et valider votre arrivée à Dakar.`;
+    const successMsg = `🌟 CONFIRMATION DE PAIEMENT PAYTECH !\n\nMerci ${studentNameParam} !\nVotre paiement pour le Pack ${packNameParam.toUpperCase()} (Réf: ${refParam}) a été validé avec succès sur PayTech Sénégal (Wave / Orange Money / Virement Bancaire).\n\nCliquez ci-dessous pour contacter votre concierge Le BADIL sur WhatsApp et valider votre arrivée à Dakar.`;
     
     alert(successMsg);
 
@@ -179,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let baseRate = 35000;
     if (eventType === 'saly') baseRate = 95000;
     if (eventType === 'goree') baseRate = 40000;
+    if (eventType === 'saloum') baseRate = 95000;
 
     const subtotal = baseRate * participants * days;
     const coordFee = subtotal * 0.15;
@@ -285,15 +286,153 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   populateSchools();
 
-  // ONLINE PAYTECH PAYMENT SUBMISSION
+  // ==========================================
+  // PAYMENT METHOD SWITCHER & SUBMISSION (PAYTECH / VIREMENT BANCAIRE)
+  // ==========================================
+  const paymentMethodRadios = document.querySelectorAll('input[name="payment_method_choice"]');
+  const virementDetailsBox = document.getElementById('virement-details-box');
+  const cardChoicePaytech = document.getElementById('card-choice-paytech');
+  const cardChoiceVirement = document.getElementById('card-choice-virement');
+  const submitBtn = document.getElementById('btn-pay-online');
+
+  function updatePaymentMethodSelection(method) {
+    if (method === 'virement') {
+      if (virementDetailsBox) virementDetailsBox.style.display = 'block';
+      if (cardChoicePaytech) cardChoicePaytech.classList.remove('active');
+      if (cardChoiceVirement) cardChoiceVirement.classList.add('active');
+      if (submitBtn) submitBtn.innerHTML = '🏦 Valider la Réservation par Virement Bancaire';
+    } else {
+      if (virementDetailsBox) virementDetailsBox.style.display = 'none';
+      if (cardChoicePaytech) cardChoicePaytech.classList.add('active');
+      if (cardChoiceVirement) cardChoiceVirement.classList.remove('active');
+      if (submitBtn) submitBtn.innerHTML = '🔒 Payer via Wave / Orange Money';
+    }
+  }
+
+  paymentMethodRadios.forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      updatePaymentMethodSelection(e.target.value);
+    });
+  });
+
+  if (cardChoicePaytech) {
+    cardChoicePaytech.addEventListener('click', () => {
+      const radio = cardChoicePaytech.querySelector('input[type="radio"]');
+      if (radio) { radio.checked = true; updatePaymentMethodSelection('paytech'); }
+    });
+  }
+
+  if (cardChoiceVirement) {
+    cardChoiceVirement.addEventListener('click', () => {
+      const radio = cardChoiceVirement.querySelector('input[type="radio"]');
+      if (radio) { radio.checked = true; updatePaymentMethodSelection('virement'); }
+    });
+  }
+
+  // Confirmation view inside modal for Virement Bancaire
+  function showVirementSuccessModal(data, clientInfo) {
+    const modalBody = document.querySelector('#booking-modal .modal-body');
+    if (!modalBody) return;
+
+    const waMsg = `Bonjour Le BADIL Conciergerie, j'ai validé ma réservation avec option Virement Bancaire :
+- Réf Dossier : ${data.refCommand}
+- Pack : ${data.packName}
+- Montant : ${formatFCFA(data.amount)}
+- Étudiant : ${clientInfo.studentName}
+- Date Arrivée AIBD : ${clientInfo.date}
+- Établissement : ${clientInfo.school}
+
+Merci de prendre en charge mon arrivée à Dakar !`;
+
+    modalBody.innerHTML = `
+      <div class="virement-success-container" style="text-align:center; padding: 0.5rem 0;">
+        <div style="font-size: 3rem; line-height: 1; margin-bottom: 0.75rem;">🎉</div>
+        <h3 style="color: var(--color-navy-primary); font-size: 1.35rem; margin-bottom: 0.5rem;">Réservation Validée par Virement Bancaire !</h3>
+        <p style="color: var(--color-gray-600); font-size: 0.9rem; margin-bottom: 1.2rem;">
+          Merci <strong>${clientInfo.studentName}</strong>. Votre dossier a été enregistré sous référence officielle.
+        </p>
+
+        <div style="background: var(--color-navy-dark); color: var(--color-gold-light); padding: 0.85rem 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.25rem; display: inline-block; border: 1px solid var(--color-gold-primary);">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-gray-300);">Référence Officielle du Dossier :</div>
+          <div style="font-family: monospace; font-size: 1.35rem; font-weight: 800; letter-spacing: 1px; margin-top: 0.2rem;">${data.refCommand}</div>
+        </div>
+
+        <div class="bank-details-box" style="text-align: left; margin: 0 0 1.25rem 0;">
+          <div class="bank-header">
+            <strong>📋 Coordonnées de Virement Le BADIL</strong>
+            <span class="bank-currency">${formatFCFA(data.amount)} (~${formatEUR(data.amount)})</span>
+          </div>
+          <div class="bank-grid">
+            <div class="bank-field">
+              <span class="bank-label">Bénéficiaire :</span>
+              <span class="bank-val">LE BADIL CONCIERGERIE SUARL</span>
+            </div>
+            <div class="bank-field">
+              <span class="bank-label">Banque :</span>
+              <span class="bank-val">CBAO Groupe Attijariwafa Bank (Dakar)</span>
+            </div>
+            <div class="bank-field">
+              <span class="bank-label">Code Banque / Guichet :</span>
+              <span class="bank-val font-mono">SN012 / 01234</span>
+            </div>
+            <div class="bank-field">
+              <span class="bank-label">Compte / Clé :</span>
+              <span class="bank-val font-mono">012345678901 (Clé 45)</span>
+            </div>
+            <div class="bank-field">
+              <span class="bank-label">IBAN Sénégal :</span>
+              <span class="bank-val font-mono">${data.bankDetails ? data.bankDetails.iban : 'SN12 SN01 2012 3412 3456 7890 145'}</span>
+            </div>
+            <div class="bank-field">
+              <span class="bank-label">Code SWIFT / BIC :</span>
+              <span class="bank-val font-mono">${data.bankDetails ? data.bankDetails.swift : 'CBAOSNDA'}</span>
+            </div>
+            <div class="bank-field">
+              <span class="bank-label">Motif Obligatoire :</span>
+              <span class="bank-val font-mono" style="color:var(--color-gold-dark); font-weight:700;">${data.refCommand}</span>
+            </div>
+          </div>
+          <div class="bank-notice">
+            💡 <strong>Étape Suivante :</strong> Mentionnez bien la référence ci-dessus sur votre ordre de virement. Cliquez ci-dessous pour joindre votre concierge dédié sur WhatsApp.
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <a href="${generateWhatsAppUrl(waMsg)}" target="_blank" class="btn-primary" style="background:#25D366; border-color:#25D366; justify-content: center; text-decoration: none; font-size: 1rem; padding: 0.9rem;">
+            💬 Joindre mon Concierge sur WhatsApp
+          </a>
+          <button type="button" id="btn-close-virement-modal" class="btn-secondary" style="justify-content: center; padding: 0.75rem;">
+            Fermer la Fenêtre
+          </button>
+        </div>
+      </div>
+    `;
+
+    const closeBtn = document.getElementById('btn-close-virement-modal');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        const bookingModal = document.getElementById('booking-modal');
+        if (bookingModal) bookingModal.classList.remove('active');
+        window.location.reload();
+      });
+    }
+  }
+
+  // Form submission logic
   if (checkoutForm) {
     checkoutForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const submitBtn = document.getElementById('btn-pay-online');
       const originalBtnText = submitBtn.innerHTML;
+      const selectedRadio = document.querySelector('input[name="payment_method_choice"]:checked');
+      const selectedMethod = selectedRadio ? selectedRadio.value : 'paytech';
+
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '🔄 Connexion sécurisée à PayTech Sénégal...';
+      if (selectedMethod === 'virement') {
+        submitBtn.innerHTML = '🔄 Enregistrement de votre réservation...';
+      } else {
+        submitBtn.innerHTML = '🔄 Connexion sécurisée à PayTech Sénégal...';
+      }
 
       const packId = checkoutPackSelect.value;
       const studentName = document.getElementById('checkout-student-name').value;
@@ -313,17 +452,23 @@ document.addEventListener('DOMContentLoaded', () => {
             whatsapp,
             school,
             date,
-            paymentMethod: 'paytech_all'
+            paymentMethod: selectedMethod
           })
         });
 
         const data = await response.json();
 
+        // 1. CAS DU VIREMENT BANCAIRE
+        if (data.isVirement) {
+          showVirementSuccessModal(data, { packId, studentName, email, whatsapp, school, date });
+          return;
+        }
+
+        // 2. CAS DE PAYTECH EN LIGNE (WAVE / ORANGE MONEY)
         if (data.success && data.redirectUrl) {
-          // Redirect user directly to PayTech official checkout portal
           window.location.href = data.redirectUrl;
         } else {
-          alert(`⚠️ Information PayTech : ${data.message || 'Impossible d\'initialiser le paiement.'}`);
+          alert(`⚠️ Information : ${data.message || 'Impossible d\'initialiser le paiement en ligne.'}`);
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalBtnText;
         }
@@ -331,9 +476,15 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         console.error('Checkout error:', err);
         const packText = checkoutPackSelect.options[checkoutPackSelect.selectedIndex].text;
-        const waFallbackText = `Bonjour Le BADIL Conciergerie, je souhaite effectuer ma réservation :\n- Pack : ${packText}\n- Étudiant : ${studentName}\n- WhatsApp : ${whatsapp}\n- Établissement : ${school}\n- Arrivée : ${date}`;
+        const waFallbackText = `Bonjour Le BADIL Conciergerie, je souhaite effectuer ma réservation :
+- Pack : ${packText}
+- Mode : ${selectedMethod === 'virement' ? 'Virement Bancaire' : 'Mobile Money'}
+- Étudiant : ${studentName}
+- WhatsApp : ${whatsapp}
+- Établissement : ${school}
+- Arrivée : ${date}`;
 
-        if (confirm("Redirection vers PayTech... Si vous souhaitez contacter un concierge directement via WhatsApp (Option C), cliquez sur OK.")) {
+        if (confirm("Connexion réseau indisponible... Souhaitez-vous valider votre réservation directement avec un concierge sur WhatsApp ?")) {
           window.open(generateWhatsAppUrl(waFallbackText), '_blank');
         }
 

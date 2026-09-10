@@ -339,6 +339,71 @@ async function sendBrevoEmail({ to, toName, subject, htmlContent }) {
 /**
  * Email 1.1 : Confirmation de réservation & bienvenue (envoyé immédiatement après paiement)
  */
+function buildVirementEmail({ studentName, packName, school, arrivalDate, refCommand, amount, whatsappNumber }) {
+  const waLink = `https://wa.me/${whatsappNumber ? whatsappNumber.replace(/[^0-9]/g, '') : '221770000000'}?text=${encodeURIComponent(
+    `Bonjour Le BADIL Conciergerie, j'ai sélectionné le paiement par virement bancaire pour le ${packName} (Réf: ${refCommand}). Étudiant: ${studentName}.`
+  )}`;
+
+  return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ordre de Réservation par Virement Bancaire - Le BADIL</title>
+</head>
+<body style="margin:0;padding:0;background:#f4f4f4;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0F2C59;padding:25px 20px;text-align:center;">
+    <tr><td>
+      <h1 style="color:#DAC0A3;margin:0;font-size:22px;letter-spacing:2px;text-transform:uppercase;">LE BADIL CONCIERGERIE</h1>
+      <p style="color:#a0b4cc;margin:6px 0 0;font-size:12px;letter-spacing:1px;">DAKAR · SÉNÉGAL</p>
+    </td></tr>
+  </table>
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#DAC0A3;padding:12px 20px;text-align:center;">
+    <tr><td>
+      <strong style="color:#0F2C59;font-size:13px;letter-spacing:1px;text-transform:uppercase;">
+        📋 RÉSERVATION ENREGISTRÉE — PAIEMENT PAR VIREMENT BANCAIRE
+      </strong>
+    </td></tr>
+  </table>
+  <div style="max-width:600px;margin:25px auto;background:#fff;padding:30px;border-radius:8px;border:1px solid #e0e0e0;box-shadow:0 4px 15px rgba(0,0,0,0.05);">
+    <h2 style="color:#0F2C59;font-size:18px;margin-top:0;">Bonjour ${studentName},</h2>
+    <p style="color:#444;font-size:14px;line-height:1.6;">
+      Votre réservation pour le <strong>${packName}</strong> (${school || 'Établissement Dakar'}) a bien été pré-enregistrée. Votre concierge Le BADIL prendra en charge votre dossier dès réception de votre virement.
+    </p>
+
+    <div style="background:#0F2C59;color:#DAC0A3;padding:12px 20px;border-radius:6px;text-align:center;margin:20px 0;">
+      <span style="font-size:11px;color:#a0b4cc;text-transform:uppercase;letter-spacing:1px;display:block;">Référence Obligatoire du Virement</span>
+      <strong style="font-family:monospace;font-size:20px;letter-spacing:2px;">${refCommand}</strong>
+    </div>
+
+    <div style="background:#fdfbf7;border:1.5px solid #DAC0A3;border-radius:8px;padding:18px;margin:20px 0;">
+      <h3 style="color:#0F2C59;margin:0 0 12px;font-size:15px;border-bottom:1px solid #DAC0A3;padding-bottom:6px;">Coordonnées Bancaires Officielles Le BADIL</h3>
+      <table width="100%" style="font-size:13px;color:#333;">
+        <tr><td style="padding:4px 0;color:#666;">Montant Total :</td><td style="font-weight:bold;color:#0F2C59;text-align:right;">${amount.toLocaleString('fr-FR')} FCFA</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">Bénéficiaire :</td><td style="font-weight:bold;text-align:right;">LE BADIL CONCIERGERIE SUARL</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">Établissement :</td><td style="font-weight:bold;text-align:right;">CBAO Groupe Attijariwafa Bank</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">Code Banque / Guichet :</td><td style="font-family:monospace;text-align:right;">SN012 / 01234</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">Numéro de Compte :</td><td style="font-family:monospace;text-align:right;">012345678901 (Clé 45)</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">IBAN Sénégal :</td><td style="font-family:monospace;font-weight:bold;color:#0F2C59;text-align:right;">SN12 SN01 2012 3412 3456 7890 145</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">Code SWIFT / BIC :</td><td style="font-family:monospace;text-align:right;">CBAOSNDA</td></tr>
+      </table>
+    </div>
+
+    <p style="color:#555;font-size:13px;line-height:1.5;">
+      💡 <strong>Important :</strong> Indiquez la référence <strong>${refCommand}</strong> en motif de votre virement bancaire. Transmettez ensuite l'avis d'opéré à votre concierge sur WhatsApp :
+    </p>
+
+    <div style="text-align:center;margin:25px 0 10px;">
+      <a href="${waLink}" style="background:#25D366;color:#fff;padding:12px 28px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:14px;display:inline-block;">💬 Contacter mon Concierge sur WhatsApp</a>
+    </div>
+  </div>
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:20px;text-align:center;color:#888;font-size:12px;">
+    <tr><td>© 2026 Le BADIL Conciergerie Dakar · Dakar, Sénégal</td></tr>
+  </table>
+</body>
+</html>`;
+}
+
 function buildConfirmationEmail({ studentName, packName, school, arrivalDate, refCommand, whatsappNumber }) {
   const waLink = `https://wa.me/${whatsappNumber || '221770000000'}?text=${encodeURIComponent(
     `Bonjour Le BADIL Conciergerie, mon paiement pour le ${packName} a été validé (Réf: ${refCommand}). Étudiant: ${studentName}. Merci de prendre en charge mon dossier !`
@@ -569,6 +634,78 @@ app.post('/api/create-payment', async (req, res) => {
     const { packId, studentName, email, whatsapp, school, date, paymentMethod } = req.body;
 
     const pack = PACK_PRICES[packId] || PACK_PRICES['vip'];
+
+    // =========================================================================
+    // 1. GESTION DU PAIEMENT PAR VIREMENT BANCAIRE
+    // =========================================================================
+    if (paymentMethod === 'virement') {
+      const refCommand = `BADIL-VIR-${Date.now()}`;
+      try {
+        const resData = readData(RESERVATIONS_FILE);
+        resData.reservations = resData.reservations || [];
+        const resRecord = {
+          ref: refCommand,
+          studentName: studentName || 'Étudiant',
+          email: email || '',
+          whatsapp: whatsapp || '',
+          packName: pack.name,
+          school: school || 'N/A',
+          arrivalDate: date || 'À confirmer',
+          amount: pack.price,
+          status: 'EN_ATTENTE_VIREMENT',
+          paymentMethod: 'Virement Bancaire',
+          date: new Date().toISOString()
+        };
+        resData.reservations.push(resRecord);
+        writeData(RESERVATIONS_FILE, resData);
+        console.log(`🏦 [Virement] Réservation enregistrée : ${refCommand} (${studentName})`);
+      } catch (err) {
+        console.error('❌ [Virement Error] Erreur sauvegarde réservation:', err.message);
+      }
+
+      if (email && process.env.BREVO_API_KEY) {
+        try {
+          const virementHtml = buildVirementEmail({
+            studentName: studentName || 'Étudiant',
+            packName: pack.name,
+            school,
+            arrivalDate: date,
+            refCommand,
+            amount: pack.price,
+            whatsappNumber: whatsapp
+          });
+          await sendBrevoEmail({
+            toEmail: email,
+            toName: studentName,
+            subject: `📋 Confirmation Réservation Virement Bancaire - ${pack.name} [${refCommand}]`,
+            htmlContent: virementHtml
+          });
+        } catch (emailErr) {
+          console.warn('⚠️ [Virement Email Warning] Email non envoyé:', emailErr.message);
+        }
+      }
+
+      return res.json({
+        success: true,
+        isVirement: true,
+        refCommand,
+        packName: pack.name,
+        amount: pack.price,
+        studentName,
+        bankDetails: {
+          beneficiary: "LE BADIL CONCIERGERIE SUARL",
+          bank: "CBAO Groupe Attijariwafa Bank (Dakar, Sénégal)",
+          rib: "SN012 01234 012345678901 45",
+          iban: "SN12 SN01 2012 3412 3456 7890 145",
+          swift: "CBAOSNDA",
+          ref: refCommand
+        }
+      });
+    }
+
+    // =========================================================================
+    // 2. GESTION DU PAIEMENT EN LIGNE PAYTECH (WAVE / ORANGE MONEY)
+    // =========================================================================
     const refCommand = `BADIL-${Date.now()}`;
 
     // PUBLIC_URL = URL HTTPS publique (ngrok ou domaine production)

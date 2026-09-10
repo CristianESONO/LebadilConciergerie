@@ -176,6 +176,31 @@ class BadilServerHandler(http.server.SimpleHTTPRequestHandler):
                 payment_method = data.get('paymentMethod', 'wave')
 
                 pack = PACK_PRICES.get(pack_id, PACK_PRICES['vip'])
+                
+                if payment_method == 'virement':
+                    ref_vir = f"BADIL-VIR-{int(time.time())}"
+                    response_payload = {
+                        "success": True,
+                        "isVirement": True,
+                        "refCommand": ref_vir,
+                        "packName": pack['name'],
+                        "amount": pack['price'],
+                        "studentName": student_name,
+                        "bankDetails": {
+                            "beneficiary": "LE BADIL CONCIERGERIE SUARL",
+                            "bank": "CBAO Groupe Attijariwafa Bank (Dakar, Sénégal)",
+                            "rib": "SN012 01234 012345678901 45",
+                            "iban": "SN12 SN01 2012 3412 3456 7890 145",
+                            "swift": "CBAOSNDA",
+                            "ref": ref_vir
+                        }
+                    }
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps(response_payload).encode('utf-8'))
+                    return
+
                 ref_command = f"BADIL-{int(time.time())}-{uuid.uuid4().hex[:6]}"
 
                 ipn_url = f"{SITE_URL}/api/paytech-ipn" if SITE_URL.startswith("https://") else "https://lebadilconciergerie.sn/api/paytech-ipn"
