@@ -4,7 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  const WHATSAPP_NUMBER = '221770000000'; // Standard WhatsApp Pro Le BADIL
+  let WHATSAPP_NUMBER = '221770000000'; // Standard WhatsApp Pro Le BADIL
   const FCFA_PER_EUR = 655.957;
 
   function formatFCFA(amount) {
@@ -285,6 +285,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   populateSchools();
+
+  // ==========================================
+  // DYNAMIC SETTINGS LOADER (WHATSAPP, BANKING, PRICING)
+  // ==========================================
+  async function syncDynamicSettings() {
+    try {
+      const res = await fetch('/api/settings');
+      if (res.ok) {
+        const s = await res.json();
+        if (s.general && s.general.whatsapp) {
+          WHATSAPP_NUMBER = s.general.whatsapp.replace(/[^0-9]/g, '');
+        }
+        if (s.banking) {
+          const b = s.banking;
+          const bankBox = document.getElementById('virement-details-box');
+          if (bankBox) {
+            const valFields = bankBox.querySelectorAll('.bank-val');
+            if (valFields.length >= 5) {
+              if (b.beneficiary) valFields[0].textContent = b.beneficiary;
+              if (b.bankName) valFields[1].textContent = b.bankName;
+              if (b.bankCode && b.branchCode) valFields[2].textContent = `${b.bankCode} / ${b.branchCode}`;
+              if (b.accountNumber && b.ribKey) valFields[3].textContent = `${b.accountNumber} (Clé ${b.ribKey})`;
+              if (b.iban) valFields[4].textContent = b.iban;
+              if (b.swift && valFields[5]) valFields[5].textContent = b.swift;
+            }
+          }
+        }
+        if (s.pricing) {
+          Object.assign(packPrices, s.pricing);
+          updateCheckoutPrice();
+        }
+      }
+    } catch (e) {
+      console.warn('Paramètres dynamiques locaux:', e);
+    }
+  }
+  syncDynamicSettings();
 
   // ==========================================
   // PAYMENT METHOD SWITCHER & SUBMISSION (PAYTECH / VIREMENT BANCAIRE)

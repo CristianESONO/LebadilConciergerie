@@ -1250,6 +1250,14 @@
         <span>Équipe & Accès</span>
         <span class="nav-pill" id="sidebarTeamCount">3</span>
       </button>
+
+      <button class="admin-nav-item" data-admin-tab="tab-settings">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        <span>Paramètres Généraux</span>
+      </button>
     </nav>
 
     <div class="sidebar-footer">
@@ -1511,7 +1519,8 @@
                   <th>Arrivée AIBD</th>
                   <th>Montant Encaissé</th>
                   <th>Statut</th>
-                  <th style="text-align: right;">Date & Heure</th>
+                  <th>Date & Heure</th>
+                  <th style="text-align: right;">Action Concierge</th>
                 </tr>
               </thead>
               <tbody id="bookingsTableBody">
@@ -1863,6 +1872,179 @@
           </div>
         </div>
 
+        <!-- ==================== TAB 6: PARAMÈTRES GÉNÉRAUX & CONFIGURATION ==================== -->
+        <div id="tab-settings" class="tab-pane">
+          <div class="card-container" style="margin-bottom: 2rem;">
+            <div class="card-header">
+              <div>
+                <h2>⚙️ Paramètres Généraux & Configuration Commerciale</h2>
+                <p>Modifiez en toute autonomie vos coordonnées bancaires, numéro WhatsApp, tarifs officiels et clés d'API sans toucher au code.</p>
+              </div>
+              <div class="card-controls">
+                <button type="button" class="btn-clean btn-clean-secondary" id="btnReloadSettings">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  <span>Recharger</span>
+                </button>
+              </div>
+            </div>
+
+            <div id="settingsFeedback" class="feedback-alert" style="display:none; margin: 1rem 1.75rem 0 1.75rem;"></div>
+
+            <form id="settingsForm" style="padding: 1.75rem;">
+              <!-- Section 1: Contact & WhatsApp -->
+              <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--slate-200); padding-bottom: 1.5rem;">
+                <h3 style="color: var(--navy-900); font-size: 1.15rem; margin-bottom: 1rem; display:flex; align-items:center; gap:0.5rem;">
+                  <span>📱 Contact Conciergerie & WhatsApp</span>
+                </h3>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+                  <div class="form-field">
+                    <label class="form-label-clean">Numéro WhatsApp Réception (Format international sans +)</label>
+                    <input type="text" class="form-input-clean" id="set-whatsapp" placeholder="Ex: 221770000000" required>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Affichage Public WhatsApp</label>
+                    <input type="text" class="form-input-clean" id="set-whatsapp-display" placeholder="Ex: +221 77 000 00 00" required>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Email Officiel Le BADIL</label>
+                    <input type="email" class="form-input-clean" id="set-email" placeholder="lebadilconciergerie@gmail.com" required>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Raison Sociale Société</label>
+                    <input type="text" class="form-input-clean" id="set-company" placeholder="LE BADIL CONCIERGERIE SUARL" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 2: Coordonnées Bancaires (Virement) -->
+              <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--slate-200); padding-bottom: 1.5rem;">
+                <h3 style="color: var(--navy-900); font-size: 1.15rem; margin-bottom: 1rem; display:flex; align-items:center; gap:0.5rem;">
+                  <span>🏦 Coordonnées Bancaires Officielles (Virement CBAO / UEMOA)</span>
+                </h3>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+                  <div class="form-field">
+                    <label class="form-label-clean">Établissement Bancaire</label>
+                    <input type="text" class="form-input-clean" id="set-bank-name" placeholder="CBAO Groupe Attijariwafa Bank" required>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Bénéficiaire du Compte</label>
+                    <input type="text" class="form-input-clean" id="set-bank-beneficiary" placeholder="LE BADIL CONCIERGERIE SUARL" required>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Code Banque / Guichet</label>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.5rem;">
+                      <input type="text" class="form-input-clean" id="set-bank-code" placeholder="SN012">
+                      <input type="text" class="form-input-clean" id="set-branch-code" placeholder="01234">
+                    </div>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Numéro de Compte & Clé RIB</label>
+                    <div style="display:grid; grid-template-columns: 2fr 1fr; gap:0.5rem;">
+                      <input type="text" class="form-input-clean" id="set-account-num" placeholder="012345678901">
+                      <input type="text" class="form-input-clean" id="set-rib-key" placeholder="45">
+                    </div>
+                  </div>
+                  <div class="form-field" style="grid-column: span 2;">
+                    <label class="form-label-clean">IBAN Sénégal Complet</label>
+                    <input type="text" class="form-input-clean" id="set-iban" placeholder="SN12 SN01 2012 3412 3456 7890 145" required>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Code SWIFT / BIC</label>
+                    <input type="text" class="form-input-clean" id="set-swift" placeholder="CBAOSNDA" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 3: Tarifs des Packs Étudiants -->
+              <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--slate-200); padding-bottom: 1.5rem;">
+                <h3 style="color: var(--navy-900); font-size: 1.15rem; margin-bottom: 1rem; display:flex; align-items:center; gap:0.5rem;">
+                  <span>🏷️ Grille Tarifaire — Packs Étudiants (Montants en FCFA)</span>
+                </h3>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+                  <div class="form-field">
+                    <label class="form-label-clean">Pack Teranga (AIBD & Transfert)</label>
+                    <input type="number" class="form-input-clean" id="set-price-teranga" min="1000" step="500" required>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Pack Logement Serein</label>
+                    <input type="number" class="form-input-clean" id="set-price-logement" min="1000" step="500" required>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Pack Intégration (Santé & TER)</label>
+                    <input type="number" class="form-input-clean" id="set-price-integration" min="1000" step="500" required>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Pack VIP All-Inclusive</label>
+                    <input type="number" class="form-input-clean" id="set-price-vip" min="1000" step="500" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 4: Tarifs Corporate & Team Building -->
+              <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--slate-200); padding-bottom: 1.5rem;">
+                <h3 style="color: var(--navy-900); font-size: 1.15rem; margin-bottom: 1rem; display:flex; align-items:center; gap:0.5rem;">
+                  <span>🏝️ Tarifs Pôle Entreprises & Team Building (Montants en FCFA)</span>
+                </h3>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+                  <div class="form-field">
+                    <label class="form-label-clean">Journée d'Étude Dakar (par participant)</label>
+                    <input type="number" class="form-input-clean" id="set-price-journee" min="1000" step="500" required>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Séminaire Résidentiel Saly (par part./jour)</label>
+                    <input type="number" class="form-input-clean" id="set-price-saly" min="1000" step="500" required>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Team Building Gorée (par participant)</label>
+                    <input type="number" class="form-input-clean" id="set-price-goree" min="1000" step="500" required>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Team Building Saloum (par participant)</label>
+                    <input type="number" class="form-input-clean" id="set-price-saloum" min="1000" step="500" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 5: Passerelles PayTech & Brevo -->
+              <div style="margin-bottom: 2rem;">
+                <h3 style="color: var(--navy-900); font-size: 1.15rem; margin-bottom: 1rem; display:flex; align-items:center; gap:0.5rem;">
+                  <span>🔐 Passerelles de Paiement & Envois d'Emails</span>
+                </h3>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+                  <div class="form-field">
+                    <label class="form-label-clean">Environnement PayTech</label>
+                    <select class="form-input-clean" id="set-paytech-env">
+                      <option value="test">Mode Test (SandBox Démonstration)</option>
+                      <option value="live">Mode Production (Paiements Réels Encaissés)</option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">PayTech API Key</label>
+                    <input type="text" class="form-input-clean" id="set-paytech-key" placeholder="Clé publique PayTech">
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">PayTech API Secret</label>
+                    <input type="password" class="form-input-clean" id="set-paytech-secret" placeholder="Clé secrète PayTech">
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">Brevo API Key (Sendinblue)</label>
+                    <input type="password" class="form-input-clean" id="set-brevo-key" placeholder="xkeysib-...">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div style="display:flex; justify-content: flex-end; gap:1rem; align-items:center;">
+                <button type="submit" class="btn-clean btn-clean-primary" id="btnSaveAllSettings" style="padding:0.9rem 2.2rem; font-size:1rem;">
+                  💾 Enregistrer toutes les modifications
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
       </div>
 
     </main>
@@ -1884,10 +2066,11 @@
 
     const tabLabels = {
       'tab-schools': 'Établissements & Universités',
-      'tab-bookings': 'Réservations PayTech',
+      'tab-bookings': 'Réservations PayTech & Virement',
       'tab-commercial': 'Outil Commercial Dakar',
       'tab-emails': 'Notifications & Brevo API',
-      'tab-team': 'Équipe & Gestion des Accès'
+      'tab-team': 'Équipe & Gestion des Accès',
+      'tab-settings': 'Paramètres Généraux & Tarifs'
     };
 
     tabBtns.forEach(btn => {
@@ -2164,13 +2347,36 @@
                 <strong style="color:var(--navy-900); font-size:0.95rem; font-family:var(--font-heading);">${amountFormatted}</strong>
               </td>
               <td>
-                <span class="status-badge status-confirmed">
-                  <span class="badge-dot"></span>
-                  <span>${b.status || 'CONFIRMED'}</span>
-                </span>
+                ${b.status === 'EN_ATTENTE_VIREMENT' ? `
+                  <span class="status-badge" style="background:#fef3c7; color:#b45309; border:1px solid #fde68a;">
+                    <span class="badge-dot" style="background:#d97706;"></span>
+                    <span>En attente virement</span>
+                  </span>
+                ` : `
+                  <span class="status-badge status-confirmed">
+                    <span class="badge-dot"></span>
+                    <span>${b.status === 'CONFIRMED' ? 'Validé / Payé' : (b.status || 'CONFIRMED')}</span>
+                  </span>
+                `}
               </td>
-              <td style="text-align: right; font-size:0.8rem; color:var(--slate-500); font-weight:500;">
+              <td style="font-size:0.8rem; color:var(--slate-500); font-weight:500;">
                 ${dateStr}
+              </td>
+              <td style="text-align: right;">
+                <div style="display:inline-flex; gap:0.4rem; justify-content: flex-end; align-items:center;">
+                  ${b.status === 'EN_ATTENTE_VIREMENT' ? `
+                    <button type="button" class="btn-clean btn-clean-primary" style="padding:4px 9px; font-size:0.75rem; background:#16a34a; border-color:#16a34a;" onclick="confirmVirementAction('${b.ref}')">
+                      ✅ Valider virement
+                    </button>
+                  ` : `
+                    <span style="font-size:0.75rem; color:#16a34a; font-weight:700;">✔️ Confirmé</span>
+                  `}
+                  ${b.whatsapp ? `
+                    <a href="https://wa.me/${b.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Bonjour ' + (b.studentName || '') + ', Le BADIL Conciergerie vous contacte concernant votre réservation ' + b.ref + '.')}" target="_blank" class="btn-clean btn-clean-secondary" style="padding:4px 8px; font-size:0.75rem; text-decoration:none;">
+                      💬 WhatsApp
+                    </a>
+                  ` : ''}
+                </div>
               </td>
             </tr>
           `;
@@ -2502,6 +2708,172 @@ Statut : Proposition technique et financière sous 24 heures.
     loadSchools();
     loadBookings();
     loadTeam();
+
+    // ==========================================
+    // CONFIRM VIREMENT ACTION (ADMIN)
+    // ==========================================
+    window.confirmVirementAction = async function(ref) {
+      if (!confirm(`Confirmez-vous la réception du virement pour la réservation [${ref}] ?\n\nLe statut passera en CONFIRMÉ et un email de bienvenue officiel sera envoyé au client.`)) {
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/admin/reservations/${ref}/confirm-virement`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert(data.message);
+          loadBookings();
+        } else {
+          alert(`Erreur : ${data.message}`);
+        }
+      } catch (err) {
+        console.error('Erreur confirmation virement:', err);
+        alert('Erreur réseau lors de la validation du virement.');
+      }
+    };
+
+    // ==========================================
+    // SETTINGS MODULE (LOAD & SAVE)
+    // ==========================================
+    const settingsForm = document.getElementById('settingsForm');
+    const settingsFeedback = document.getElementById('settingsFeedback');
+    const btnReloadSettings = document.getElementById('btnReloadSettings');
+
+    async function loadSettings() {
+      try {
+        const res = await fetch('/api/admin/settings');
+        if (!res.ok) throw new Error('Impossible de charger les paramètres.');
+        const s = await res.json();
+
+        // Contact
+        if (s.general) {
+          document.getElementById('set-whatsapp').value = s.general.whatsapp || '';
+          document.getElementById('set-whatsapp-display').value = s.general.whatsappDisplay || '';
+          document.getElementById('set-email').value = s.general.email || '';
+          document.getElementById('set-company').value = s.general.companyName || '';
+        }
+
+        // Banking
+        if (s.banking) {
+          document.getElementById('set-bank-name').value = s.banking.bankName || '';
+          document.getElementById('set-bank-beneficiary').value = s.banking.beneficiary || '';
+          document.getElementById('set-bank-code').value = s.banking.bankCode || '';
+          document.getElementById('set-branch-code').value = s.banking.branchCode || '';
+          document.getElementById('set-account-num').value = s.banking.accountNumber || '';
+          document.getElementById('set-rib-key').value = s.banking.ribKey || '';
+          document.getElementById('set-iban').value = s.banking.iban || '';
+          document.getElementById('set-swift').value = s.banking.swift || '';
+        }
+
+        // Pricing
+        if (s.pricing) {
+          document.getElementById('set-price-teranga').value = s.pricing.teranga || 75000;
+          document.getElementById('set-price-logement').value = s.pricing.logement || 150000;
+          document.getElementById('set-price-integration').value = s.pricing.integration || 60000;
+          document.getElementById('set-price-vip').value = s.pricing.vip || 250000;
+          document.getElementById('set-price-journee').value = s.pricing.journee || 35000;
+          document.getElementById('set-price-saly').value = s.pricing.saly || 95000;
+          document.getElementById('set-price-goree').value = s.pricing.goree || 40000;
+          document.getElementById('set-price-saloum').value = s.pricing.saloum || 95000;
+        }
+
+        // Gateways
+        if (s.gateways) {
+          document.getElementById('set-paytech-env').value = s.gateways.paytechEnv || 'test';
+          document.getElementById('set-paytech-key').value = s.gateways.paytechApiKey || '';
+          document.getElementById('set-paytech-secret').value = s.gateways.paytechApiSecret || '';
+          document.getElementById('set-brevo-key').value = s.gateways.brevoApiKey || '';
+        }
+
+      } catch (err) {
+        console.error('Erreur chargement paramètres:', err);
+      }
+    }
+
+    if (btnReloadSettings) {
+      btnReloadSettings.addEventListener('click', () => {
+        loadSettings();
+      });
+    }
+
+    if (settingsForm) {
+      settingsForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('btnSaveAllSettings');
+        const origText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sauvegarde en cours...';
+
+        const payload = {
+          general: {
+            whatsapp: document.getElementById('set-whatsapp').value.trim(),
+            whatsappDisplay: document.getElementById('set-whatsapp-display').value.trim(),
+            email: document.getElementById('set-email').value.trim(),
+            companyName: document.getElementById('set-company').value.trim()
+          },
+          banking: {
+            bankName: document.getElementById('set-bank-name').value.trim(),
+            beneficiary: document.getElementById('set-bank-beneficiary').value.trim(),
+            bankCode: document.getElementById('set-bank-code').value.trim(),
+            branchCode: document.getElementById('set-branch-code').value.trim(),
+            accountNumber: document.getElementById('set-account-num').value.trim(),
+            ribKey: document.getElementById('set-rib-key').value.trim(),
+            iban: document.getElementById('set-iban').value.trim(),
+            swift: document.getElementById('set-swift').value.trim()
+          },
+          pricing: {
+            teranga: parseInt(document.getElementById('set-price-teranga').value) || 75000,
+            logement: parseInt(document.getElementById('set-price-logement').value) || 150000,
+            integration: parseInt(document.getElementById('set-price-integration').value) || 60000,
+            vip: parseInt(document.getElementById('set-price-vip').value) || 250000,
+            journee: parseInt(document.getElementById('set-price-journee').value) || 35000,
+            saly: parseInt(document.getElementById('set-price-saly').value) || 95000,
+            goree: parseInt(document.getElementById('set-price-goree').value) || 40000,
+            saloum: parseInt(document.getElementById('set-price-saloum').value) || 95000
+          },
+          gateways: {
+            paytechEnv: document.getElementById('set-paytech-env').value,
+            paytechApiKey: document.getElementById('set-paytech-key').value.trim(),
+            paytechApiSecret: document.getElementById('set-paytech-secret').value.trim(),
+            brevoApiKey: document.getElementById('set-brevo-key').value.trim()
+          }
+        };
+
+        try {
+          const res = await fetch('/api/admin/settings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            settingsFeedback.style.display = 'block';
+            settingsFeedback.className = 'feedback-alert feedback-success';
+            settingsFeedback.innerHTML = data.message || 'Parametres enregistres avec succes !';
+            setTimeout(() => { settingsFeedback.style.display = 'none'; }, 4000);
+          } else {
+            settingsFeedback.style.display = 'block';
+            settingsFeedback.className = 'feedback-alert feedback-error';
+            settingsFeedback.innerHTML = data.message || 'Erreur lors de la sauvegarde.';
+          }
+        } catch (err) {
+          settingsFeedback.style.display = 'block';
+          settingsFeedback.className = 'feedback-alert feedback-error';
+          settingsFeedback.innerHTML = 'Erreur de connexion au serveur.';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = origText;
+        }
+      });
+    }
+
+    // Charger les paramètres au démarrage
+    loadSettings();
+
   </script>
 </body>
 </html>

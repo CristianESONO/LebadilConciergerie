@@ -16,6 +16,56 @@ const ROOT_DIR = process.env.APP_ROOT || __dirname;
 const SCHOOLS_FILE      = path.join(ROOT_DIR, 'data', 'schools.json');
 const RESERVATIONS_FILE = path.join(ROOT_DIR, 'data', 'reservations.json');
 const USERS_FILE        = path.join(ROOT_DIR, 'data', 'users.json');
+const SETTINGS_FILE     = path.join(ROOT_DIR, 'data', 'settings.json');
+
+// Helper: Get merged settings
+function getSettings() {
+  const defaultSettings = {
+    general: {
+      whatsapp: "221770000000",
+      whatsappDisplay: "+221 77 000 00 00",
+      email: "lebadilconciergerie@gmail.com",
+      companyName: "LE BADIL CONCIERGERIE SUARL",
+      address: "Dakar, Sénégal (Zone Almadies / Plateau)"
+    },
+    banking: {
+      beneficiary: "LE BADIL CONCIERGERIE SUARL",
+      bankName: "CBAO Groupe Attijariwafa Bank",
+      bankBranch: "Dakar Almadies / Plateau",
+      bankCode: "SN012",
+      branchCode: "01234",
+      accountNumber: "012345678901",
+      ribKey: "45",
+      iban: "SN12 SN01 2012 3412 3456 7890 145",
+      swift: "CBAOSNDA"
+    },
+    pricing: {
+      teranga: 75000,
+      logement: 150000,
+      integration: 60000,
+      vip: 250000,
+      journee: 35000,
+      saly: 95000,
+      goree: 40000,
+      saloum: 95000
+    },
+    gateways: {
+      paytechEnv: "test",
+      paytechApiKey: "e5fb556881039577d34510c62716e3039cb6ac6ea0db972c9ca14f6424243d11",
+      paytechApiSecret: "5a3b2e06b7f3cc4e14fa6e1d201c2f10579f7a7003bb9aa49fad038589c5778c",
+      brevoApiKey: "",
+      brevoSenderEmail: "lebadilconciergerie@gmail.com",
+      brevoSenderName: "Le BADIL Conciergerie Dakar"
+    }
+  };
+  const data = readData(SETTINGS_FILE);
+  return {
+    general: { ...defaultSettings.general, ...(data.general || {}) },
+    banking: { ...defaultSettings.banking, ...(data.banking || {}) },
+    pricing: { ...defaultSettings.pricing, ...(data.pricing || {}) },
+    gateways: { ...defaultSettings.gateways, ...(data.gateways || {}) }
+  };
+}
 
 // Helper: read/write JSON data files (compatible Vercel Serverless & Local)
 function readData(filePath) {
@@ -265,6 +315,97 @@ app.get('/api/admin/reservations', requireAdmin, (req, res) => {
   const data = readData(RESERVATIONS_FILE);
   const reservations = (data.reservations || []).slice().reverse(); // plus récentes en premier
   res.json(reservations);
+});
+
+// =========================================================================
+// API — PARAMÈTRES & CONFIGURATION DYNAMIQUE
+// =========================================================================
+
+// Public settings (accessible par le frontend public)
+app.get('/api/settings', (req, res) => {
+  const s = getSettings();
+  res.json({
+    general: s.general,
+    banking: s.banking,
+    pricing: s.pricing
+  });
+});
+
+// Admin settings (protégé, inclut les clés d'API)
+app.get('/api/admin/settings', requireAdmin, (req, res) => {
+  res.json(getSettings());
+});
+
+// Mise à jour des settings admin
+app.post('/api/admin/settings', requireAdmin, (req, res) => {
+  try {
+    const current = getSettings();
+    const updated = {
+      general: { ...current.general, ...(req.body.general || {}) },
+      banking: { ...current.banking, ...(req.body.banking || {}) },
+      pricing: { ...current.pricing, ...(req.body.pricing || {}) },
+      gateways: { ...current.gateways, ...(req.body.gateways || {}) }
+    };
+    writeData(SETTINGS_FILE, updated);
+    console.log('⚙️ [Settings] Paramètres mis à jour avec succès par l\'administrateur');
+    res.json({ success: true, message: 'Paramètres enregistrés avec succès !', settings: updated });
+  } catch (err) {
+    console.error('❌ [Settings Error]', err);
+    res.status(500).json({ success: false, message: 'Impossible d\'enregistrer les paramètres.' });
+  }
+});
+
+// Validation manuelle d'un virement bancaire par l'administrateur
+app.post('/api/admin/reservations/:ref/confirm-virement', requireAdmin, async (req, res) => {
+  const { ref } = req.params;
+  try {
+    const resData = readData(RESERVATIONS_FILE);
+    resData.reservations = resData.reservations || [];
+    const idx = resData.reservations.findIndex(r => r.ref === ref);
+    if (idx === -1) {
+      return res.status(404).json({ success: false, message: 'Réservation introuvable.' });
+    }
+
+    const booking = resData.reservations[idx];
+    booking.status = 'CONFIRMED';
+    booking.confirmedAt = new Date().toISOString();
+    booking.confirmedBy = (req.session.user && req.session.user.name) ? req.session.user.name : 'Administrateur';
+    booking.paymentMethod = 'Virement Bancaire (Validé CBAO)';
+    resData.reservations[idx] = booking;
+    writeData(RESERVATIONS_FILE, resData);
+
+    console.log(`✅ [Virement Validé] Réservation ${ref} confirmée par l'admin.`);
+
+    // Envoi de l'email officiel de confirmation (Email 1.1) au client
+    if (booking.email) {
+      try {
+        const confirmHtml = buildConfirmationEmail({
+          studentName: booking.studentName,
+          packName: booking.packName,
+          school: booking.school,
+          arrivalDate: booking.arrivalDate,
+          refCommand: booking.ref,
+          whatsappNumber: booking.whatsapp
+        });
+        await sendBrevoEmail({
+          to: booking.email,
+          toName: booking.studentName,
+          subject: `✅ Paiement Validé par Virement — Bienvenue chez Le BADIL Conciergerie [Réf: ${booking.ref}]`,
+          htmlContent: confirmHtml
+        });
+      } catch (emErr) {
+        console.warn('⚠️ [Brevo Warning] Email de validation virement non envoyé:', emErr.message);
+      }
+    }
+
+    res.json({
+      success: true,
+      message: `Virement pour la réservation ${ref} validé ! Le dossier est désormais CONFIRMÉ.`,
+      booking
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
 });
 
 // Serve static frontend files (après les routes admin pour ne pas intercepter)

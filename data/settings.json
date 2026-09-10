@@ -1,0 +1,38 @@
+﻿{
+  "general": {
+    "whatsapp": "221770000000",
+    "whatsappDisplay": "+221 77 000 00 00",
+    "email": "lebadilconciergerie@gmail.com",
+    "companyName": "LE BADIL CONCIERGERIE SUARL",
+    "address": "Dakar, Sénégal (Zone Almadies / Plateau)"
+  },
+  "banking": {
+    "beneficiary": "LE BADIL CONCIERGERIE SUARL",
+    "bankName": "CBAO Groupe Attijariwafa Bank",
+    "bankBranch": "Dakar Almadies / Plateau",
+    "bankCode": "SN012",
+    "branchCode": "01234",
+    "accountNumber": "012345678901",
+    "ribKey": "45",
+    "iban": "SN12 SN01 2012 3412 3456 7890 145",
+    "swift": "CBAOSNDA"
+  },
+  "pricing": {
+    "teranga": 75000,
+    "logement": 150000,
+    "integration": 60000,
+    "vip": 250000,
+    "journee": 35000,
+    "saly": 95000,
+    "goree": 40000,
+    "saloum": 95000
+  },
+  "gateways": {
+    "paytechEnv": "test",
+    "paytechApiKey": "e5fb556881039577d34510c62716e3039cb6ac6ea0db972c9ca14f6424243d11",
+    "paytechApiSecret": "5a3b2e06b7f3cc4e14fa6e1d201c2f10579f7a7003bb9aa49fad038589c5778c",
+    "brevoApiKey": "",
+    "brevoSenderEmail": "lebadilconciergerie@gmail.com",
+    "brevoSenderName": "Le BADIL Conciergerie Dakar"
+  }
+}
