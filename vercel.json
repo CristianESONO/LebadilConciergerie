@@ -8,12 +8,14 @@
   ],
   "routes": [
     {
-      "src": "/styles.css",
-      "dest": "/styles.css"
+      "src": "/styles\\.css",
+      "headers": { "content-type": "text/css" },
+      "dest": "/api/index.js"
     },
     {
-      "src": "/app.js",
-      "dest": "/app.js"
+      "src": "/app\\.js",
+      "headers": { "content-type": "application/javascript" },
+      "dest": "/api/index.js"
     },
     {
       "src": "/(.*)",

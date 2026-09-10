@@ -9,10 +9,13 @@ const session  = require('express-session');
 const app  = express();
 const PORT = process.env.PORT || 8080;
 
+// Root directory: on Vercel, __dirname is api/ so APP_ROOT is set by api/index.js
+const ROOT_DIR = process.env.APP_ROOT || __dirname;
+
 // Data file paths
-const SCHOOLS_FILE      = path.join(__dirname, 'data', 'schools.json');
-const RESERVATIONS_FILE = path.join(__dirname, 'data', 'reservations.json');
-const USERS_FILE        = path.join(__dirname, 'data', 'users.json');
+const SCHOOLS_FILE      = path.join(ROOT_DIR, 'data', 'schools.json');
+const RESERVATIONS_FILE = path.join(ROOT_DIR, 'data', 'reservations.json');
+const USERS_FILE        = path.join(ROOT_DIR, 'data', 'users.json');
 
 // Helper: read/write JSON data files (compatible Vercel Serverless & Local)
 function readData(filePath) {
@@ -44,6 +47,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files (CSS, JS, images, etc.) using ROOT_DIR (Vercel-compatible)
+app.use(express.static(ROOT_DIR, {
+  index: false, // index.html served by explicit routes below
+  extensions: ['css', 'js', 'png', 'jpg', 'svg', 'ico', 'woff', 'woff2']
+}));
+
 // Session middleware (for admin auth)
 app.use(session({
   secret: process.env.ADMIN_SESSION_SECRET || 'badil_secret_2026',
@@ -65,12 +74,12 @@ function requireAdmin(req, res, next) {
 // Page de connexion admin
 app.get('/admin', (req, res) => {
   if (req.session && req.session.isAdmin) return res.redirect('/admin/dashboard');
-  res.sendFile(path.join(__dirname, 'admin.html'));
+  res.sendFile(path.join(ROOT_DIR, 'admin.html'));
 });
 
 // Dashboard admin (protégé)
 app.get('/admin/dashboard', requireAdmin, (req, res) => {
-  res.sendFile(path.join(__dirname, 'admin-dashboard.html'));
+  res.sendFile(path.join(ROOT_DIR, 'admin-dashboard.html'));
 });
 
 // POST /admin/login — Authentification (multi-utilisateurs équipe)
@@ -259,11 +268,11 @@ app.get('/api/admin/reservations', requireAdmin, (req, res) => {
 });
 
 // Serve static frontend files (après les routes admin pour ne pas intercepter)
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(ROOT_DIR)));
 
 // Route racine explicite
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(ROOT_DIR, 'index.html'));
 });
 
 // =========================================================================
