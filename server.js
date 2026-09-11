@@ -435,17 +435,21 @@ const PACK_PRICES = {
  * @param {object} options - { to, toName, subject, htmlContent }
  */
 async function sendBrevoEmail({ to, toName, subject, htmlContent }) {
-  const apiKey = process.env.BREVO_API_KEY;
+  const settings = getSettings();
+  const apiKey = (settings.gateways && settings.gateways.brevoApiKey) ? settings.gateways.brevoApiKey.trim() : (process.env.BREVO_API_KEY || '').trim();
 
   if (!apiKey) {
-    console.warn('⚠️ [Brevo] BREVO_API_KEY manquant dans .env — email non envoyé.');
+    console.warn('⚠️ [Brevo] BREVO_API_KEY manquant (non configuré dans Paramètres ou .env) — email non envoyé.');
     return { skipped: true };
   }
 
+  const senderName  = (settings.gateways && settings.gateways.brevoSenderName)  || process.env.BREVO_SENDER_NAME  || 'Le BADIL Conciergerie Dakar';
+  const senderEmail = (settings.gateways && settings.gateways.brevoSenderEmail) || process.env.BREVO_SENDER_EMAIL || 'lebadilconciergerie@gmail.com';
+
   const payload = {
     sender: {
-      name:  process.env.BREVO_SENDER_NAME  || 'Le BADIL Conciergerie Dakar',
-      email: process.env.BREVO_SENDER_EMAIL || 'lebadilconciergerie@gmail.com'
+      name:  senderName,
+      email: senderEmail
     },
     to: [{ email: to, name: toName || to }],
     subject,
@@ -849,10 +853,15 @@ app.post('/api/create-payment', async (req, res) => {
     // =========================================================================
     const refCommand = `BADIL-${Date.now()}`;
 
-    // PUBLIC_URL = URL HTTPS publique (ngrok ou domaine production)
-    // SITE_URL   = URL de redirection success/cancel (peut rester localhost)
-    const siteUrl   = process.env.SITE_URL   || `http://localhost:${PORT}`;
-    const publicUrl = process.env.PUBLIC_URL  || siteUrl;
+    // Auto-détection URL Vercel ou locale
+    const vercelHost = process.env.VERCEL_URL ? (process.env.VERCEL_URL.startsWith('http') ? process.env.VERCEL_URL : `https://${process.env.VERCEL_URL}`) : null;
+    const siteUrl    = process.env.SITE_URL || vercelHost || `http://localhost:${PORT}`;
+    const publicUrl  = process.env.PUBLIC_URL || siteUrl;
+
+    const settings = getSettings();
+    const paytechApiKey    = (settings.gateways && settings.gateways.paytechApiKey)    ? settings.gateways.paytechApiKey.trim()    : (process.env.PAYTECH_API_KEY || '').trim();
+    const paytechApiSecret = (settings.gateways && settings.gateways.paytechApiSecret) ? settings.gateways.paytechApiSecret.trim() : (process.env.PAYTECH_API_SECRET || '').trim();
+    const paytechEnv       = (settings.gateways && settings.gateways.paytechEnv)       ? settings.gateways.paytechEnv              : (process.env.PAYTECH_ENV || 'test');
 
     // PayTech EXIGE HTTPS pour callback_url — bloquer si encore en localhost
     if (!publicUrl.startsWith('https://')) {
@@ -876,7 +885,7 @@ app.post('/api/create-payment', async (req, res) => {
       currency:     'xof',                // IMPORTANT: minuscules obligatoires
       ref_command:  refCommand,
       command_name: cleanCommandName,
-      env:          process.env.PAYTECH_ENV || 'test',
+      env:          paytechEnv,
       ipn_url:      `${publicUrl}/api/paytech-ipn`,
       callback_url: `${publicUrl}/api/paytech-ipn`,
       success_url:  `${publicUrl}/?payment=success&pack=${packId}&name=${encodeURIComponent(studentName)}&ref=${refCommand}`,
@@ -893,14 +902,14 @@ app.post('/api/create-payment', async (req, res) => {
       })
     };
 
-    console.log(`[PayTech Request] Ref: ${refCommand} | Pack: ${pack.name} | Price: ${pack.price} FCFA | Client: ${studentName}`);
+    console.log(`[PayTech Request] Ref: ${refCommand} | Pack: ${pack.name} | Price: ${pack.price} FCFA | Client: ${studentName} | Env: ${paytechEnv}`);
 
     const response = await fetch('https://paytech.sn/api/payment/request-payment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'API_KEY':    process.env.PAYTECH_API_KEY,
-        'API_SECRET': process.env.PAYTECH_API_SECRET
+        'API_KEY':    paytechApiKey,
+        'API_SECRET': paytechApiSecret
       },
       body: JSON.stringify(paytechBody)
     });
