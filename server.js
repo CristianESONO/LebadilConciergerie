@@ -111,10 +111,26 @@ app.use(session({
   cookie: { maxAge: 8 * 60 * 60 * 1000 } // 8 heures
 }));
 
-// Middleware: protéger les routes admin
+// Middleware: vérifier l'authentification admin
 function requireAdmin(req, res, next) {
   if (req.session && req.session.isAdmin) return next();
+  if (req.path.startsWith('/api/')) return res.status(401).json({ error: 'Non authentifié.' });
   return res.redirect('/admin');
+}
+
+// Middleware: vérifier le rôle de l'utilisateur (admin, gerante, staff)
+function requireRole(allowedRoles) {
+  return (req, res, next) => {
+    if (!req.session || !req.session.isAdmin) {
+      if (req.path.startsWith('/api/')) return res.status(401).json({ error: 'Non authentifié.' });
+      return res.redirect('/admin');
+    }
+    const userRoleCode = req.session.user?.roleCode || 'staff';
+    if (allowedRoles.includes(userRoleCode)) {
+      return next();
+    }
+    return res.status(403).json({ error: 'Action non autorisée pour votre profil utilisateur.' });
+  };
 }
 
 // =========================================================================
@@ -146,11 +162,16 @@ app.post('/admin/login', (req, res) => {
 
   if (foundUser) {
     req.session.isAdmin = true;
+    const roleCode = foundUser.roleCode || (
+      foundUser.login === 'admin' ? 'admin' :
+      (foundUser.role && (foundUser.role.toLowerCase().includes('gérant') || foundUser.role.toLowerCase().includes('direct')) ? 'gerante' : 'staff')
+    );
     req.session.user = {
       id: foundUser.id,
       name: foundUser.name,
       login: foundUser.login,
       role: foundUser.role,
+      roleCode: roleCode,
       phone: foundUser.phone || ''
     };
     return res.json({ success: true, redirect: '/admin/dashboard', user: req.session.user });
@@ -163,9 +184,10 @@ app.post('/admin/login', (req, res) => {
     req.session.isAdmin = true;
     req.session.user = {
       id: 'usr-root',
-      name: 'Direction Générale',
+      name: 'Développeur & Admin',
       login: validLogin,
-      role: 'Directeur Général',
+      role: 'Développeur (Super Admin)',
+      roleCode: 'admin',
       phone: '+221 77 000 00 00'
     };
     return res.json({ success: true, redirect: '/admin/dashboard', user: req.session.user });
@@ -184,20 +206,21 @@ app.get('/admin/logout', (req, res) => {
 app.get('/api/admin/me', requireAdmin, (req, res) => {
   res.json({
     success: true,
-    user: req.session.user || { name: 'Administrateur', role: 'Superviseur' }
+    user: req.session.user || { name: 'Administrateur', role: 'Superviseur', roleCode: 'admin' }
   });
 });
 
 // =========================================================================
 // API — GESTION DE L'ÉQUIPE (Membres & Rôles)
 // =========================================================================
-app.get('/api/admin/users', requireAdmin, (req, res) => {
+app.get('/api/admin/users', requireRole(['admin', 'gerante']), (req, res) => {
   const usersData = readData(USERS_FILE);
   const users = (usersData.users || []).map(u => ({
     id: u.id,
     name: u.name,
     login: u.login,
     role: u.role,
+    roleCode: u.roleCode || (u.login === 'admin' ? 'admin' : (u.role && (u.role.toLowerCase().includes('gérant') || u.role.toLowerCase().includes('direct')) ? 'gerante' : 'staff')),
     phone: u.phone || '',
     status: u.status || 'active',
     createdAt: u.createdAt
@@ -205,7 +228,7 @@ app.get('/api/admin/users', requireAdmin, (req, res) => {
   res.json(users);
 });
 
-app.post('/api/admin/users', requireAdmin, (req, res) => {
+app.post('/api/admin/users', requireRole(['admin', 'gerante']), (req, res) => {
   const { name, login, password, role, phone } = req.body;
   if (!name || !login || !password) {
     return res.status(400).json({ error: 'Le nom, l\'identifiant et le mot de passe sont obligatoires.' });
@@ -218,12 +241,23 @@ app.post('/api/admin/users', requireAdmin, (req, res) => {
     return res.status(400).json({ error: 'Cet identifiant de connexion est déjà utilisé par un autre collaborateur.' });
   }
 
+  const isSuperAdmin = req.session.user?.roleCode === 'admin';
+  let targetRoleCode = 'staff';
+  if (isSuperAdmin) {
+    if (role && (role.toLowerCase().includes('admin') || role.toLowerCase().includes('développeur'))) {
+      targetRoleCode = 'admin';
+    } else if (role && (role.toLowerCase().includes('gérant') || role.toLowerCase().includes('direct'))) {
+      targetRoleCode = 'gerante';
+    }
+  }
+
   const newUser = {
     id: `usr-${Date.now()}`,
     name: name.trim(),
     login: login.trim().toLowerCase(),
     password: password.trim(),
     role: role || 'Collaborateur Conciergerie',
+    roleCode: targetRoleCode,
     phone: (phone || '').trim(),
     status: 'active',
     createdAt: new Date().toISOString()
@@ -239,6 +273,7 @@ app.post('/api/admin/users', requireAdmin, (req, res) => {
       name: newUser.name,
       login: newUser.login,
       role: newUser.role,
+      roleCode: newUser.roleCode,
       phone: newUser.phone,
       status: newUser.status,
       createdAt: newUser.createdAt
@@ -246,7 +281,7 @@ app.post('/api/admin/users', requireAdmin, (req, res) => {
   });
 });
 
-app.delete('/api/admin/users/:id', requireAdmin, (req, res) => {
+app.delete('/api/admin/users/:id', requireRole(['admin', 'gerante']), (req, res) => {
   const usersData = readData(USERS_FILE);
   usersData.users = usersData.users || [];
 
@@ -254,13 +289,17 @@ app.delete('/api/admin/users/:id', requireAdmin, (req, res) => {
     return res.status(400).json({ error: 'Action refusée : Vous ne pouvez pas supprimer votre propre compte connecté.' });
   }
 
-  const before = usersData.users.length;
-  usersData.users = usersData.users.filter(u => u.id !== req.params.id);
-
-  if (usersData.users.length === before) {
+  const targetUser = usersData.users.find(u => u.id === req.params.id);
+  if (!targetUser) {
     return res.status(404).json({ error: 'Membre non trouvé.' });
   }
 
+  const isSuperAdmin = req.session.user?.roleCode === 'admin';
+  if (targetUser.roleCode === 'admin' && !isSuperAdmin) {
+    return res.status(403).json({ error: 'Action refusée : Seul le Développeur (Super Admin) peut modifier un compte administrateur.' });
+  }
+
+  usersData.users = usersData.users.filter(u => u.id !== req.params.id);
   writeData(USERS_FILE, usersData);
   res.json({ success: true });
 });
@@ -281,8 +320,8 @@ app.get('/api/admin/schools', requireAdmin, (req, res) => {
   res.json(data.schools || []);
 });
 
-// Admin : ajouter un établissement
-app.post('/api/admin/schools', requireAdmin, (req, res) => {
+// Admin : ajouter un établissement (réservé au développeur / super admin)
+app.post('/api/admin/schools', requireRole(['admin']), (req, res) => {
   const { name, city } = req.body;
   if (!name) return res.status(400).json({ error: 'Le nom de l\'établissement est requis.' });
 
@@ -298,8 +337,8 @@ app.post('/api/admin/schools', requireAdmin, (req, res) => {
   res.json({ success: true, school: newSchool });
 });
 
-// Admin : supprimer un établissement
-app.delete('/api/admin/schools/:id', requireAdmin, (req, res) => {
+// Admin : supprimer un établissement (réservé au développeur / super admin)
+app.delete('/api/admin/schools/:id', requireRole(['admin']), (req, res) => {
   const data = readData(SCHOOLS_FILE);
   const before = (data.schools || []).length;
   data.schools = (data.schools || []).filter(s => s.id !== req.params.id);
@@ -309,7 +348,7 @@ app.delete('/api/admin/schools/:id', requireAdmin, (req, res) => {
 });
 
 // =========================================================================
-// API — RÉSERVATIONS (admin uniquement)
+// API — RÉSERVATIONS (admin & gérante & staff)
 // =========================================================================
 app.get('/api/admin/reservations', requireAdmin, (req, res) => {
   const data = readData(RESERVATIONS_FILE);
@@ -318,7 +357,7 @@ app.get('/api/admin/reservations', requireAdmin, (req, res) => {
 });
 
 // =========================================================================
-// API — PARAMÈTRES & CONFIGURATION DYNAMIQUE
+// API — PARAMÈTRES & CONFIGURATION DYNAMIQUE (réservé Développeur / Admin)
 // =========================================================================
 
 // Public settings (accessible par le frontend public)
@@ -331,13 +370,13 @@ app.get('/api/settings', (req, res) => {
   });
 });
 
-// Admin settings (protégé, inclut les clés d'API)
-app.get('/api/admin/settings', requireAdmin, (req, res) => {
+// Admin settings (protégé, inclut les clés d'API, réservé Dev)
+app.get('/api/admin/settings', requireRole(['admin']), (req, res) => {
   res.json(getSettings());
 });
 
-// Mise à jour des settings admin
-app.post('/api/admin/settings', requireAdmin, (req, res) => {
+// Mise à jour des settings admin (réservé Dev)
+app.post('/api/admin/settings', requireRole(['admin']), (req, res) => {
   try {
     const current = getSettings();
     const updated = {
@@ -355,8 +394,8 @@ app.post('/api/admin/settings', requireAdmin, (req, res) => {
   }
 });
 
-// Validation manuelle d'un virement bancaire par l'administrateur
-app.post('/api/admin/reservations/:ref/confirm-virement', requireAdmin, async (req, res) => {
+// Validation manuelle d'un virement bancaire (admin & gérante)
+app.post('/api/admin/reservations/:ref/confirm-virement', requireRole(['admin', 'gerante']), async (req, res) => {
   const { ref } = req.params;
   try {
     const resData = readData(RESERVATIONS_FILE);
@@ -1104,7 +1143,7 @@ app.post('/api/send-document-reminder', async (req, res) => {
 // API ENDPOINT: TEST EMAIL — pour vérifier la config Brevo
 // GET /api/test-email?to=votre@email.com
 // =========================================================================
-app.get('/api/test-email', async (req, res) => {
+app.get('/api/test-email', requireRole(['admin']), async (req, res) => {
   const to = req.query.to || process.env.BREVO_SENDER_EMAIL;
 
   if (!to) {
@@ -1133,6 +1172,38 @@ app.get('/api/test-email', async (req, res) => {
 
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.post('/api/test-email', requireRole(['admin']), async (req, res) => {
+  const to = req.body.email || req.query.to || process.env.BREVO_SENDER_EMAIL;
+
+  if (!to) {
+    return res.status(400).json({ success: false, message: 'Adresse email requise.' });
+  }
+
+  try {
+    const result = await sendBrevoEmail({
+      to,
+      toName:      'Test Le BADIL',
+      subject:     '🧪 Test Email — Le BADIL Conciergerie Dakar',
+      htmlContent: `
+        <div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:30px;background:#0F2C59;border-radius:12px;color:#DAC0A3;text-align:center;">
+          <h2 style="color:#DAC0A3;margin-bottom:8px;">✅ Configuration Brevo Active !</h2>
+          <p style="color:#a0b4cc;">Le module email <strong>Le BADIL Conciergerie</strong> fonctionne correctement.</p>
+          <p style="color:#6a8099;font-size:12px;margin-top:20px;">Envoyé le ${new Date().toLocaleString('fr-FR')}</p>
+        </div>
+      `
+    });
+
+    if (result.skipped) {
+      return res.json({ success: false, message: 'BREVO_API_KEY manquant — configurez votre clé API dans les Paramètres.' });
+    }
+
+    res.json({ success: true, message: `Email de test envoyé à ${to} avec succès !`, brevo: result });
+
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 });
 

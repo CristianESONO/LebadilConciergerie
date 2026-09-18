@@ -2,13 +2,25 @@
   "users": [
     {
       "id": "usr-1",
-      "name": "Direction Générale",
+      "name": "Développeur & Admin",
       "login": "admin",
       "password": "LeBadil2026!",
-      "role": "Directeur Général",
+      "role": "Développeur (Super Admin)",
+      "roleCode": "admin",
       "phone": "+221 77 000 00 00",
       "status": "active",
       "createdAt": "2026-09-10T12:00:00.000Z"
+    },
+    {
+      "id": "usr-gerante",
+      "name": "Gérante Le BADIL",
+      "login": "gerante",
+      "password": "BadilGerante2026!",
+      "role": "Gérante de Conciergerie",
+      "roleCode": "gerante",
+      "phone": "+221 77 999 88 77",
+      "status": "active",
+      "createdAt": "2026-09-10T12:30:00.000Z"
     },
     {
       "id": "usr-2",
@@ -16,6 +28,7 @@
       "login": "moussa.sow",
       "password": "BadilEquipe2026!",
       "role": "Chargé d'Affaires B2B (Dakar)",
+      "roleCode": "staff",
       "phone": "+221 77 123 45 67",
       "status": "active",
       "createdAt": "2026-09-10T13:00:00.000Z"
@@ -26,6 +39,7 @@
       "login": "aminata.diop",
       "password": "BadilAibd2026!",
       "role": "Superviseur Accueil AIBD",
+      "roleCode": "staff",
       "phone": "+221 77 234 56 78",
       "status": "active",
       "createdAt": "2026-09-10T13:30:00.000Z"

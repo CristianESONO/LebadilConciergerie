@@ -1350,22 +1350,22 @@
 
     <div class="sidebar-badge">
       <span class="dot"></span>
-      <span>Direction & Exploitation</span>
+      <span id="sidebarRolePill">Direction & Exploitation</span>
     </div>
 
     <nav class="sidebar-nav">
-      <div class="nav-category-title">Vue Globale</div>
+      <div class="nav-category-title" id="navCatOverview">Vue Globale</div>
 
-      <button class="admin-nav-item active" data-admin-tab="tab-overview">
+      <button class="admin-nav-item active" data-admin-tab="tab-overview" id="navBtnOverview">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
         <span>Tableau de Bord</span>
       </button>
 
-      <div class="nav-category-title">Espaces de Gestion</div>
+      <div class="nav-category-title" id="navCatManagement">Espaces de Gestion</div>
 
-      <button class="admin-nav-item" data-admin-tab="tab-schools">
+      <button class="admin-nav-item" data-admin-tab="tab-schools" id="navBtnSchools">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
         </svg>
@@ -1373,7 +1373,7 @@
         <span class="nav-pill" id="sidebarSchoolsCount">13</span>
       </button>
 
-      <button class="admin-nav-item" data-admin-tab="tab-bookings">
+      <button class="admin-nav-item" data-admin-tab="tab-bookings" id="navBtnBookings">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
         </svg>
@@ -1381,25 +1381,25 @@
         <span class="nav-pill" id="sidebarBookingsCount">0</span>
       </button>
 
-      <div class="nav-category-title">Outils Opérationnels</div>
+      <div class="nav-category-title" id="navCatOperations">Outils Opérationnels</div>
 
-      <button class="admin-nav-item" data-admin-tab="tab-commercial">
+      <button class="admin-nav-item" data-admin-tab="tab-commercial" id="navBtnCommercial">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
         <span>Outil Commercial Dakar</span>
       </button>
 
-      <button class="admin-nav-item" data-admin-tab="tab-emails">
+      <button class="admin-nav-item" data-admin-tab="tab-emails" id="navBtnEmails">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
         <span>Notifications & Brevo</span>
       </button>
 
-      <div class="nav-category-title">Administration & Sécurité</div>
+      <div class="nav-category-title" id="navCatAdmin">Administration & Sécurité</div>
 
-      <button class="admin-nav-item" data-admin-tab="tab-team">
+      <button class="admin-nav-item" data-admin-tab="tab-team" id="navBtnTeam">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
@@ -1407,7 +1407,7 @@
         <span class="nav-pill" id="sidebarTeamCount">3</span>
       </button>
 
-      <button class="admin-nav-item" data-admin-tab="tab-settings">
+      <button class="admin-nav-item" data-admin-tab="tab-settings" id="navBtnSettings">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -1429,6 +1429,7 @@
         <div class="user-info">
           <div class="user-name" id="loggedUserName">Direction Générale</div>
           <div class="user-role" id="loggedUserRole">Directeur Général</div>
+          <div id="loggedUserRoleBadge" style="display:inline-block; font-size:0.68rem; font-weight:700; color:var(--gold-400); margin-top:2px;">Super Admin</div>
         </div>
         <a href="/admin/logout" class="btn-logout-icon" title="Se déconnecter">
           <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1654,7 +1655,17 @@
             </div>
           </div>
 
-          <!-- Add School Inline Form -->
+          <!-- Read-only notice for Manager & Staff -->
+          <div id="schoolReadOnlyNotice" style="display:none; margin-bottom: 1.25rem; padding: 0.95rem 1.25rem; background: rgba(197, 168, 128, 0.12); border: 1px solid rgba(197, 168, 128, 0.35); border-radius: var(--radius-md); color: var(--navy-900); font-size: 0.86rem; align-items: center; gap: 0.75rem;">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color:var(--gold-600); flex-shrink:0;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <strong>Mode Consultation :</strong> Vous disposez des droits de consultation sur la liste des universités et écoles partenaires. L'ajout, la modification ou la suppression des établissements relève de la maintenance technique du Développeur.
+            </div>
+          </div>
+
+          <!-- Add School Inline Form (visible admin dev) -->
           <div class="add-school-container">
             <form id="addSchoolForm" class="add-school-card-form">
               <div class="input-with-label">
@@ -1706,7 +1717,7 @@
                   <th>Établissement Universitaire</th>
                   <th style="width: 220px;">Localisation</th>
                   <th style="width: 150px;">Statut</th>
-                  <th style="width: 120px; text-align: right;">Action</th>
+                  <th style="width: 120px; text-align: right;" id="schoolsActionHeader">Action</th>
                 </tr>
               </thead>
               <tbody id="schoolsTableBody">
@@ -2104,11 +2115,12 @@
               </div>
               <div class="input-with-label">
                 <select id="newUserRole">
+                  <option value="Gérante de Conciergerie">Gérante de Conciergerie</option>
                   <option value="Chargé d'Affaires B2B (Dakar)">Chargé d'Affaires B2B (Dakar)</option>
                   <option value="Superviseur Accueil AIBD">Superviseur Accueil AIBD</option>
                   <option value="Responsable Chasse Logement">Responsable Chasse Logement</option>
                   <option value="Concierge Opérationnel Terrain">Concierge Opérationnel Terrain</option>
-                  <option value="Directeur Général">Directeur Général</option>
+                  <option value="Directeur Général" id="optRoleAdmin">Développeur (Super Admin)</option>
                 </select>
               </div>
               <div class="input-with-label">
@@ -2330,8 +2342,9 @@
        CLIENT APPLICATION LOGIC
        ========================================================================== -->
   <script>
-    // State
+    // State & Current Authenticated User
     let schoolsCache = [];
+    let currentUser = { roleCode: 'admin', role: 'Directeur Général', name: 'Direction' };
 
     // ==========================================
     // 1. TABS SWITCHER & BREADCRUMB
@@ -2341,6 +2354,7 @@
     const currentBreadcrumb = document.getElementById('currentBreadcrumb');
 
     const tabLabels = {
+      'tab-overview': 'Tableau de Bord & Métriques',
       'tab-schools': 'Établissements & Universités',
       'tab-bookings': 'Réservations PayTech & Virement',
       'tab-commercial': 'Outil Commercial Dakar',
@@ -2352,6 +2366,17 @@
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const targetTab = btn.getAttribute('data-admin-tab');
+        const role = currentUser?.roleCode || 'staff';
+
+        // Permissions strictes par onglet
+        if (role !== 'admin' && (targetTab === 'tab-settings' || targetTab === 'tab-commercial' || targetTab === 'tab-emails')) {
+          alert("Accès restreint : Cette section est réservée à l'administrateur technique.");
+          return;
+        }
+        if (role === 'staff' && targetTab === 'tab-team') {
+          alert("Accès restreint : La gestion de l'équipe est réservée à la Direction.");
+          return;
+        }
 
         tabBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -2387,11 +2412,12 @@
 
     function renderSchoolsTable(schools) {
       if (!schoolsTableBody) return;
+      const isSuperAdmin = currentUser && currentUser.roleCode === 'admin';
 
       if (schools.length === 0) {
         schoolsTableBody.innerHTML = `
           <tr>
-            <td colspan="5" class="empty-card-state">
+            <td colspan="${isSuperAdmin ? 5 : 4}" class="empty-card-state">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
@@ -2425,9 +2451,10 @@
             <td>
               <span class="status-badge status-confirmed">
                 <span class="badge-dot"></span>
-                <span>Actif • Public</span>
+                <span>Actif • Partenaire</span>
               </span>
             </td>
+            ${isSuperAdmin ? `
             <td style="text-align: right;">
               <button class="btn-delete-row" onclick="deleteSchool('${school.id}', '${school.name.replace(/'/g, "\\'")}')">
                 <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -2436,6 +2463,7 @@
                 <span>Supprimer</span>
               </button>
             </td>
+            ` : ''}
           </tr>
         `;
       }).join('');
@@ -2811,19 +2839,101 @@ Statut : Proposition technique et financière sous 24 heures.
     const teamActionFeedback = document.getElementById('teamActionFeedback');
     const btnRefreshTeam = document.getElementById('btnRefreshTeam');
 
+    function applyRolePermissions(user) {
+      if (!user) return;
+      const role = user.roleCode || (
+        user.login === 'admin' ? 'admin' :
+        (user.role && (user.role.toLowerCase().includes('gérant') || user.role.toLowerCase().includes('direct')) ? 'gerante' : 'staff')
+      );
+
+      const navCommercial = document.getElementById('navBtnCommercial');
+      const navEmails = document.getElementById('navBtnEmails');
+      const navTeam = document.getElementById('navBtnTeam');
+      const navSettings = document.getElementById('navBtnSettings');
+      const catOperations = document.getElementById('navCatOperations');
+      const catAdmin = document.getElementById('navCatAdmin');
+      const addSchoolContainer = document.querySelector('.add-school-container');
+      const schoolsActionHeader = document.getElementById('schoolsActionHeader');
+      const schoolReadOnlyNotice = document.getElementById('schoolReadOnlyNotice');
+      const sidebarRolePill = document.getElementById('sidebarRolePill');
+      const loggedUserRoleBadge = document.getElementById('loggedUserRoleBadge');
+      const optRoleAdmin = document.getElementById('optRoleAdmin');
+
+      if (role === 'admin') {
+        // 🧑‍💻 Développeur & Super Admin: ACCÈS TOTAL
+        if (sidebarRolePill) sidebarRolePill.textContent = 'Mode Développeur (Accès Total)';
+        if (loggedUserRoleBadge) {
+          loggedUserRoleBadge.textContent = '🧑‍💻 Développeur (Accès Total)';
+          loggedUserRoleBadge.style.color = 'var(--gold-400)';
+        }
+        if (navCommercial) navCommercial.style.display = '';
+        if (navEmails) navEmails.style.display = '';
+        if (navTeam) navTeam.style.display = '';
+        if (navSettings) navSettings.style.display = '';
+        if (catOperations) catOperations.style.display = '';
+        if (catAdmin) catAdmin.style.display = '';
+        if (addSchoolContainer) addSchoolContainer.style.display = '';
+        if (schoolsActionHeader) schoolsActionHeader.style.display = '';
+        if (schoolReadOnlyNotice) schoolReadOnlyNotice.style.display = 'none';
+        if (optRoleAdmin) optRoleAdmin.style.display = '';
+
+      } else if (role === 'gerante') {
+        // 👩‍💼 Gérante: Vue d'ensemble, Réservations, Équipe, Établissements en lecture seule
+        if (sidebarRolePill) sidebarRolePill.textContent = 'Gérante Conciergerie';
+        if (loggedUserRoleBadge) {
+          loggedUserRoleBadge.textContent = '👩‍💼 Direction Conciergerie';
+          loggedUserRoleBadge.style.color = '#38BDF8';
+        }
+        if (navCommercial) navCommercial.style.display = 'none';
+        if (navEmails) navEmails.style.display = 'none';
+        if (navSettings) navSettings.style.display = 'none';
+        if (catOperations) catOperations.style.display = 'none';
+
+        if (navTeam) navTeam.style.display = '';
+        if (catAdmin) catAdmin.style.display = '';
+
+        if (addSchoolContainer) addSchoolContainer.style.display = 'none';
+        if (schoolsActionHeader) schoolsActionHeader.style.display = 'none';
+        if (schoolReadOnlyNotice) schoolReadOnlyNotice.style.display = 'flex';
+        if (optRoleAdmin) optRoleAdmin.style.display = 'none';
+
+      } else {
+        // 👥 Staff / Équipe: Vue d'ensemble, Réservations, Établissements en lecture seule
+        if (sidebarRolePill) sidebarRolePill.textContent = 'Collaborateur Équipe';
+        if (loggedUserRoleBadge) {
+          loggedUserRoleBadge.textContent = '👥 Équipe Opérations';
+          loggedUserRoleBadge.style.color = 'var(--slate-300)';
+        }
+        if (navCommercial) navCommercial.style.display = 'none';
+        if (navEmails) navEmails.style.display = 'none';
+        if (navTeam) navTeam.style.display = 'none';
+        if (navSettings) navSettings.style.display = 'none';
+        if (catOperations) catOperations.style.display = 'none';
+        if (catAdmin) catAdmin.style.display = 'none';
+
+        if (addSchoolContainer) addSchoolContainer.style.display = 'none';
+        if (schoolsActionHeader) schoolsActionHeader.style.display = 'none';
+        if (schoolReadOnlyNotice) schoolReadOnlyNotice.style.display = 'flex';
+      }
+    }
+
     async function loadCurrentUser() {
       try {
         const res = await fetch('/api/admin/me');
         if (res.ok) {
           const data = await res.json();
           if (data.user) {
-            const initial = (data.user.name || 'AD').trim().substring(0, 2).toUpperCase();
+            currentUser = data.user;
+            const initial = (currentUser.name || 'AD').trim().substring(0, 2).toUpperCase();
             const avatarEl = document.getElementById('loggedUserAvatar');
             const nameEl = document.getElementById('loggedUserName');
             const roleEl = document.getElementById('loggedUserRole');
             if (avatarEl) avatarEl.textContent = initial;
-            if (nameEl) nameEl.textContent = data.user.name || 'Direction';
-            if (roleEl) roleEl.textContent = data.user.role || 'Directeur Général';
+            if (nameEl) nameEl.textContent = currentUser.name || 'Direction';
+            if (roleEl) roleEl.textContent = currentUser.role || 'Directeur Général';
+
+            applyRolePermissions(currentUser);
+            if (schoolsCache.length > 0) renderSchoolsTable(schoolsCache);
           }
         }
       } catch (e) {
@@ -2834,7 +2944,10 @@ Statut : Proposition technique et financière sous 24 heures.
     async function loadTeam() {
       try {
         const res = await fetch('/api/admin/users');
-        if (!res.ok) throw new Error('Impossible de charger les utilisateurs.');
+        if (!res.ok) {
+          if (res.status === 403) return; // Non autorisé pour ce profil
+          throw new Error('Impossible de charger les collaborateurs.');
+        }
         const users = await res.json();
 
         if (kpiTeamCount) kpiTeamCount.textContent = users.length;
@@ -2853,6 +2966,8 @@ Statut : Proposition technique et financière sous 24 heures.
           return;
         }
 
+        const isSuperAdmin = currentUser && currentUser.roleCode === 'admin';
+
         teamTableBody.innerHTML = users.map((u, index) => {
           const initial = (u.name || 'U').trim().substring(0, 2).toUpperCase();
           let roleBadge = 'pack-vip';
@@ -2860,6 +2975,11 @@ Statut : Proposition technique et financière sous 24 heures.
           if (rLower.includes('aibd') || rLower.includes('accueil')) roleBadge = 'pack-teranga';
           else if (rLower.includes('commercial') || rLower.includes('b2b')) roleBadge = 'pack-logement';
           else if (rLower.includes('logement')) roleBadge = 'pack-integration';
+          else if (rLower.includes('gérant') || rLower.includes('direct')) roleBadge = 'pack-vip';
+
+          const isUserAdmin = u.roleCode === 'admin' || u.login === 'admin';
+          // Seul le dev peut supprimer un admin. La gérante peut supprimer les collaborateurs mais pas le dev
+          const canDelete = isSuperAdmin ? (currentUser.id !== u.id) : (currentUser.roleCode === 'gerante' && !isUserAdmin);
 
           return `
             <tr>
@@ -2890,12 +3010,16 @@ Statut : Proposition technique et financière sous 24 heures.
                 </span>
               </td>
               <td style="text-align: right;">
-                <button class="btn-delete-row" onclick="deleteTeamMember('${u.id}', '${u.name.replace(/'/g, "\\'")}')">
-                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                  <span>Retirer</span>
-                </button>
+                ${canDelete ? `
+                  <button class="btn-delete-row" onclick="deleteTeamMember('${u.id}', '${u.name.replace(/'/g, "\\'")}')">
+                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    <span>Retirer</span>
+                  </button>
+                ` : `
+                  <span style="font-size:0.75rem; color:var(--slate-400); font-style:italic; padding:4px 8px; background:var(--slate-100); border-radius:4px;">Compte Protégé</span>
+                `}
               </td>
             </tr>
           `;
