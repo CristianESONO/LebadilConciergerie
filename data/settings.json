@@ -1,8 +1,8 @@
-﻿{
+{
   "general": {
-    "whatsapp": "221770000000",
-    "whatsappDisplay": "+221 77 000 00 00",
-    "email": "lebadilconciergerie@gmail.com",
+    "whatsapp": "221710923333",
+    "whatsappDisplay": "+221 71 092 33 33",
+    "email": "contact@lebadilconciergerie.com",
     "companyName": "LE BADIL CONCIERGERIE SUARL",
     "address": "Dakar, Sénégal (Zone Almadies / Plateau)"
   },
@@ -28,11 +28,8 @@
     "saloum": 95000
   },
   "gateways": {
-    "paytechEnv": "",
+    "paytechEnv": "prod",
     "paytechApiKey": "",
-    "paytechApiSecret": "",
-    "brevoApiKey": "",
-    "brevoSenderEmail": "lebadilconciergerie@gmail.com",
-    "brevoSenderName": "Le BADIL Conciergerie Dakar"
+    "paytechApiSecret": ""
   }
 }

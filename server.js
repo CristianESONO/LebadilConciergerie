@@ -5,6 +5,7 @@ const path     = require('path');
 const crypto   = require('crypto');
 const fs       = require('fs');
 const session  = require('express-session');
+const nodemailer = require('nodemailer');
 
 const app  = express();
 const PORT = process.env.PORT || 8080;
@@ -22,9 +23,9 @@ const SETTINGS_FILE     = path.join(ROOT_DIR, 'data', 'settings.json');
 function getSettings() {
   const defaultSettings = {
     general: {
-      whatsapp: "221770000000",
-      whatsappDisplay: "+221 77 000 00 00",
-      email: "lebadilconciergerie@gmail.com",
+      whatsapp: "221710923333",
+      whatsappDisplay: "+221 71 092 33 33",
+      email: "contact@lebadilconciergerie.com",
       companyName: "LE BADIL CONCIERGERIE SUARL",
       address: "Dakar, Sénégal (Zone Almadies / Plateau)"
     },
@@ -52,10 +53,7 @@ function getSettings() {
     gateways: {
       paytechEnv: "",
       paytechApiKey: "",
-      paytechApiSecret: "",
-      brevoApiKey: "",
-      brevoSenderEmail: "contact@lebadilconciergerie.com",
-      brevoSenderName: "Le BADIL Conciergerie"
+      paytechApiSecret: ""
     }
   };
   const data = readData(SETTINGS_FILE);
@@ -188,7 +186,7 @@ app.post('/admin/login', (req, res) => {
       login: validLogin,
       role: 'Développeur (Super Admin)',
       roleCode: 'admin',
-      phone: '+221 77 000 00 00'
+      phone: '+221 71 092 33 33'
     };
     return res.json({ success: true, redirect: '/admin/dashboard', user: req.session.user });
   }
@@ -426,14 +424,14 @@ app.post('/api/admin/reservations/:ref/confirm-virement', requireRole(['admin', 
           refCommand: booking.ref,
           whatsappNumber: booking.whatsapp
         });
-        await sendBrevoEmail({
+        await sendEmail({
           to: booking.email,
           toName: booking.studentName,
           subject: `✅ Paiement Validé par Virement — Bienvenue chez Le BADIL Conciergerie [Réf: ${booking.ref}]`,
           htmlContent: confirmHtml
         });
       } catch (emErr) {
-        console.warn('⚠️ [Brevo Warning] Email de validation virement non envoyé:', emErr.message);
+        console.warn('⚠️ [SMTP OVH Warning] Email de validation virement non envoyé:', emErr.message);
       }
     }
 
@@ -466,55 +464,58 @@ const PACK_PRICES = {
 };
 
 // =========================================================================
-// BREVO EMAIL MODULE
+// SMTP EMAIL MODULE — OVH ZIMBRA
 // =========================================================================
 
 /**
- * Envoie un email HTML via l'API Brevo (Sendinblue).
+ * Envoie un email HTML via SMTP OVH Zimbra.
  * @param {object} options - { to, toName, subject, htmlContent }
  */
-async function sendBrevoEmail({ to, toName, subject, htmlContent }) {
-  const settings = getSettings();
-  const apiKey = (settings.gateways && settings.gateways.brevoApiKey) ? settings.gateways.brevoApiKey.trim() : (process.env.BREVO_API_KEY || '').trim();
+async function sendEmail({ to, toName, subject, htmlContent }) {
+  const smtpHost = (process.env.SMTP_HOST || '').trim();
+  const smtpPort = Number(process.env.SMTP_PORT || 465);
+  const smtpUser = (process.env.SMTP_USER || '').trim();
+  const smtpPassword = process.env.SMTP_PASSWORD || '';
+  const smtpSecure = String(process.env.SMTP_SECURE || 'true').toLowerCase() === 'true';
 
-  if (!apiKey) {
-    console.warn('⚠️ [Brevo] BREVO_API_KEY manquant (non configuré dans Paramètres ou .env) — email non envoyé.');
+  if (!smtpHost || !smtpUser || !smtpPassword) {
+    console.warn('⚠️ [SMTP OVH] Configuration SMTP incomplète — email non envoyé.');
     return { skipped: true };
   }
 
-  const senderName  = (settings.gateways && settings.gateways.brevoSenderName)  || process.env.BREVO_SENDER_NAME  || 'Le BADIL Conciergerie Dakar';
-  const senderEmail = (settings.gateways && settings.gateways.brevoSenderEmail) || process.env.BREVO_SENDER_EMAIL || 'lebadilconciergerie@gmail.com';
-
-  const payload = {
-    sender: {
-      name:  senderName,
-      email: senderEmail
-    },
-    to: [{ email: to, name: toName || to }],
-    subject,
-    htmlContent
-  };
-
-  const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-    method: 'POST',
-    headers: {
-      'accept':       'application/json',
-      'api-key':      apiKey,
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify(payload)
+  const transporter = nodemailer.createTransport({
+    host: smtpHost,
+    port: smtpPort,
+    secure: smtpSecure,
+    auth: {
+      user: smtpUser,
+      pass: smtpPassword
+    }
   });
 
-  const data = await response.json();
+  const senderName = process.env.SMTP_SENDER_NAME || 'Le BADIL Conciergerie';
+  const senderEmail = smtpUser;
 
-  if (response.ok) {
-    console.log(`✅ [Brevo] Email envoyé à ${to} — Sujet: "${subject}" | ID: ${data.messageId}`);
-  } else {
-    console.error(`❌ [Brevo] Échec envoi à ${to}:`, data);
+  try {
+    const info = await transporter.sendMail({
+      from: `"${senderName}" <${senderEmail}>`,
+      to: toName ? `"${toName}" <${to}>` : to,
+      subject,
+      html: htmlContent
+    });
+
+    console.log(`✅ [SMTP OVH] Email envoyé à ${to} — Sujet: "${subject}" | ID: ${info.messageId}`);
+
+    return {
+      success: true,
+      messageId: info.messageId
+    };
+  } catch (error) {
+    console.error(`❌ [SMTP OVH] Échec envoi à ${to}:`, error.message);
+    throw error;
   }
-
-  return data;
 }
+
 
 // =========================================================================
 // TEMPLATES EMAILS HTML — CORPORATE BLEU MARINE & OR CHAMPAGNE
@@ -524,7 +525,7 @@ async function sendBrevoEmail({ to, toName, subject, htmlContent }) {
  * Email 1.1 : Confirmation de réservation & bienvenue (envoyé immédiatement après paiement)
  */
 function buildVirementEmail({ studentName, packName, school, arrivalDate, refCommand, amount, whatsappNumber }) {
-  const waLink = `https://wa.me/${whatsappNumber ? whatsappNumber.replace(/[^0-9]/g, '') : '221770000000'}?text=${encodeURIComponent(
+  const waLink = `https://wa.me/${whatsappNumber ? whatsappNumber.replace(/[^0-9]/g, '') : '221710923333'}?text=${encodeURIComponent(
     `Bonjour Le BADIL Conciergerie, j'ai sélectionné le paiement par virement bancaire pour le ${packName} (Réf: ${refCommand}). Étudiant: ${studentName}.`
   )}`;
 
@@ -589,7 +590,7 @@ function buildVirementEmail({ studentName, packName, school, arrivalDate, refCom
 }
 
 function buildConfirmationEmail({ studentName, packName, school, arrivalDate, refCommand, whatsappNumber }) {
-  const waLink = `https://wa.me/${whatsappNumber || '221770000000'}?text=${encodeURIComponent(
+  const waLink = `https://wa.me/${whatsappNumber || '221710923333'}?text=${encodeURIComponent(
     `Bonjour Le BADIL Conciergerie, mon paiement pour le ${packName} a été validé (Réf: ${refCommand}). Étudiant: ${studentName}. Merci de prendre en charge mon dossier !`
   )}`;
 
@@ -720,7 +721,7 @@ function buildConfirmationEmail({ studentName, packName, school, arrivalDate, re
     <tr>
       <td align="center" style="padding:24px 20px;">
         <p style="color:#a0b4cc;margin:0 0 6px;font-size:12px;">Le BADIL Conciergerie Dakar — Excellence & Service Teranga</p>
-        <p style="color:#6a8099;margin:0;font-size:11px;">📞 WhatsApp Pro : +221 77 000 00 00 · ✉️ ${process.env.BREVO_SENDER_EMAIL || 'lebadilconciergerie@gmail.com'}</p>
+        <p style="color:#6a8099;margin:0;font-size:11px;">📞 WhatsApp Pro : ${whatsappNumber || '+221 71 092 33 33'} · ✉️ ${process.env.SMTP_USER || 'contact@lebadilconciergerie.com'}</p>
         <p style="color:#6a8099;margin:8px 0 0;font-size:10px;">NINEA: 009876543 · RCCM: SN.DKR.2026.B.1234</p>
       </td>
     </tr>
@@ -784,7 +785,7 @@ function buildDocumentReminderEmail({ studentName, packName, refCommand }) {
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center">
-                    <a href="https://wa.me/221770000000?text=${encodeURIComponent(`Bonjour Le BADIL, je vous envoie mes documents pour le dossier ${refCommand}`)}" 
+                    <a href="https://wa.me/221710923333?text=${encodeURIComponent(`Bonjour Le BADIL, je vous envoie mes documents pour le dossier ${refCommand}`)}"
                        style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:13px 28px;border-radius:50px;font-weight:700;font-size:14px;">
                       📎 Envoyer mes documents par WhatsApp
                     </a>
@@ -802,7 +803,7 @@ function buildDocumentReminderEmail({ studentName, packName, refCommand }) {
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#0F2C59;">
     <tr>
       <td align="center" style="padding:20px;">
-        <p style="color:#6a8099;margin:0;font-size:11px;">Le BADIL Conciergerie Dakar · ${process.env.BREVO_SENDER_EMAIL || 'lebadilconciergerie@gmail.com'}</p>
+        <p style="color:#6a8099;margin:0;font-size:11px;">Le BADIL Conciergerie Dakar · ${process.env.SMTP_USER || 'contact@lebadilconciergerie.com'}</p>
       </td>
     </tr>
   </table>
@@ -847,7 +848,7 @@ app.post('/api/create-payment', async (req, res) => {
         console.error('❌ [Virement Error] Erreur sauvegarde réservation:', err.message);
       }
 
-      if (email && process.env.BREVO_API_KEY) {
+      if (email && process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASSWORD) {
         try {
           const virementHtml = buildVirementEmail({
             studentName: studentName || 'Étudiant',
@@ -858,8 +859,8 @@ app.post('/api/create-payment', async (req, res) => {
             amount: pack.price,
             whatsappNumber: whatsapp
           });
-          await sendBrevoEmail({
-            toEmail: email,
+          await sendEmail({
+            to: email,
             toName: studentName,
             subject: `📋 Confirmation Réservation Virement Bancaire - ${pack.name} [${refCommand}]`,
             htmlContent: virementHtml
@@ -1051,7 +1052,7 @@ app.post('/api/paytech-ipn', async (req, res) => {
     }
 
     // =========================================================================
-    // ENVOI EMAIL DE CONFIRMATION (Email 1.1) via Brevo
+    // ENVOI EMAIL DE CONFIRMATION (Email 1.1) via SMTP OVH
     // =========================================================================
     if (email && type_event === 'sale_complete') {
       try {
@@ -1061,10 +1062,10 @@ app.post('/api/paytech-ipn', async (req, res) => {
           school:      school,
           arrivalDate: arrivalDate,
           refCommand:  ref_command,
-          whatsappNumber: process.env.WHATSAPP_PHONE || '221770000000'
+          whatsappNumber: (getSettings().general && getSettings().general.whatsappDisplay) || '+221 71 092 33 33'
         });
 
-        await sendBrevoEmail({
+        await sendEmail({
           to:          email,
           toName:      studentName || 'Étudiant',
           subject:     `✅ Confirmation de réservation — ${packName || item_name} | Le BADIL Conciergerie`,
@@ -1088,8 +1089,8 @@ app.post('/api/paytech-ipn', async (req, res) => {
           <p style="margin-top:16px;color:#888;font-size:12px;">Notification automatique Le BADIL Conciergerie Server — ${new Date().toLocaleString('fr-FR')}</p>
         `;
 
-        await sendBrevoEmail({
-          to:          process.env.BREVO_SENDER_EMAIL || 'lebadilconciergerie@gmail.com',
+        await sendEmail({
+          to:          process.env.SMTP_USER || 'contact@lebadilconciergerie.com',
           toName:      'Équipe Le BADIL',
           subject:     `🔔 Nouvelle réservation PayTech : ${studentName || 'Client'} — ${packName || item_name}`,
           htmlContent: internalHtml
@@ -1097,7 +1098,7 @@ app.post('/api/paytech-ipn', async (req, res) => {
 
       } catch (emailErr) {
         // Ne pas bloquer la réponse à PayTech si l'email échoue
-        console.error('❌ [Brevo] Erreur lors de l\'envoi de l\'email de confirmation:', emailErr.message);
+        console.error('❌ [SMTP OVH] Erreur lors de l\'envoi de l\'email de confirmation:', emailErr.message);
       }
     }
 
@@ -1124,7 +1125,7 @@ app.post('/api/send-document-reminder', async (req, res) => {
 
     const htmlContent = buildDocumentReminderEmail({ studentName, packName, refCommand });
 
-    await sendBrevoEmail({
+    await sendEmail({
       to:          email,
       toName:      studentName,
       subject:     `📄 Documents requis pour votre dossier (Réf: ${refCommand}) — Le BADIL Conciergerie`,
@@ -1140,24 +1141,24 @@ app.post('/api/send-document-reminder', async (req, res) => {
 });
 
 // =========================================================================
-// API ENDPOINT: TEST EMAIL — pour vérifier la config Brevo
+// API ENDPOINT: TEST EMAIL — pour vérifier la configuration SMTP OVH
 // GET /api/test-email?to=votre@email.com
 // =========================================================================
 app.get('/api/test-email', requireRole(['admin']), async (req, res) => {
-  const to = req.query.to || process.env.BREVO_SENDER_EMAIL;
+  const to = req.query.to || process.env.SMTP_USER;
 
   if (!to) {
     return res.status(400).json({ error: 'Paramètre ?to=email requis.' });
   }
 
   try {
-    const result = await sendBrevoEmail({
+    const result = await sendEmail({
       to,
       toName:      'Test Le BADIL',
       subject:     '🧪 Test Email — Le BADIL Conciergerie Dakar',
       htmlContent: `
         <div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:30px;background:#0F2C59;border-radius:12px;color:#DAC0A3;text-align:center;">
-          <h2 style="color:#DAC0A3;margin-bottom:8px;">✅ Configuration Brevo Active !</h2>
+          <h2 style="color:#DAC0A3;margin-bottom:8px;">✅ Configuration SMTP OVH Active !</h2>
           <p style="color:#a0b4cc;">Le module email <strong>Le BADIL Conciergerie</strong> fonctionne correctement.</p>
           <p style="color:#6a8099;font-size:12px;margin-top:20px;">Envoyé le ${new Date().toLocaleString('fr-FR')}</p>
         </div>
@@ -1165,10 +1166,10 @@ app.get('/api/test-email', requireRole(['admin']), async (req, res) => {
     });
 
     if (result.skipped) {
-      return res.json({ success: false, message: 'BREVO_API_KEY manquant dans .env — configurez votre clé API Brevo.' });
+      return res.json({ success: false, message: 'Configuration SMTP OVH incomplète dans .env.' });
     }
 
-    res.json({ success: true, message: `Email de test envoyé à ${to}`, brevo: result });
+    res.json({ success: true, message: `Email de test envoyé à ${to}`, smtp: result });
 
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -1176,20 +1177,20 @@ app.get('/api/test-email', requireRole(['admin']), async (req, res) => {
 });
 
 app.post('/api/test-email', requireRole(['admin']), async (req, res) => {
-  const to = req.body.email || req.query.to || process.env.BREVO_SENDER_EMAIL;
+  const to = req.body.email || req.query.to || process.env.SMTP_USER;
 
   if (!to) {
     return res.status(400).json({ success: false, message: 'Adresse email requise.' });
   }
 
   try {
-    const result = await sendBrevoEmail({
+    const result = await sendEmail({
       to,
       toName:      'Test Le BADIL',
       subject:     '🧪 Test Email — Le BADIL Conciergerie Dakar',
       htmlContent: `
         <div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:30px;background:#0F2C59;border-radius:12px;color:#DAC0A3;text-align:center;">
-          <h2 style="color:#DAC0A3;margin-bottom:8px;">✅ Configuration Brevo Active !</h2>
+          <h2 style="color:#DAC0A3;margin-bottom:8px;">✅ Configuration SMTP OVH Active !</h2>
           <p style="color:#a0b4cc;">Le module email <strong>Le BADIL Conciergerie</strong> fonctionne correctement.</p>
           <p style="color:#6a8099;font-size:12px;margin-top:20px;">Envoyé le ${new Date().toLocaleString('fr-FR')}</p>
         </div>
@@ -1197,10 +1198,10 @@ app.post('/api/test-email', requireRole(['admin']), async (req, res) => {
     });
 
     if (result.skipped) {
-      return res.json({ success: false, message: 'BREVO_API_KEY manquant — configurez votre clé API dans les Paramètres.' });
+      return res.json({ success: false, message: 'Configuration SMTP OVH incomplète dans .env.' });
     }
 
-    res.json({ success: true, message: `Email de test envoyé à ${to} avec succès !`, brevo: result });
+    res.json({ success: true, message: `Email de test envoyé à ${to} avec succès !`, smtp: result });
 
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -1212,11 +1213,11 @@ app.post('/api/test-email', requireRole(['admin']), async (req, res) => {
 // =========================================================================
 if (!process.env.VERCEL) {
   app.listen(PORT, () => {
-    const brevoStatus = process.env.BREVO_API_KEY ? '✅ CONFIGURÉ' : '⚠️  MANQUANT (ajoutez BREVO_API_KEY dans .env)';
+    const smtpStatus = (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASSWORD) ? '✅ CONFIGURÉ' : '⚠️  INCOMPLET';
     console.log(`==================================================`);
     console.log(`🚀 LE BADIL CONCIERGERIE — SERVEUR ACTIF (PORT ${PORT})`);
     console.log(`💳 PayTech  : ${process.env.PAYTECH_API_KEY ? '✅ CONFIGURÉ' : '❌ MANQUANT'}`);
-    console.log(`✉️  Brevo   : ${brevoStatus}`);
+    console.log(`✉️  SMTP OVH : ${smtpStatus}`);
     console.log(`🔐 Admin    : http://localhost:${PORT}/admin`);
     console.log(`🌐 Site     : http://localhost:${PORT}`);
     console.log(`==================================================`);

@@ -4,7 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  let WHATSAPP_NUMBER = '221770000000'; // Standard WhatsApp Pro Le BADIL
+  let WHATSAPP_NUMBER = '221710923333';
   const FCFA_PER_EUR = 655.957;
 
   function formatFCFA(amount) {
@@ -294,8 +294,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch('/api/settings');
       if (res.ok) {
         const s = await res.json();
-        if (s.general && s.general.whatsapp) {
-          WHATSAPP_NUMBER = s.general.whatsapp.replace(/[^0-9]/g, '');
+        if (s.general) {
+          if (s.general.whatsapp) {
+            WHATSAPP_NUMBER = s.general.whatsapp.replace(/[^0-9]/g, '');
+          }
+
+          if (s.general.whatsappDisplay) {
+            document.querySelectorAll('[data-contact-whatsapp]').forEach(el => {
+              el.textContent = s.general.whatsappDisplay;
+            });
+          }
+
+          if (s.general.email) {
+            document.querySelectorAll('[data-contact-email]').forEach(el => {
+              el.textContent = s.general.email;
+            });
+          }
         }
         if (s.banking) {
           const b = s.banking;

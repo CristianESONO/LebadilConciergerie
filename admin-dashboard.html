@@ -1056,7 +1056,7 @@
     }
 
     /* ==========================================================================
-       BREVO EMAIL NOTIFICATIONS CARDS & TEST TOOL
+       SMTP OVH EMAIL NOTIFICATIONS CARDS & TEST TOOL
        ========================================================================== */
     .test-dispatcher-box {
       background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
@@ -1394,7 +1394,7 @@
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
-        <span>Notifications & Brevo</span>
+        <span>Notifications & SMTP OVH</span>
       </button>
 
       <div class="nav-category-title" id="navCatAdmin">Administration & Sécurité</div>
@@ -1953,17 +1953,17 @@
       </div>
 
       <!-- =====================================================================
-           TAB 4: NOTIFICATIONS & BREVO API DISPATCHER
+           TAB 4: NOTIFICATIONS & SMTP OVH
            ===================================================================== -->
       <div id="tab-emails" class="tab-pane">
 
-        <!-- Live Brevo Dispatcher Card -->
+        <!-- Live SMTP OVH Dispatcher Card -->
         <div class="test-dispatcher-box">
           <div class="test-dispatcher-header">
             <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#16A34A" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
-            <h4>Banc d'Essai Brevo API (Envoi d'Email Réel)</h4>
+            <h4>Banc d'Essai SMTP OVH (Envoi d'Email Réel)</h4>
           </div>
           <p class="test-dispatcher-desc">
             Testez instantanément la délivrabilité et l'acheminement des emails de confirmation vers votre boîte de réception.
@@ -2191,15 +2191,15 @@
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
                   <div class="form-field">
                     <label class="form-label-clean">Numéro WhatsApp Réception (Format international sans +)</label>
-                    <input type="text" class="form-input-clean" id="set-whatsapp" placeholder="Ex: 221770000000" required>
+                    <input type="text" class="form-input-clean" id="set-whatsapp" placeholder="Ex: 221710923333" required>
                   </div>
                   <div class="form-field">
                     <label class="form-label-clean">Affichage Public WhatsApp</label>
-                    <input type="text" class="form-input-clean" id="set-whatsapp-display" placeholder="Ex: +221 77 000 00 00" required>
+                    <input type="text" class="form-input-clean" id="set-whatsapp-display" placeholder="Ex: +221 71 092 33 33" required>
                   </div>
                   <div class="form-field">
                     <label class="form-label-clean">Email Officiel Le BADIL</label>
-                    <input type="email" class="form-input-clean" id="set-email" placeholder="lebadilconciergerie@gmail.com" required>
+                    <input type="email" class="form-input-clean" id="set-email" placeholder="contact@lebadilconciergerie.com" required>
                   </div>
                   <div class="form-field">
                     <label class="form-label-clean">Raison Sociale Société</label>
@@ -2297,7 +2297,7 @@
                 </div>
               </div>
 
-              <!-- Section 5: Passerelles PayTech & Brevo -->
+              <!-- Section 5: Passerelles PayTech & SMTP OVH -->
               <div style="margin-bottom: 2rem;">
                 <h3 style="color: var(--navy-900); font-size: 1.15rem; margin-bottom: 1rem; display:flex; align-items:center; gap:0.5rem;">
                   <span>🔐 Passerelles de Paiement & Envois d'Emails</span>
@@ -2317,10 +2317,6 @@
                   <div class="form-field">
                     <label class="form-label-clean">PayTech API Secret</label>
                     <input type="password" class="form-input-clean" id="set-paytech-secret" placeholder="Clé secrète PayTech">
-                  </div>
-                  <div class="form-field">
-                    <label class="form-label-clean">Brevo API Key (Sendinblue)</label>
-                    <input type="password" class="form-input-clean" id="set-brevo-key" placeholder="xkeysib-...">
                   </div>
                 </div>
               </div>
@@ -2358,7 +2354,7 @@
       'tab-schools': 'Établissements & Universités',
       'tab-bookings': 'Réservations PayTech & Virement',
       'tab-commercial': 'Outil Commercial Dakar',
-      'tab-emails': 'Notifications & Brevo API',
+      'tab-emails': 'Notifications & SMTP OVH API',
       'tab-team': 'Équipe & Gestion des Accès',
       'tab-settings': 'Paramètres Généraux & Tarifs'
     };
@@ -2772,7 +2768,7 @@ Statut : Proposition technique et financière sous 24 heures.
     }
 
     // ==========================================
-    // 5. TEST EMAIL (BREVO)
+    // 5. TEST EMAIL (SMTP OVH)
     // ==========================================
     const btnSendTestEmail = document.getElementById('btnSendTestEmail');
     const testRecipientEmail = document.getElementById('testRecipientEmail');
@@ -2802,7 +2798,7 @@ Statut : Proposition technique et financière sous 24 heures.
           if (res.ok && data.success) {
             showAlert(testEmailFeedback, `✅ ${data.message}`, '#DCFCE7', '#15803D');
           } else {
-            showAlert(testEmailFeedback, `⚠️ ${data.message || 'Échec de l\'envoi Brevo.'}`, '#FEE2E2', '#DC2626');
+            showAlert(testEmailFeedback, `⚠️ ${data.message || 'Échec de l\'envoi SMTP OVH.'}`, '#FEE2E2', '#DC2626');
           }
         } catch (err) {
           showAlert(testEmailFeedback, `⚠️ Erreur réseau : ${err.message}`, '#FEE2E2', '#DC2626');
@@ -3189,7 +3185,6 @@ Statut : Proposition technique et financière sous 24 heures.
           document.getElementById('set-paytech-env').value = s.gateways.paytechEnv || 'test';
           document.getElementById('set-paytech-key').value = s.gateways.paytechApiKey || '';
           document.getElementById('set-paytech-secret').value = s.gateways.paytechApiSecret || '';
-          document.getElementById('set-brevo-key').value = s.gateways.brevoApiKey || '';
         }
 
       } catch (err) {
@@ -3242,7 +3237,6 @@ Statut : Proposition technique et financière sous 24 heures.
             paytechEnv: document.getElementById('set-paytech-env').value,
             paytechApiKey: document.getElementById('set-paytech-key').value.trim(),
             paytechApiSecret: document.getElementById('set-paytech-secret').value.trim(),
-            brevoApiKey: document.getElementById('set-brevo-key').value.trim()
           }
         };
 
