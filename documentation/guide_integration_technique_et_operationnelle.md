@@ -1,28 +1,39 @@
 # GUIDE D'INTÉGRATION TECHNIQUE & OPÉRATIONNELLE
-## Le BADIL Conciergerie Dakar — Paiements PayTech & Emails Automatiques Brevo
+## Le BADIL Conciergerie Dakar — Paiements PayTech & Emails Automatiques SMTP OVH
 
-Ce guide détaille le fonctionnement et la configuration de l'envoi d'emails automatiques via **Brevo** (anciennement Sendinblue) ainsi que le paramétrage de votre passerelle de paiement **PayTech**.
+Ce guide détaille le fonctionnement et la configuration de l'envoi d'emails automatiques via **SMTP OVH Zimbra** ainsi que le paramétrage de votre passerelle de paiement **PayTech**.
 
 ---
 
-## ✉️ 1. AUTOMATISATION DES EMAILS VIA BREVO (SENDINBLUE)
+## ✉️ 1. AUTOMATISATION DES EMAILS VIA SMTP OVH ZIMBRA
 
-Le moteur d'envoi automatique d'emails a été **entièrement développé et intégré** dans votre serveur (`server.py`).
+Le moteur d'envoi automatique d'emails a été **entièrement développé et intégré** dans votre serveur Node.js (`server.js`).
 
-### A. Comment créer et récupérer votre clé API Brevo (100% Gratuit)
-Brevo offre un forfait gratuit de **300 emails par jour**, ce qui est amplement suffisant pour l'activité de conciergerie.
 
-1. Créez un compte gratuit sur [https://www.brevo.com/fr/](https://www.brevo.com/fr/).
-2. Allez dans le menu : **Votre Profil (en haut à droite) ➔ Clés API & SMTP** (ou directement [https://app.brevo.com/settings/keys/api](https://app.brevo.com/settings/keys/api)).
-3. Cliquez sur **« Générer une nouvelle clé API »**.
-4. Donnez-lui un nom (ex: *Le BADIL Conciergerie*), copiez la clé générée (commence par `xkeysib-...`).
-5. Ouvrez votre fichier [`.env`](file:///c:/Users/user/Desktop/LeBadilConcierge/.env) et collez votre clé :
-   ```env
-   BREVO_API_KEY=xkeysib-votre-cle-ici...
-   BREVO_SENDER_EMAIL=contact@lebadilconciergerie.sn
-   BREVO_SENDER_NAME=Le BADIL Conciergerie Dakar
-   ```
-6. Dans Brevo, allez dans **Expéditeurs et domaines** pour valider l'adresse email d'envoi (`contact@lebadilconciergerie.sn` ou votre adresse Gmail / professionnelle de contact).
+
+---
+
+### A. Configuration SMTP OVH Zimbra
+
+L'application utilise la boîte email professionnelle `contact@lebadilconciergerie.com` via le serveur SMTP OVH Zimbra.
+
+Les paramètres utilisés en production sont :
+
+```env
+SMTP_HOST=smtp.mail.ovh.net
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER=contact@lebadilconciergerie.com
+SMTP_PASSWORD=votre_mot_de_passe_de_boite_mail
+```
+
+Le mot de passe correspond au mot de passe de la boîte email OVH/Zimbra.
+
+**Important :**
+- Ne jamais publier le mot de passe SMTP dans Git.
+- Le fichier `.env` reste ignoré par Git.
+- Le fichier `.env.example` contient uniquement des valeurs d'exemple.
+- L'adresse `contact@lebadilconciergerie.com` est utilisée comme compte SMTP pour l'envoi des emails.
 
 ---
 
@@ -42,8 +53,8 @@ Brevo offre un forfait gratuit de **300 emails par jour**, ce qui est amplement 
 ## 💳 2. CONFIGURATION PAYTECH SÉNÉGAL (DASHBOARD)
 
 Vos clés officielles sont configurées dans votre fichier `.env` :
-* **Clé API** : `e5fb556881039577d34510c62716e3039cb6ac6ea0db972c9ca14f6424243d11`
-* **Clé Secrète** : `5a3b2e06b7f3cc4e14fa6e1d201c2f10579f7a7003bb9aa49fad038589c5778c`
+* **Clé API** : configurée uniquement dans le fichier `.env` du serveur.
+* **Clé Secrète** : configurée uniquement dans le fichier `.env` du serveur.
 
 ### URLs de redirection à renseigner dans https://paytech.sn/app/settings/api :
 
