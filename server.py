@@ -38,7 +38,12 @@ PACK_PRICES = {
     'teranga': {'name': 'Pack Teranga (Accueil AIBD & Transfert)', 'price': 75000},
     'logement': {'name': 'Pack Logement Serein (Chasse & Abonnements)', 'price': 150000},
     'integration': {'name': 'Pack Intégration (Transport & Santé)', 'price': 60000},
-    'vip': {'name': 'Pack VIP All-Inclusive (Clé en Main)', 'price': 250000}
+    'vip': {'name': 'Pack VIP All-Inclusive (Clé en Main)', 'price': 250000},
+    'escapade-dakar': {'name': 'Escapade Dakar Vivant & Arty', 'price': 25000},
+    'escapade-goree': {'name': 'Journée Île de Gorée Mémoire & Histoire', 'price': 40000},
+    'escapade-saly': {'name': 'Journée Détente & Sports Nautiques Saly', 'price': 55000},
+    'escapade-saloum': {'name': 'Aventure Bolongs & Pêche Saloum', 'price': 75000},
+    'escapade-saloum-safari': {'name': 'Safari Ornithologique & Bivouac Saloum', 'price': 95000}
 }
 
 # =========================================================================

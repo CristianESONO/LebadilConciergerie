@@ -38,6 +38,9 @@
       <button class="nav-tab-btn" data-tab="tab-entreprises">
         💼 Pôle Entreprises
       </button>
+      <button class="nav-tab-btn" data-tab="tab-escapades">
+        🌍 Escapades
+      </button>
       <button class="nav-tab-btn" data-tab="tab-logistique">
         ✈️ Jour-J AIBD
       </button>
@@ -188,6 +191,281 @@
             <button class="btn-primary select-pack-btn" data-pack="integration" style="width:100%;">Réserver ce Pack</button>
           </div>
         </div>
+
+        <!-- === ADD-ON ESCAPADES ÉTUDIANTS === -->
+        <div class="section-header" style="margin-top:2.5rem;">
+          <span class="section-tag">Bonus Découverte 🌍</span>
+          <h2 class="section-title" style="font-size:1.5rem;">Enrichissez votre vie étudiante au Sénégal</h2>
+          <p class="section-desc">Des escapades organisées pour sortir du quotidien, découvrir le pays et tisser des liens. Ajoutez-en une à n'importe quel pack.</p>
+        </div>
+        <div class="grid-4">
+
+          <!-- Escapade Dakar Vivant -->
+          <div class="pack-card" style="border-top: 3px solid #e67e22;">
+            <div>
+              <div class="pack-icon">🏙️</div>
+              <h3 class="pack-name">Dakar Vivant</h3>
+              <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Immersion Urbaine &amp; Culture</p>
+              <div class="pack-price-box">
+                <div class="price-fcfa">25 000 FCFA</div>
+                <div class="price-eur">~ 38 € / pers.</div>
+              </div>
+              <ul class="pack-features">
+                <li>🎨 Village des Arts de Dakar (Médina)</li>
+                <li>🥁 Atelier percussions Sabar en groupe</li>
+                <li>🍴 Street food tour Sandaga &amp; Marché Kermel</li>
+                <li>🌅 Coucher de soleil aux Mamelles &amp; Phare</li>
+              </ul>
+            </div>
+            <button class="btn-primary select-pack-btn" data-pack="escapade-dakar" style="width:100%; background: linear-gradient(135deg,#e67e22,#d35400);">Ajouter à mon Pack</button>
+          </div>
+
+          <!-- Escapade Gorée -->
+          <div class="pack-card" style="border-top: 3px solid #8e44ad;">
+            <div>
+              <div class="pack-icon">🏝️</div>
+              <h3 class="pack-name">Journée Gorée</h3>
+              <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Patrimoine UNESCO &amp; Mémoire</p>
+              <div class="pack-price-box">
+                <div class="price-fcfa">40 000 FCFA</div>
+                <div class="price-eur">~ 61 € / pers.</div>
+              </div>
+              <ul class="pack-features">
+                <li>⛵ Traversée bateau depuis l'embarcadère</li>
+                <li>🏛️ Maison des Esclaves &amp; Porte du Voyage sans Retour</li>
+                <li>🎨 Ruelles colorées &amp; artisans locaux</li>
+                <li>🍽️ Déjeuner spécialités sénégalaises sur l'île</li>
+              </ul>
+            </div>
+            <button class="btn-primary select-pack-btn" data-pack="escapade-goree" style="width:100%; background: linear-gradient(135deg,#8e44ad,#6c3483);">Ajouter à mon Pack</button>
+          </div>
+
+          <!-- Escapade Saly -->
+          <div class="pack-card" style="border-top: 3px solid #27ae60;">
+            <div>
+              <div class="pack-icon">🏄</div>
+              <h3 class="pack-name">Week-end Saly</h3>
+              <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Plage &amp; Sports Petite Côte</p>
+              <div class="pack-price-box">
+                <div class="price-fcfa">55 000 FCFA</div>
+                <div class="price-eur">~ 84 € / pers.</div>
+              </div>
+              <ul class="pack-features">
+                <li>🚐 Transport aller-retour Dakar ↔ Saly</li>
+                <li>🏄 Session initiation surf ou stand-up paddle</li>
+                <li>🏋️ Beach volley + yoga au lever de soleil</li>
+                <li>🌴 Accès spa &amp; piscine lodge partenaire</li>
+              </ul>
+            </div>
+            <button class="btn-primary select-pack-btn" data-pack="escapade-saly" style="width:100%; background: linear-gradient(135deg,#27ae60,#1e8449);">Ajouter à mon Pack</button>
+          </div>
+
+          <!-- Escapade Saloum -->
+          <div class="pack-card" style="border-top: 3px solid #2980b9;">
+            <div>
+              <div class="pack-icon">🛶</div>
+              <h3 class="pack-name">Aventure Saloum</h3>
+              <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Delta &amp; Bolongs en Pirogue</p>
+              <div class="pack-price-box">
+                <div class="price-fcfa">75 000 FCFA</div>
+                <div class="price-eur">~ 115 € / pers.</div>
+              </div>
+              <ul class="pack-features">
+                <li>🚐 Transport climatisé Dakar ↔ Sine Saloum</li>
+                <li>🛶 Excursion pirogue bolongs (mangrove)</li>
+                <li>🦅 Observation oiseaux &amp; pêche traditionnelle</li>
+                <li>🏕️ Déjeuner grillades fraîches en éco-lodge</li>
+              </ul>
+            </div>
+            <button class="btn-primary select-pack-btn" data-pack="escapade-saloum" style="width:100%; background: linear-gradient(135deg,#2980b9,#1a5276);">Ajouter à mon Pack</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB ESCAPADES ==================== -->
+    <div id="tab-escapades" class="tab-content">
+      <div class="card-panel">
+        <div class="section-header">
+          <span class="section-tag">Destinations &amp; Activités</span>
+          <h2 class="section-title">Explorez le Sénégal avec Le BADIL</h2>
+          <p class="section-desc">
+            Que vous soyez étudiant en quête d'aventure ou entreprise en quête d'inspiration, nous orchestrons des escapades mémorables aux quatre coins du pays.
+          </p>
+        </div>
+
+        <!-- === DAKAR === -->
+        <div class="escapade-destination-block">
+          <div class="escapade-dest-header" style="border-left: 4px solid #e67e22;">
+            <div style="display:flex; align-items:center; gap:1rem;">
+              <span style="font-size:2.5rem;">🏙️</span>
+              <div>
+                <h3 style="font-size:1.4rem; color:var(--color-navy-primary); margin:0;">Dakar — La Ville Vibrante</h3>
+                <p style="color:var(--color-gray-600); font-size:0.9rem; margin:0;">Culture urbaine, gastronomie de rue &amp; scène artistique</p>
+              </div>
+            </div>
+            <span class="badge-tag enterprise" style="background:#e67e22;">À partir de 25 000 FCFA</span>
+          </div>
+          <div class="grid-4" style="margin-top:1rem;">
+            <div class="activity-card">
+              <div class="activity-icon">🎨</div>
+              <h4>Village des Arts</h4>
+              <p>Ateliers d'artistes contemporains sénégalais, œuvres uniques, rencontres culturelles en Médina.</p>
+              <span class="activity-tag">Culture</span>
+            </div>
+            <div class="activity-card">
+              <div class="activity-icon">🥁</div>
+              <h4>Atelier Sabar</h4>
+              <p>Cours de percussion Sabar en groupe animé par un maître griot. Idéal team building ou découverte.</p>
+              <span class="activity-tag">Musique &amp; Cohésion</span>
+            </div>
+            <div class="activity-card">
+              <div class="activity-icon">🍴</div>
+              <h4>Street Food Tour</h4>
+              <p>Dégustation guidée : thieboudienne, yassa poulet, bissap glacé au marché Kermel &amp; Sandaga.</p>
+              <span class="activity-tag">Gastronomie</span>
+            </div>
+            <div class="activity-card">
+              <div class="activity-icon">🌅</div>
+              <h4>Les Mamelles &amp; Phare</h4>
+              <p>Vue panoramique sur l'Atlantique depuis le promontoire volcanique. Coucher de soleil inoubliable.</p>
+              <span class="activity-tag">Panorama</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- === GORÉE === -->
+        <div class="escapade-destination-block">
+          <div class="escapade-dest-header" style="border-left: 4px solid #8e44ad;">
+            <div style="display:flex; align-items:center; gap:1rem;">
+              <span style="font-size:2.5rem;">🏝️</span>
+              <div>
+                <h3 style="font-size:1.4rem; color:var(--color-navy-primary); margin:0;">Île de Gorée — Mémoire &amp; Sérénité</h3>
+                <p style="color:var(--color-gray-600); font-size:0.9rem; margin:0;">Site UNESCO, patrimoine historique &amp; art de vivre insulaire</p>
+              </div>
+            </div>
+            <span class="badge-tag enterprise" style="background:#8e44ad;">À partir de 40 000 FCFA</span>
+          </div>
+          <div class="grid-4" style="margin-top:1rem;">
+            <div class="activity-card">
+              <div class="activity-icon">🏛️</div>
+              <h4>Maison des Esclaves</h4>
+              <p>Visite guidée émouvante : cachots, salle de pesée et la célèbre Porte du Voyage sans Retour.</p>
+              <span class="activity-tag">Histoire &amp; Mémoire</span>
+            </div>
+            <div class="activity-card">
+              <div class="activity-icon">🚶</div>
+              <h4>Tour des Ruelles</h4>
+              <p>Promenade dans les ruelles colorées, montée au Castel, vue 360° sur l'océan Atlantique et Dakar.</p>
+              <span class="activity-tag">Patrimoine</span>
+            </div>
+            <div class="activity-card">
+              <div class="activity-icon">🎭</div>
+              <h4>Rencontre Artistique</h4>
+              <p>Échanges avec les artistes locaux, visites de galeries nichées dans les vieilles demeures coloniales.</p>
+              <span class="activity-tag">Art &amp; Culture</span>
+            </div>
+            <div class="activity-card">
+              <div class="activity-icon">🍽️</div>
+              <h4>Déjeuner Insulaire</h4>
+              <p>Repas gastronomique dans un restaurant face à l'océan. Fraîcheur, brise marine et saveurs locales.</p>
+              <span class="activity-tag">Gastronomie</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- === SALY === -->
+        <div class="escapade-destination-block">
+          <div class="escapade-dest-header" style="border-left: 4px solid #27ae60;">
+            <div style="display:flex; align-items:center; gap:1rem;">
+              <span style="font-size:2.5rem;">🏄</span>
+              <div>
+                <h3 style="font-size:1.4rem; color:var(--color-navy-primary); margin:0;">Saly &amp; Petite Côte — Détente &amp; Sport</h3>
+                <p style="color:var(--color-gray-600); font-size:0.9rem; margin:0;">Plages dorées, sports nautiques &amp; escapade balnéaire</p>
+              </div>
+            </div>
+            <span class="badge-tag enterprise" style="background:#27ae60;">À partir de 55 000 FCFA</span>
+          </div>
+          <div class="grid-4" style="margin-top:1rem;">
+            <div class="activity-card">
+              <div class="activity-icon">🏄</div>
+              <h4>Surf &amp; Paddle</h4>
+              <p>Initiation surf ou stand-up paddle avec moniteur certifié sur les vagues de la Petite Côte.</p>
+              <span class="activity-tag">Sport Nautique</span>
+            </div>
+            <div class="activity-card">
+              <div class="activity-icon">🤿</div>
+              <h4>Snorkeling &amp; Plongée</h4>
+              <p>Exploration sous-marine des récifs côtiers en compagnie d'un moniteur PADI local certifié.</p>
+              <span class="activity-tag">Plongée</span>
+            </div>
+            <div class="activity-card">
+              <div class="activity-icon">🏋️</div>
+              <h4>Beach Volley &amp; Sports</h4>
+              <p>Tournoi de beach volley organisé, pétanque sur sable, yoga au lever du soleil face à l'Atlantique.</p>
+              <span class="activity-tag">Sport &amp; Bien-être</span>
+            </div>
+            <div class="activity-card">
+              <div class="activity-icon">🌴</div>
+              <h4>Spa &amp; Détente Lodge</h4>
+              <p>Accès spa &amp; hammam dans nos lodges partenaires, massages traditionnels et piscine à débordement.</p>
+              <span class="activity-tag">Bien-être</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- === ÎLES DU SALOUM === -->
+        <div class="escapade-destination-block">
+          <div class="escapade-dest-header" style="border-left: 4px solid #2980b9;">
+            <div style="display:flex; align-items:center; gap:1rem;">
+              <span style="font-size:2.5rem;">🛶</span>
+              <div>
+                <h3 style="font-size:1.4rem; color:var(--color-navy-primary); margin:0;">Îles du Saloum — Nature &amp; Aventure</h3>
+                <p style="color:var(--color-gray-600); font-size:0.9rem; margin:0;">Delta UNESCO, mangrove, ornithologie &amp; vie sauvage</p>
+              </div>
+            </div>
+            <span class="badge-tag enterprise" style="background:#2980b9;">À partir de 75 000 FCFA</span>
+          </div>
+          <div class="grid-4" style="margin-top:1rem;">
+            <div class="activity-card">
+              <div class="activity-icon">🛶</div>
+              <h4>Pirogue dans les Bolongs</h4>
+              <p>Navigation silencieuse dans les bras de mer entre mangroves, marigots et villages de pêcheurs.</p>
+              <span class="activity-tag">Nature</span>
+            </div>
+            <div class="activity-card">
+              <div class="activity-icon">🦅</div>
+              <h4>Safari Ornithologique</h4>
+              <p>Observation de plus de 180 espèces d'oiseaux (pélicans, flamants roses, aigrettes) avec un guide naturaliste.</p>
+              <span class="activity-tag">Écotourisme</span>
+            </div>
+            <div class="activity-card">
+              <div class="activity-icon">🎣</div>
+              <h4>Pêche Sportive</h4>
+              <p>Sortie de pêche traditionnelle avec les pêcheurs locaux. Retour avec votre prise grillée au feu de bois.</p>
+              <span class="activity-tag">Sport &amp; Tradition</span>
+            </div>
+            <div class="activity-card">
+              <div class="activity-icon">🏕️</div>
+              <h4>Nuit en Éco-lodge</h4>
+              <p>Hébergement immersif en lodge flottant ou case africaine au cœur du delta. Étoiles garanties.</p>
+              <span class="activity-tag">Éco-hébergement</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Escapades -->
+        <div style="text-align:center; margin-top:2.5rem; padding:2rem; background:linear-gradient(135deg, var(--color-navy-dark), var(--color-navy-primary)); border-radius:var(--radius-md); border:1px solid var(--color-gold-primary);">
+          <div style="font-size:2rem; margin-bottom:0.75rem;">✨</div>
+          <h3 style="color:var(--color-gold-primary); margin-bottom:0.5rem; font-size:1.3rem;">Votre escapade sur-mesure</h3>
+          <p style="color:rgba(255,255,255,0.8); font-size:0.95rem; max-width:550px; margin:0 auto 1.5rem;">Combinez plusieurs destinations ou ajoutez une escapade à votre pack étudiant ou séminaire. Notre équipe crée l'itinéraire parfait pour vous.</p>
+          <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+            <button class="btn-primary" id="open-booking-modal-escapade">💳 Réserver une Escapade</button>
+            <a href="https://wa.me/221770000000" target="_blank" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.5rem; border:2px solid var(--color-gold-primary); color:var(--color-gold-primary); border-radius:var(--radius-sm); font-weight:600; text-decoration:none; font-size:0.95rem;">💬 WhatsApp Concierge</a>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -237,9 +515,12 @@
               <label class="form-label" style="color:var(--color-gold-light);">Type d'Événement</label>
               <select class="form-control" id="sim-event-type">
                 <option value="journee">Journée d'Étude Dakar (35 000 FCFA / pers.)</option>
+                <option value="dakar-culture">Escapade Dakar Vivant — Culture &amp; Street Food (25 000 FCFA / pers.)</option>
                 <option value="saly">Séminaire Résidentiel Saly / Petite Côte (95 000 FCFA / pers./j)</option>
-                <option value="goree">Team Building Immersion Gorée (40 000 FCFA / pers.)</option>
-                <option value="saloum">Team Building Immersion Sine Saloum (95 000 FCFA / pers.)</option>
+                <option value="saly-sport">Journée Sport &amp; Détente Saly — Surf, Paddle, Spa (55 000 FCFA / pers.)</option>
+                <option value="goree">Immersion Historique Île de Gorée (40 000 FCFA / pers.)</option>
+                <option value="saloum">Aventure Îles du Saloum — Bolongs &amp; Écologie (95 000 FCFA / pers.)</option>
+                <option value="saloum-peche">Journée Pêche Sportive Saloum (75 000 FCFA / pers.)</option>
               </select>
             </div>
 
@@ -399,10 +680,46 @@
               </tr>
               <tr>
                 <td><strong>Team Building Delta du Sine Saloum</strong></td>
-                <td>Transport privatif climatisé + Immersion bolongs en pirogue + Éco-lodge & Déjeuner grillades + Activités cohésion & régie</td>
+                <td>Transport privatif climatisé + Immersion bolongs en pirogue + Éco-lodge &amp; Déjeuner grillades + Activités cohésion &amp; régie</td>
                 <td><strong style="color:var(--color-navy-primary);">95 000 FCFA / pers.</strong></td>
                 <td>145 €</td>
                 <td><span class="badge-tag enterprise">Entreprises</span></td>
+              </tr>
+              <!-- ESCAPADES & ACTIVITÉS -->
+              <tr style="background: rgba(230,126,34,0.06);">
+                <td><strong>Escapade Dakar Vivant</strong></td>
+                <td>Village des Arts Médina + Atelier Sabar en groupe + Street food tour Kermel/Sandaga + Coucher de soleil aux Mamelles</td>
+                <td><strong style="color:#e67e22;">25 000 FCFA / pers.</strong></td>
+                <td>38 €</td>
+                <td><span class="badge-tag etudiant">Étudiants</span> <span class="badge-tag enterprise">Corporate</span></td>
+              </tr>
+              <tr style="background: rgba(39,174,96,0.06);">
+                <td><strong>Journée Sport &amp; Détente Saly</strong></td>
+                <td>Transport A/R Dakar↔Saly + Surf ou Paddle (moniteur certifié) + Beach Volley + Accès spa &amp; piscine lodge partenaire</td>
+                <td><strong style="color:#27ae60;">55 000 FCFA / pers.</strong></td>
+                <td>84 €</td>
+                <td><span class="badge-tag etudiant">Étudiants</span> <span class="badge-tag enterprise">Corporate</span></td>
+              </tr>
+              <tr style="background: rgba(142,68,173,0.06);">
+                <td><strong>Gorée — Journée Individuelle</strong></td>
+                <td>Traversée bateau + Guide conférencier + Maison des Esclaves + Castel panoramique + Déjeuner + Eau incluse toute la journée</td>
+                <td><strong style="color:#8e44ad;">40 000 FCFA / pers.</strong></td>
+                <td>61 €</td>
+                <td><span class="badge-tag etudiant">Étudiants</span></td>
+              </tr>
+              <tr style="background: rgba(41,128,185,0.06);">
+                <td><strong>Pêche Sportive &amp; Bolongs Saloum</strong></td>
+                <td>Transport A/R + Pirogue mangrove + Sortie pêche avec pêcheurs locaux + Grillades fraîches au feu de bois en éco-lodge</td>
+                <td><strong style="color:#2980b9;">75 000 FCFA / pers.</strong></td>
+                <td>115 €</td>
+                <td><span class="badge-tag etudiant">Étudiants</span> <span class="badge-tag enterprise">Corporate</span></td>
+              </tr>
+              <tr style="background: rgba(41,128,185,0.04);">
+                <td><strong>Safari Ornithologique Saloum</strong></td>
+                <td>Observation 180+ espèces (pélicans, flamants roses, aigrettes) + Guide naturaliste + Pirogue bolongs + Nuit éco-lodge optionnelle</td>
+                <td><strong style="color:#2980b9;">95 000 FCFA / pers.</strong></td>
+                <td>145 €</td>
+                <td><span class="badge-tag etudiant">Étudiants</span> <span class="badge-tag enterprise">Corporate</span></td>
               </tr>
             </tbody>
           </table>
@@ -424,10 +741,19 @@
           <div class="form-group">
             <label class="form-label">Pack Sélectionné</label>
             <select class="form-control" id="checkout-pack-select">
-              <option value="teranga" data-price="75000">Pack Teranga (Accueil AIBD & Transfert) — 75 000 FCFA (~115 €)</option>
-              <option value="logement" data-price="150000">Pack Logement Serein (Chasse & Abonnements) — 150 000 FCFA (~230 €)</option>
-              <option value="integration" data-price="60000">Pack Intégration (Transport & Santé) — 60 000 FCFA (~90 €)</option>
-              <option value="vip" data-price="250000" selected>Pack VIP All-Inclusive (Clé en main complet) — 250 000 FCFA (~380 €)</option>
+              <optgroup label="🎓 Packs Étudiants &amp; Installation">
+                <option value="teranga" data-price="75000">Pack Teranga (Accueil AIBD &amp; Transfert) — 75 000 FCFA (~115 €)</option>
+                <option value="logement" data-price="150000">Pack Logement Serein (Chasse &amp; Abonnements) — 150 000 FCFA (~230 €)</option>
+                <option value="integration" data-price="60000">Pack Intégration (Transport &amp; Santé) — 60 000 FCFA (~90 €)</option>
+                <option value="vip" data-price="250000" selected>Pack VIP All-Inclusive (Clé en main complet) — 250 000 FCFA (~380 €)</option>
+              </optgroup>
+              <optgroup label="🌍 Escapades &amp; Découverte">
+                <option value="escapade-dakar" data-price="25000">Escapade Dakar Vivant &amp; Arty — 25 000 FCFA (~38 €)</option>
+                <option value="escapade-goree" data-price="40000">Journée Île de Gorée Mémoire &amp; Histoire — 40 000 FCFA (~61 €)</option>
+                <option value="escapade-saly" data-price="55000">Journée Détente &amp; Sports Saly — 55 000 FCFA (~84 €)</option>
+                <option value="escapade-saloum" data-price="75000">Aventure Bolongs &amp; Pêche Saloum — 75 000 FCFA (~114 €)</option>
+                <option value="escapade-saloum-safari" data-price="95000">Safari Ornithologique &amp; Bivouac Saloum — 95 000 FCFA (~145 €)</option>
+              </optgroup>
             </select>
           </div>
 
@@ -562,12 +888,12 @@
       </div>
 
       <div class="footer-col">
-        <h4>Pôle Business</h4>
+        <h4>Escapades &amp; Découvertes</h4>
         <ul class="footer-links">
-          <li><a href="#">Séminaires au Plateau</a></li>
-          <li><a href="#">Incentives à Saly</a></li>
-          <li><a href="#">Team Building Gorée & Saloum</a></li>
-          <li><a href="#">Flotte VIP & Chauffeurs</a></li>
+          <li><a href="javascript:void(0)" class="footer-escapade-link" data-tab="tab-escapades">Dakar Arty &amp; Culture</a></li>
+          <li><a href="javascript:void(0)" class="footer-escapade-link" data-tab="tab-escapades">Île de Gorée Historique</a></li>
+          <li><a href="javascript:void(0)" class="footer-escapade-link" data-tab="tab-escapades">Saly Détente &amp; Sports</a></li>
+          <li><a href="javascript:void(0)" class="footer-escapade-link" data-tab="tab-escapades">Delta du Saloum Aventure</a></li>
         </ul>
       </div>
 

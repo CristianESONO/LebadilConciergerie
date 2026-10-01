@@ -225,7 +225,12 @@ document.addEventListener('DOMContentLoaded', () => {
     'teranga': 75000,
     'logement': 150000,
     'integration': 60000,
-    'vip': 250000
+    'vip': 250000,
+    'escapade-dakar': 25000,
+    'escapade-goree': 40000,
+    'escapade-saly': 55000,
+    'escapade-saloum': 75000,
+    'escapade-saloum-safari': 95000
   };
 
   function updateCheckoutPrice() {
@@ -239,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkoutPackSelect.addEventListener('change', updateCheckoutPrice);
   }
 
-  const openModalBtns = document.querySelectorAll('.select-pack-btn, #open-booking-modal-hero');
+  const openModalBtns = document.querySelectorAll('.select-pack-btn, #open-booking-modal-hero, #open-booking-modal-escapade');
   openModalBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const packKey = btn.getAttribute('data-pack');
@@ -248,6 +253,18 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCheckoutPrice();
       }
       bookingModal.classList.add('active');
+    });
+  });
+
+  const footerEscapadeLinks = document.querySelectorAll('.footer-escapade-link');
+  footerEscapadeLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const tabBtn = document.querySelector('.nav-tab-btn[data-tab="tab-escapades"]');
+      if (tabBtn) {
+        tabBtn.click();
+        window.scrollTo({ top: 350, behavior: 'smooth' });
+      }
     });
   });
 
