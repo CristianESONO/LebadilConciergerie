@@ -1546,3 +1546,223 @@ footer {
   text-decoration: underline;
 }
 
+/* ==========================================================================
+   PÔLE ENTREPRISES & SÉMINAIRES B2B DESIGN SYSTEM
+   ========================================================================== */
+.corp-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+@media (max-width: 900px) {
+  .corp-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.corp-pillar-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-top: 3px solid var(--color-gold-primary);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.corp-pillar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-top-color: var(--color-navy-primary);
+}
+
+.corp-pillar-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.85rem;
+  line-height: 1;
+}
+
+.corp-pillar-card h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-navy-primary);
+  margin-bottom: 0.5rem;
+}
+
+.corp-pillar-card p {
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Corporate Packs */
+.corp-pack-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all var(--transition-smooth);
+}
+
+.corp-pack-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(15, 44, 89, 0.12);
+  border-color: var(--color-gold-primary);
+}
+
+.corp-pack-card.popular {
+  border: 2px solid var(--color-gold-primary);
+  box-shadow: 0 12px 30px rgba(212, 175, 55, 0.15);
+}
+
+.corp-pack-badge {
+  position: absolute;
+  top: -12px;
+  right: 18px;
+  background: var(--color-navy-primary);
+  color: var(--color-gold-light);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-full);
+}
+
+.corp-pack-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+
+.corp-pack-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-navy-primary);
+  margin-bottom: 0.25rem;
+}
+
+.corp-pack-subtitle {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--color-gold-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
+
+.corp-pack-price-box {
+  background: var(--color-cream);
+  border: 1px dashed var(--color-gray-300);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.corp-pack-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  flex-grow: 1;
+}
+
+.corp-pack-features li {
+  font-size: 0.85rem;
+  color: var(--color-gray-800);
+  line-height: 1.5;
+  margin-bottom: 0.65rem;
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.corp-pack-features li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-gold-primary);
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+/* Quote Section: Dual Column Estimator + B2B Form */
+.corp-quote-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .corp-quote-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.corp-estimator-box {
+  background: linear-gradient(145deg, var(--color-navy-dark) 0%, var(--color-navy-primary) 100%);
+  color: var(--color-white);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-gold-primary);
+  box-shadow: 0 12px 32px rgba(10, 29, 60, 0.25);
+}
+
+.corp-lead-form-box {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.corp-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.corp-checkbox-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.825rem;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  padding: 0.45rem 0.65rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.corp-checkbox-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--color-gold-primary);
+}
+
+.corp-checkbox-item input[type="checkbox"] {
+  accent-color: var(--color-gold-primary);
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.corp-total-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid var(--color-gold-primary);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+

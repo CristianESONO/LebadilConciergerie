@@ -469,82 +469,290 @@
       </div>
     </div>
 
-    <!-- ==================== TAB 2: PÔLE ENTREPRISES ==================== -->
+    <!-- ==================== TAB 2: PÔLE ENTREPRISES & SÉMINAIRES ==================== -->
     <div id="tab-entreprises" class="tab-content">
       <div class="card-panel">
+        
+        <!-- Header Corporate -->
         <div class="section-header">
-          <span class="section-tag">Corporate Events & Logistics</span>
-          <h2 class="section-title">Des séminaires professionnels d'exception au Sénégal</h2>
+          <span class="section-tag" style="background:rgba(212,175,55,0.15); color:var(--color-navy-primary); border:1px solid var(--color-gold-primary);">
+            Business Events · Séminaires · Régie Logistique
+          </span>
+          <h2 class="section-title">Des séminaires professionnels qui marquent les esprits au Sénégal</h2>
           <p class="section-desc">
-            De la réunion de direction au Plateau à l'incentive résidentiel sur la Petite Côte (Saly, Somone) ou l'Île de Gorée, Le BADIL prend en charge l'intégralité de la régie logistique.
+            Conseils d’administration, comités de direction, incentives et team buildings. Le BADIL orchestre vos événements corporate de A à Z avec la rigueur d'un horloger et la chaleur de la Teranga sénégalaise.
           </p>
         </div>
 
-        <div class="grid-2">
-          <!-- Corporate Services Overview -->
-          <div>
-            <h3 style="font-size:1.3rem; margin-bottom:1rem; color:var(--color-navy-primary);">Nos Solutions sur-mesure pour Entreprises</h3>
-            <div class="stat-item corp-service-card">
-              <div class="stat-icon">🏛️</div>
-              <div class="stat-text">
-                <h4>Journée d'Étude & Conférences</h4>
-                <p>Salles équipées au Plateau / Almadies, pauses gourmandes Teranga, traiteur d'exception et régie technique.</p>
-              </div>
-            </div>
-            <div class="stat-item corp-service-card">
-              <div class="stat-icon">🏝️</div>
-              <div class="stat-text">
-                <h4>Séminaires Résidentiels Saly / Petite Côte</h4>
-                <p>Hôtels 4-5★ ou lodges de charme, restauration pension complète, soirées de gala & activités team building.</p>
-              </div>
-            </div>
-            <div class="stat-item corp-service-card">
-              <div class="stat-icon">🚗</div>
-              <div class="stat-text">
-                <h4>Transport VIP & Flotte Dédiée</h4>
-                <p>Coordination des transferts AIBD, berlines avec chauffeur privatif et vans pour délégations.</p>
-              </div>
-            </div>
+        <!-- 3 Piliers d'Excellence Corporate -->
+        <div class="corp-pillars-grid">
+          <div class="corp-pillar-card">
+            <div class="corp-pillar-icon">👤</div>
+            <h4>Interlocuteur Unique Dédié</h4>
+            <p>Un chef de projet événementiel senior pilote l’ensemble de votre dossier : repérages, négociations réceptifs, régie Jour-J et consolidation financière.</p>
           </div>
-
-          <!-- Interactive Estimator -->
-          <div style="background:linear-gradient(135deg, var(--color-navy-dark), var(--color-navy-primary)); color:var(--color-white); padding:1.75rem; border-radius:var(--radius-md); border:1px solid var(--color-gold-primary);">
-            <h3 style="color:var(--color-gold-primary); font-size:1.3rem; margin-bottom:1rem;">📊 Simuler votre Devis Séminaire</h3>
-
-            <div class="form-group">
-              <label class="form-label" style="color:var(--color-gold-light);">Type d'Événement</label>
-              <select class="form-control" id="sim-event-type">
-                <option value="journee">Journée d'Étude Dakar (35 000 FCFA / pers.)</option>
-                <option value="dakar-culture">Escapade Dakar Vivant — Culture &amp; Street Food (25 000 FCFA / pers.)</option>
-                <option value="saly">Séminaire Résidentiel Saly / Petite Côte (95 000 FCFA / pers./j)</option>
-                <option value="saly-sport">Journée Sport &amp; Détente Saly — Surf, Paddle, Spa (55 000 FCFA / pers.)</option>
-                <option value="goree">Immersion Historique Île de Gorée (40 000 FCFA / pers.)</option>
-                <option value="saloum">Aventure Îles du Saloum — Bolongs &amp; Écologie (95 000 FCFA / pers.)</option>
-                <option value="saloum-peche">Journée Pêche Sportive Saloum (75 000 FCFA / pers.)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" style="color:var(--color-gold-light);">Nombre de Participants</label>
-              <input type="number" id="sim-participants" class="form-control" value="20" min="5" max="200">
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" style="color:var(--color-gold-light);">Durée (Jours)</label>
-              <input type="number" id="sim-days" class="form-control" value="2" min="1" max="7">
-            </div>
-
-            <div style="background:rgba(255,255,255,0.1); padding:1rem; border-radius:var(--radius-sm); margin:1.25rem 0; border:1px solid var(--color-gold-primary);">
-              <div style="font-size:0.85rem; color:var(--color-gold-light);">Estimation Budgétaire Globale HT</div>
-              <div id="sim-total-fcfa" style="font-size:1.75rem; font-weight:800; color:var(--color-gold-primary);">2 231 000 FCFA</div>
-              <div id="sim-total-eur" style="font-size:0.85rem; color:rgba(255,255,255,0.8);">~ 3 400 € (Coordination 15% incluse)</div>
-            </div>
-
-            <button class="btn-primary" id="btn-request-seminar-proposal" style="width:100%;">
-              ✉️ Recevoir la Proposition Sous 24h
-            </button>
+          <div class="corp-pillar-card">
+            <div class="corp-pillar-icon">⏱️</div>
+            <h4>Réactivité &amp; Rigueur Suisse</h4>
+            <p>Proposition budgétaire détaillée sous 24h ouvrées, respect méticuleux des timings, ponctualité absolue des navettes et standards internationaux.</p>
+          </div>
+          <div class="corp-pillar-card">
+            <div class="corp-pillar-icon">💎</div>
+            <h4>Réseau Local d'Excellence</h4>
+            <p>Accès privilégié aux plus beaux établissements 4-5★ de Dakar et de la Petite Côte, traiteurs gastronomiques renommés et flotte VIP climatisée.</p>
           </div>
         </div>
+
+        <!-- 3 Packs Séminaires Clés en Main -->
+        <div style="margin: 3rem 0 2rem;">
+          <div class="section-header" style="margin-bottom:1.5rem;">
+            <span class="section-tag">Formules Événements</span>
+            <h3 style="font-size:1.6rem; color:var(--color-navy-primary);">Nos Formats Corporate Phares</h3>
+            <p class="section-desc" style="font-size:0.95rem;">Des solutions packagées adaptées aux exigences de vos comités et conventions.</p>
+          </div>
+
+          <div class="grid-3">
+            <!-- Pack CODIR VIP -->
+            <div class="corp-pack-card">
+              <div class="corp-pack-badge">Exclusif &amp; Confidentiel</div>
+              <div class="corp-pack-icon">🏛️</div>
+              <h4 class="corp-pack-title">Comité Exécutif &amp; CODIR VIP</h4>
+              <p class="corp-pack-subtitle">Dakar Plateau &amp; Almadies Corniche</p>
+              <div class="corp-pack-price-box">
+                <div class="price-fcfa">45 000 FCFA <span style="font-size:0.85rem; font-weight:normal; color:var(--color-gray-600);">/ pers.</span></div>
+                <div class="price-eur">~ 69 € / pers. (5 à 15 décideurs)</div>
+              </div>
+              <ul class="corp-pack-features">
+                <li>Salon de conférence privatisé vue mer avec écran interactif &amp; visio HD</li>
+                <li>Accueil protocolaire avec rafraîchissements &amp; pauses gourmandes Teranga</li>
+                <li>Déjeuner gastronomique orchestré par un chef renommé</li>
+                <li>Mise à disposition de berlines VIP climatisées avec chauffeurs en livrée</li>
+                <li>Régisseur technique dédié sur place tout au long de la session</li>
+              </ul>
+              <button class="btn-primary select-corp-package-btn" data-type="journee" data-name="Comité Exécutif &amp; CODIR VIP" style="width:100%;">
+                Sélectionner ce Format
+              </button>
+            </div>
+
+            <!-- Pack Séminaire Résidentiel Saly -->
+            <div class="corp-pack-card popular">
+              <div class="corp-pack-badge" style="background:var(--color-gold-primary); color:var(--color-navy-dark);">Le Plus Plébiscité</div>
+              <div class="corp-pack-icon">🏖️</div>
+              <h4 class="corp-pack-title">Séminaire Résidentiel &amp; Stratégie</h4>
+              <p class="corp-pack-subtitle">Petite Côte · Saly &amp; Somone</p>
+              <div class="corp-pack-price-box">
+                <div class="price-fcfa">95 000 FCFA <span style="font-size:0.85rem; font-weight:normal; color:var(--color-gray-600);">/ pers. / jour</span></div>
+                <div class="price-eur">~ 145 € / pers. / j (15 à 80 participants)</div>
+              </div>
+              <ul class="corp-pack-features">
+                <li>Hôtel 4-5★ ou lodge d'exception en pension complète (buffets &amp; dîners de gala)</li>
+                <li>Salle plénière modulable + salles de sous-commissions équipées</li>
+                <li>Navettes privatives climatisées Dakar ↔ AIBD ↔ Saly via Autoroute</li>
+                <li>Activité détente ou incentive : sports nautiques, golf ou safari Bandia</li>
+                <li>Soirée festive au bord de l'eau avec animation acoustique ou lounge</li>
+              </ul>
+              <button class="btn-primary select-corp-package-btn" data-type="saly" data-name="Séminaire Résidentiel Saly" style="width:100%; background:linear-gradient(135deg, var(--color-gold-primary), var(--color-gold-dark)); color:var(--color-navy-dark); font-weight:700;">
+                Sélectionner ce Format
+              </button>
+            </div>
+
+            <!-- Pack Team Building Gorée / Saloum -->
+            <div class="corp-pack-card">
+              <div class="corp-pack-badge">Cohésion &amp; Sens</div>
+              <div class="corp-pack-icon">🛶</div>
+              <h4 class="corp-pack-title">Team Building Immersion &amp; RSE</h4>
+              <p class="corp-pack-subtitle">Île de Gorée ou Delta du Sine Saloum</p>
+              <div class="corp-pack-price-box">
+                <div class="price-fcfa">50 000 FCFA <span style="font-size:0.85rem; font-weight:normal; color:var(--color-gray-600);">/ pers.</span></div>
+                <div class="price-eur">~ 76 € / pers. (15 à 120 participants)</div>
+              </div>
+              <ul class="corp-pack-features">
+                <li>Traversée privative (chaloupe historique ou pirogues motorisées sécurisées)</li>
+                <li>Atelier de cohésion : rallye d'orientation, défi Sabar ou régate dans les bolongs</li>
+                <li>Déjeuner banquet de spécialités locales les pieds dans l'eau</li>
+                <li>Action solidaire ou sensibilisation environnementale (mangrove / artisans)</li>
+                <li>Reportage photo &amp; vidéo souvenir professionnel de la journée</li>
+              </ul>
+              <button class="btn-primary select-corp-package-btn" data-type="goree" data-name="Team Building Immersion &amp; RSE" style="width:100%;">
+                Sélectionner ce Format
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== ESTIMATEUR & FORMULAIRE DE QUALIFICATION B2B ==================== -->
+        <div id="corporate-quote-section" style="margin-top:3.5rem;">
+          <div class="section-header">
+            <span class="section-tag">Devis Officiel sous 24h</span>
+            <h3 style="font-size:1.6rem; color:var(--color-navy-primary);">Simulez &amp; Qualifiez votre Événement</h3>
+            <p class="section-desc">Ajustez les paramètres à gauche, renseignez les coordonnées de votre société à droite. Vous recevrez instantanément votre synthèse par email.</p>
+          </div>
+
+          <div class="corp-quote-grid">
+
+            <!-- Colonne 1 : Estimateur Budgétaire Interactif -->
+            <div class="corp-estimator-box">
+              <h4 style="color:var(--color-gold-primary); font-size:1.2rem; margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;">
+                <span>📊</span> Estimateur Budgétaire en Direct
+              </h4>
+
+              <div class="form-group">
+                <label class="form-label" style="color:var(--color-gold-light);">Type d'Événement &amp; Cadre</label>
+                <select class="form-control" id="sim-event-type">
+                  <option value="journee" data-rate="45000">Conseil d'Administration / CODIR VIP (45 000 FCFA / pers.)</option>
+                  <option value="saly" data-rate="95000" selected>Séminaire Résidentiel Saly / Petite Côte (95 000 FCFA / pers./j)</option>
+                  <option value="goree" data-rate="50000">Team Building Immersion Île de Gorée (50 000 FCFA / pers.)</option>
+                  <option value="saloum" data-rate="95000">Expédition Cohésion Delta du Saloum (95 000 FCFA / pers.)</option>
+                  <option value="dakar-culture" data-rate="35000">Journée d'Étude Dakar Plateau (35 000 FCFA / pers.)</option>
+                  <option value="saly-sport" data-rate="55000">Incentive Sport &amp; Plage Saly (55 000 FCFA / pers.)</option>
+                  <option value="saloum-peche" data-rate="75000">Team Building Pêche &amp; Bolongs (75 000 FCFA / pers.)</option>
+                </select>
+              </div>
+
+              <div class="grid-2" style="gap:1rem;">
+                <div class="form-group">
+                  <label class="form-label" style="color:var(--color-gold-light);">Participants</label>
+                  <input type="number" id="sim-participants" class="form-control" value="25" min="5" max="250">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="color:var(--color-gold-light);">Durée (Jours)</label>
+                  <input type="number" id="sim-days" class="form-control" value="2" min="1" max="10">
+                </div>
+              </div>
+
+              <!-- Options Additionnelles Cochables -->
+              <div style="margin:1.25rem 0;">
+                <label class="form-label" style="color:var(--color-gold-light); margin-bottom:0.75rem; display:block;">Options &amp; Prestations Complémentaires :</label>
+                <div class="corp-options-list">
+                  <label class="corp-checkbox-item">
+                    <input type="checkbox" id="opt-transport-vip" class="corp-opt-cb" data-cost-pers="15000" checked>
+                    <span>🚗 Flotte Transport VIP climatisée (Navettes AIBD &amp; Berlines)</span>
+                  </label>
+                  <label class="corp-checkbox-item">
+                    <input type="checkbox" id="opt-gala-dinner" class="corp-opt-cb" data-cost-pers="20000" checked>
+                    <span>🍽️ Dîner de Gala &amp; Soirée d'Exception Teranga</span>
+                  </label>
+                  <label class="corp-checkbox-item">
+                    <input type="checkbox" id="opt-media-drone" class="corp-opt-cb" data-cost-fixed="250000">
+                    <span>📸 Couverture Photo &amp; Vidéo par Drone professionnelle</span>
+                  </label>
+                  <label class="corp-checkbox-item">
+                    <input type="checkbox" id="opt-welcome-gift" class="corp-opt-cb" data-cost-pers="10000">
+                    <span>🎁 Coffrets cadeaux d'accueil Teranga aux couleurs de l'entreprise</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Affichage du Total Estimé -->
+              <div class="corp-total-card">
+                <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:var(--color-gold-light);">Estimation Prévisionnelle Globale HT</div>
+                <div id="sim-total-fcfa" style="font-size:2rem; font-weight:800; color:var(--color-gold-bright); margin:0.35rem 0;">6 756 250 FCFA</div>
+                <div id="sim-total-eur" style="font-size:0.875rem; color:rgba(255,255,255,0.85);">~ 10 300 € (Régie &amp; Coordination 15% incluses)</div>
+              </div>
+
+              <div style="margin-top:1rem; font-size:0.775rem; color:rgba(255,255,255,0.7); line-height:1.4;">
+                * Estimation indicative non contractuelle. Votre devis formel définitif vous sera transmis sous 24h avec planning logistique complet.
+              </div>
+            </div>
+
+            <!-- Colonne 2 : Formulaire Officiel de Qualification B2B -->
+            <div class="corp-lead-form-box">
+              <h4 style="color:var(--color-navy-primary); font-size:1.2rem; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.5rem;">
+                <span>💼</span> Formulaire de Qualification Corporate
+              </h4>
+              <p style="color:var(--color-gray-600); font-size:0.85rem; margin-bottom:1.25rem;">
+                Recevez votre proposition personnalisée avec notre calendrier de régie sous 24 heures.
+              </p>
+
+              <form id="corporate-quote-form">
+                <div class="grid-2" style="gap:0.75rem;">
+                  <div class="form-group">
+                    <label class="form-label required">Raison Sociale / Société</label>
+                    <input type="text" id="corp-company" class="form-control" placeholder="Ex: Groupe Attijari, Sonatel, Total..." required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Secteur d'Activité</label>
+                    <select id="corp-sector" class="form-control">
+                      <option value="Banque &amp; Assurance">Banque, Finance &amp; Assurance</option>
+                      <option value="Télécoms &amp; Tech" selected>Télécoms, Numérique &amp; Tech</option>
+                      <option value="Énergie &amp; BTP">Énergie, Mines, BTP &amp; Industrie</option>
+                      <option value="Institutionnel &amp; ONG">Institutionnel, Ambassade &amp; ONG</option>
+                      <option value="Distribution &amp; Santé">Distribution, Agroalimentaire &amp; Santé</option>
+                      <option value="Autre">Autre secteur d'activité</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid-2" style="gap:0.75rem;">
+                  <div class="form-group">
+                    <label class="form-label required">Nom &amp; Prénom du Décideur</label>
+                    <input type="text" id="corp-contact-name" class="form-control" placeholder="Ex: Mariama Sall" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Fonction / Titre</label>
+                    <input type="text" id="corp-contact-title" class="form-control" placeholder="Ex: DRH, Directeur Général...">
+                  </div>
+                </div>
+
+                <div class="grid-2" style="gap:0.75rem;">
+                  <div class="form-group">
+                    <label class="form-label required">Email Professionnel</label>
+                    <input type="email" id="corp-email" class="form-control" placeholder="contact@entreprise.com" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label required">Téléphone / WhatsApp Pro</label>
+                    <input type="tel" id="corp-phone" class="form-control" placeholder="+221 77 XXX XX XX" required>
+                  </div>
+                </div>
+
+                <div class="grid-2" style="gap:0.75rem;">
+                  <div class="form-group">
+                    <label class="form-label">Destination Privilégiée</label>
+                    <select id="corp-destination" class="form-control">
+                      <option value="Petite Côte · Saly &amp; Somone" selected>Petite Côte · Saly, Somone &amp; Bandia</option>
+                      <option value="Dakar Plateau &amp; Corniche">Dakar Plateau &amp; Corniche (Urbain)</option>
+                      <option value="Almadies &amp; Ngor">Almadies &amp; Ngor Beach (Prestige)</option>
+                      <option value="Île de Gorée">Île de Gorée (Mémoire &amp; Culture)</option>
+                      <option value="Delta du Sine Saloum">Delta du Sine Saloum (Nature &amp; Bivouac)</option>
+                      <option value="À conseiller">Laisser Le BADIL me conseiller</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Enveloppe Budgétaire Indicative</label>
+                    <select id="corp-budget" class="form-control">
+                      <option value="Moins de 3 000 000 FCFA">&lt; 3 000 000 FCFA (&lt; 4 500 €)</option>
+                      <option value="3 000 000 à 7 000 000 FCFA" selected>3 000 000 à 7 000 000 FCFA</option>
+                      <option value="7 000 000 à 15 000 000 FCFA">7 000 000 à 15 000 000 FCFA</option>
+                      <option value="Plus de 15 000 000 FCFA">&gt; 15 000 000 FCFA (&gt; 23 000 €)</option>
+                      <option value="À affiner selon propositions">À affiner selon propositions</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Attentes particulières ou critères spécifiques</label>
+                  <textarea id="corp-notes" class="form-control" rows="2" placeholder="Précisez ici vos contraintes : dates souhaitées, hébergement en chambre individuelle, matériel de visioconférence, besoins diététiques..."></textarea>
+                </div>
+
+                <!-- Submit Button & Feedback -->
+                <button type="submit" id="btn-submit-corporate-lead" class="btn-primary" style="width:100%; padding:0.9rem; font-size:1rem; font-weight:700; background:linear-gradient(135deg, var(--color-navy-primary), var(--color-navy-dark)); border:1px solid var(--color-gold-primary);">
+                  💼 Transmettre ma Demande de Devis (Réponse 24h)
+                </button>
+
+                <div id="corp-form-alert" style="display:none; margin-top:1rem; padding:1rem; border-radius:var(--radius-sm); font-size:0.875rem;"></div>
+
+                <div style="text-align:center; margin-top:1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                  <span style="font-size:0.825rem; color:var(--color-gray-600);">Besoin d'un échange immédiat ?</span>
+                  <a href="https://wa.me/221710923333?text=Bonjour%20Le%20BADIL%20Conciergerie%2C%20je%20souhaite%20%C3%A9changer%20avec%20un%20chef%20de%20projet%20corporate%20pour%20un%20s%C3%A9minaire%20d%27entreprise." target="_blank" style="font-size:0.825rem; color:#25D366; font-weight:700; text-decoration:underline;">
+                    💬 WhatsApp Événements Pro
+                  </a>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
 

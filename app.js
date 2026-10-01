@@ -162,50 +162,180 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // 5. SEMINAR COST ESTIMATOR LOGIC
+  // ==========================================
+  // 5. CORPORATE SEMINAR ESTIMATOR & QUALIFICATION FORM
   // ==========================================
   const simEventType = document.getElementById('sim-event-type');
   const simParticipants = document.getElementById('sim-participants');
   const simDays = document.getElementById('sim-days');
   const simTotalFcfa = document.getElementById('sim-total-fcfa');
   const simTotalEur = document.getElementById('sim-total-eur');
-  const btnRequestProposal = document.getElementById('btn-request-seminar-proposal');
+  const corpOptionCheckboxes = document.querySelectorAll('.corp-opt-cb');
+  const selectCorpPkgBtns = document.querySelectorAll('.select-corp-package-btn');
+  const corpForm = document.getElementById('corporate-quote-form');
+  const corpAlert = document.getElementById('corp-form-alert');
+  const btnSubmitCorp = document.getElementById('btn-submit-corporate-lead');
 
   function calculateSeminarEstimate() {
-    const eventType = simEventType.value;
+    if (!simEventType || !simParticipants || !simDays || !simTotalFcfa) return;
+
+    const selectedOption = simEventType.options[simEventType.selectedIndex];
+    const baseRate = parseInt(selectedOption?.dataset?.rate || 45000);
     const participants = parseInt(simParticipants.value) || 1;
     const days = parseInt(simDays.value) || 1;
 
-    let baseRate = 35000;
-    if (eventType === 'saly') baseRate = 95000;
-    if (eventType === 'goree') baseRate = 40000;
-    if (eventType === 'saloum') baseRate = 95000;
+    let optionsPerPers = 0;
+    let optionsFixed = 0;
 
-    const subtotal = baseRate * participants * days;
-    const coordFee = subtotal * 0.15;
+    corpOptionCheckboxes.forEach(cb => {
+      if (cb.checked) {
+        if (cb.dataset.costPers) optionsPerPers += parseInt(cb.dataset.costPers);
+        if (cb.dataset.costFixed) optionsFixed += parseInt(cb.dataset.costFixed);
+      }
+    });
+
+    const baseEventCost = baseRate * participants * days;
+    const optionsCost = (optionsPerPers * participants) + optionsFixed;
+    const subtotal = baseEventCost + optionsCost;
+    const coordFee = Math.round(subtotal * 0.15);
     const totalFcfa = subtotal + coordFee;
 
     simTotalFcfa.textContent = formatFCFA(totalFcfa);
-    simTotalEur.textContent = formatEUR(totalFcfa) + ' (Frais de régie 15% inclus)';
+    if (simTotalEur) {
+      simTotalEur.textContent = formatEUR(totalFcfa) + ' (Régie & Coordination 15% incluses)';
+    }
+
+    return { totalFcfa, totalEur: formatEUR(totalFcfa) };
   }
 
   if (simEventType && simParticipants && simDays) {
     simEventType.addEventListener('change', calculateSeminarEstimate);
     simParticipants.addEventListener('input', calculateSeminarEstimate);
     simDays.addEventListener('input', calculateSeminarEstimate);
+    corpOptionCheckboxes.forEach(cb => cb.addEventListener('change', calculateSeminarEstimate));
+    calculateSeminarEstimate();
   }
 
-  if (btnRequestProposal) {
-    btnRequestProposal.addEventListener('click', () => {
-      const eventTypeText = simEventType.options[simEventType.selectedIndex].text;
-      const participants = simParticipants.value;
-      const days = simDays.value;
-      const total = simTotalFcfa.textContent;
+  // Quick select package button behavior
+  selectCorpPkgBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.getAttribute('data-type');
+      if (simEventType && type) {
+        simEventType.value = type;
+        calculateSeminarEstimate();
+      }
+      const quoteSection = document.getElementById('corporate-quote-section');
+      if (quoteSection) {
+        quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
 
-      const waText = `Bonjour Le BADIL Conciergerie Dakar, je souhaite obtenir un devis officiel pour notre séminaire d'entreprise :\n- Format : ${eventTypeText}\n- Participants : ${participants} personnes\n- Durée : ${days} jour(s)\n- Estimation : ${total}\nMerci de me transmettre votre proposition sous 24h.`;
+  // Corporate Lead Form Submission (Email 2.1)
+  if (corpForm) {
+    corpForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-      // Option C: Direct WhatsApp Link
-      window.open(generateWhatsAppUrl(waText), '_blank');
+      const company = document.getElementById('corp-company')?.value?.trim();
+      const sector = document.getElementById('corp-sector')?.value;
+      const contactName = document.getElementById('corp-contact-name')?.value?.trim();
+      const contactTitle = document.getElementById('corp-contact-title')?.value?.trim();
+      const email = document.getElementById('corp-email')?.value?.trim();
+      const phone = document.getElementById('corp-phone')?.value?.trim();
+      const destination = document.getElementById('corp-destination')?.value;
+      const budget = document.getElementById('corp-budget')?.value;
+      const notes = document.getElementById('corp-notes')?.value?.trim();
+
+      if (!company || !contactName || !email || !phone) {
+        if (corpAlert) {
+          corpAlert.style.display = 'block';
+          corpAlert.style.background = '#FEE2E2';
+          corpAlert.style.color = '#991B1B';
+          corpAlert.style.border = '1px solid #F87171';
+          corpAlert.textContent = 'Veuillez remplir tous les champs obligatoires (*).';
+        }
+        return;
+      }
+
+      const activeServices = [];
+      corpOptionCheckboxes.forEach(cb => {
+        if (cb.checked) {
+          activeServices.push(cb.parentElement.textContent.trim());
+        }
+      });
+
+      const eventTypeText = simEventType ? simEventType.options[simEventType.selectedIndex].text : 'Séminaire Corporate';
+      const participants = simParticipants ? simParticipants.value : '20';
+      const days = simDays ? simDays.value : '2';
+      const totalFcfaText = simTotalFcfa ? simTotalFcfa.textContent : '';
+      const totalEurText = simTotalEur ? simTotalEur.textContent : '';
+      const totalEstimate = `${totalFcfaText} (${totalEurText})`;
+
+      // UI Loading state
+      if (btnSubmitCorp) {
+        btnSubmitCorp.disabled = true;
+        btnSubmitCorp.innerHTML = '⏳ Transmission de votre demande en cours...';
+      }
+      if (corpAlert) {
+        corpAlert.style.display = 'none';
+      }
+
+      try {
+        const response = await fetch('/api/corporate-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            companyName: company,
+            contactName,
+            contactTitle,
+            email,
+            phone,
+            sector,
+            eventType: eventTypeText,
+            participants,
+            days,
+            destination,
+            budget,
+            services: activeServices,
+            totalEstimate,
+            notes
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          if (corpAlert) {
+            corpAlert.style.display = 'block';
+            corpAlert.style.background = '#ECFDF5';
+            corpAlert.style.color = '#065F46';
+            corpAlert.style.border = '1.5px solid #10B981';
+            corpAlert.innerHTML = `
+              <strong>✅ Demande enregistrée avec succès (Réf: ${data.refLead}) !</strong><br/>
+              Un accusé de réception officiel a été envoyé à <strong>${email}</strong>.<br/>
+              Notre Direction des Événements Corporate prendra contact avec vous sous <strong>24 heures ouvrées</strong> pour vous transmettre le devis détaillé.
+            `;
+          }
+          corpForm.reset();
+          calculateSeminarEstimate();
+        } else {
+          throw new Error(data.message || 'Une erreur est survenue lors de l\'envoi.');
+        }
+
+      } catch (err) {
+        if (corpAlert) {
+          corpAlert.style.display = 'block';
+          corpAlert.style.background = '#FEF2F2';
+          corpAlert.style.color = '#B91C1C';
+          corpAlert.style.border = '1.5px solid #EF4444';
+          corpAlert.innerHTML = `❌ Erreur : ${err.message}. Vous pouvez également nous contacter directement via WhatsApp ci-dessous.`;
+        }
+      } finally {
+        if (btnSubmitCorp) {
+          btnSubmitCorp.disabled = false;
+          btnSubmitCorp.innerHTML = '💼 Transmettre ma Demande de Devis (Réponse 24h)';
+        }
+      }
     });
   }
 
