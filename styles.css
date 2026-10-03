@@ -1483,6 +1483,30 @@ footer {
   gap: 1rem;
 }
 
+/* Badges de prix escapade - lisibilité garantie sur tout fond */
+.escapade-price-badge,
+.escapade-dest-header .badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  white-space: nowrap;
+}
+
+.select-pack-btn[data-pack^="escapade-"] {
+  color: #ffffff !important;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
 .activity-card {
   background: var(--color-white);
   border: 1px solid var(--color-gray-200);
@@ -1764,5 +1788,22 @@ footer {
   margin-top: 1.25rem;
   text-align: center;
 }
+
+#btn-submit-corporate-lead {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-navy-primary), var(--color-navy-dark)) !important;
+  border: 1.5px solid var(--color-gold-primary) !important;
+  box-shadow: 0 4px 14px rgba(15, 44, 89, 0.35);
+  transition: all var(--transition-fast);
+}
+
+#btn-submit-corporate-lead:hover {
+  background: linear-gradient(135deg, var(--color-navy-light), var(--color-navy-primary)) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(15, 44, 89, 0.5);
+  transform: translateY(-2px);
+  border-color: #ffffff !important;
+}
+
 
 
