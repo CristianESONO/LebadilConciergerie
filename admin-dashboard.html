@@ -2205,6 +2205,14 @@
                     <label class="form-label-clean">Raison Sociale Société</label>
                     <input type="text" class="form-input-clean" id="set-company" placeholder="LE BADIL CONCIERGERIE SUARL" required>
                   </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">NINEA (laisser vide tant qu’il n’est pas officiel)</label>
+                    <input type="text" class="form-input-clean" id="set-ninea" placeholder="Numéro NINEA réel">
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label-clean">RCCM (laisser vide tant qu’il n’est pas officiel)</label>
+                    <input type="text" class="form-input-clean" id="set-rccm" placeholder="Numéro RCCM réel">
+                  </div>
                 </div>
               </div>
 
@@ -3154,6 +3162,8 @@ Statut : Proposition technique et financière sous 24 heures.
           document.getElementById('set-whatsapp-display').value = s.general.whatsappDisplay || '';
           document.getElementById('set-email').value = s.general.email || '';
           document.getElementById('set-company').value = s.general.companyName || '';
+          document.getElementById('set-ninea').value = s.general.ninea || '';
+          document.getElementById('set-rccm').value = s.general.rccm || '';
         }
 
         // Banking
@@ -3211,7 +3221,9 @@ Statut : Proposition technique et financière sous 24 heures.
             whatsapp: document.getElementById('set-whatsapp').value.trim(),
             whatsappDisplay: document.getElementById('set-whatsapp-display').value.trim(),
             email: document.getElementById('set-email').value.trim(),
-            companyName: document.getElementById('set-company').value.trim()
+            companyName: document.getElementById('set-company').value.trim(),
+            ninea: document.getElementById('set-ninea').value.trim(),
+            rccm: document.getElementById('set-rccm').value.trim()
           },
           banking: {
             bankName: document.getElementById('set-bank-name').value.trim(),

@@ -27,8 +27,11 @@ function getSettings() {
       whatsapp: "221710923333",
       whatsappDisplay: "+221 71 092 33 33",
       email: "contact@lebadilconciergerie.com",
-      companyName: "LE BADIL CONCIERGERIE SUARL",
-      address: "Dakar, Sénégal (Zone Almadies / Plateau)"
+      companyName: "LE BADIL",
+      address: "Hann Maristes 1/E, Villa n° 116, Hann, Dakar",
+      website: "www.lebadilconciergerie.com",
+      ninea: "008964365",
+      rccm: "SN.DKR.2021.A.36293"
     },
     banking: {
       beneficiary: "LE BADIL CONCIERGERIE SUARL",
@@ -66,6 +69,14 @@ function getSettings() {
   };
 }
 
+function formatLegalIds(settings) {
+  const g = (settings || getSettings()).general || {};
+  const parts = [];
+  if (g.ninea) parts.push(`NINEA: ${g.ninea}`);
+  if (g.rccm) parts.push(`RCCM: ${g.rccm}`);
+  return parts.join(' · ');
+}
+
 // Helper: read/write JSON data files (compatible Vercel Serverless & Local)
 function readData(filePath) {
   const fileName = path.basename(filePath);
@@ -99,7 +110,7 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files (CSS, JS, images, etc.) using ROOT_DIR (Vercel-compatible)
 app.use(express.static(ROOT_DIR, {
   index: false, // index.html served by explicit routes below
-  extensions: ['css', 'js', 'png', 'jpg', 'svg', 'ico', 'woff', 'woff2']
+  extensions: ['css', 'js', 'png', 'jpg', 'svg', 'ico', 'woff', 'woff2', 'html', 'webp']
 }));
 
 // Session middleware (for admin auth)
@@ -453,6 +464,9 @@ app.use(express.static(path.join(ROOT_DIR)));
 app.get('/', (req, res) => {
   res.sendFile(path.join(ROOT_DIR, 'index.html'));
 });
+app.get('/mentions-legales.html', (req, res) => res.sendFile(path.join(ROOT_DIR, 'mentions-legales.html')));
+app.get('/cgv.html', (req, res) => res.sendFile(path.join(ROOT_DIR, 'cgv.html')));
+app.get('/confidentialite.html', (req, res) => res.sendFile(path.join(ROOT_DIR, 'confidentialite.html')));
 
 // =========================================================================
 // PACK PRICES (FCFA)
@@ -728,7 +742,7 @@ function buildConfirmationEmail({ studentName, packName, school, arrivalDate, re
       <td align="center" style="padding:24px 20px;">
         <p style="color:#a0b4cc;margin:0 0 6px;font-size:12px;">Le BADIL Conciergerie Dakar — Excellence & Service Teranga</p>
         <p style="color:#6a8099;margin:0;font-size:11px;">📞 WhatsApp Pro : ${whatsappNumber || '+221 71 092 33 33'} · ✉️ ${process.env.SMTP_USER || 'contact@lebadilconciergerie.com'}</p>
-        <p style="color:#6a8099;margin:8px 0 0;font-size:10px;">NINEA: 009876543 · RCCM: SN.DKR.2026.B.1234</p>
+        <p style="color:#6a8099;margin:8px 0 0;font-size:10px;">${formatLegalIds() || 'Le BADIL · Dakar'}</p>
       </td>
     </tr>
   </table>
@@ -910,7 +924,7 @@ function buildCorporateLeadEmail({ companyName, contactName, contactTitle, email
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#0F2C59;">
     <tr>
       <td align="center" style="padding:22px;text-align:center;">
-        <p style="color:#a0b4cc;margin:0;font-size:11px;">Le BADIL Conciergerie SUARL · Dakar, Sénégal · NINEA: 009876543 · RCCM: SN.DKR.2026.B.1234</p>
+        <p style="color:#a0b4cc;margin:0;font-size:11px;">Le BADIL · Dakar, Sénégal${formatLegalIds() ? ' · ' + formatLegalIds() : ''}</p>
         <p style="color:#6a8099;margin:6px 0 0;font-size:11px;">Contact Corporate : ${process.env.SMTP_USER || 'contact@lebadilconciergerie.com'}</p>
       </td>
     </tr>
@@ -950,9 +964,13 @@ function buildCorporateLeadInternalNotification({ companyName, contactName, cont
 // =========================================================================
 app.post('/api/create-payment', async (req, res) => {
   try {
-    const { packId, studentName, email, whatsapp, school, date, paymentMethod } = req.body;
+    const { packId, addonId, studentName, email, whatsapp, school, date, paymentMethod } = req.body;
 
-    const pack = PACK_PRICES[packId] || PACK_PRICES['vip'];
+    const basePack = PACK_PRICES[packId] || PACK_PRICES['vip'];
+    const addon = addonId && PACK_PRICES[addonId] && addonId !== packId ? PACK_PRICES[addonId] : null;
+    const pack = addon
+      ? { name: `${basePack.name} + ${addon.name}`, price: basePack.price + addon.price }
+      : basePack;
 
     // =========================================================================
     // 1. GESTION DU PAIEMENT PAR VIREMENT BANCAIRE

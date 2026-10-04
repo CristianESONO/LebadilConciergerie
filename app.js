@@ -363,26 +363,63 @@ document.addEventListener('DOMContentLoaded', () => {
     'escapade-saloum-safari': 95000
   };
 
-  function updateCheckoutPrice() {
-    const selectedPack = checkoutPackSelect.value;
-    const price = packPrices[selectedPack] || 250000;
-    checkoutTotalFcfa.textContent = formatFCFA(price);
-    checkoutTotalEur.textContent = 'Contrevaleur : ' + formatEUR(price);
-  }
-
   if (checkoutPackSelect) {
     checkoutPackSelect.addEventListener('change', updateCheckoutPrice);
+  }
+
+  const checkoutAddonSelect = document.getElementById('checkout-addon-select');
+  if (checkoutAddonSelect) {
+    checkoutAddonSelect.addEventListener('change', updateCheckoutPrice);
+  }
+
+  function applyWhatsAppLinks() {
+    document.querySelectorAll('[data-whatsapp-link]').forEach((el) => {
+      const msg = el.getAttribute('data-whatsapp-message') || 'Bonjour Le BADIL Conciergerie, je souhaite échanger avec un concierge.';
+      el.href = generateWhatsAppUrl(msg);
+    });
+  }
+  applyWhatsAppLinks();
+
+  function updateCheckoutPrice() {
+    if (!checkoutPackSelect || !checkoutTotalFcfa) return;
+    const selectedPack = checkoutPackSelect.value;
+    let price = packPrices[selectedPack] || 0;
+    const addonKey = checkoutAddonSelect ? checkoutAddonSelect.value : '';
+    if (addonKey && packPrices[addonKey] && addonKey !== selectedPack) {
+      price += packPrices[addonKey];
+    }
+    checkoutTotalFcfa.textContent = formatFCFA(price);
+    if (checkoutTotalEur) checkoutTotalEur.textContent = 'Contrevaleur : ' + formatEUR(price);
+  }
+
+  function goToReservation() {
+    const reservation = document.getElementById('reservation');
+    if (reservation) {
+      reservation.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      reservation.classList.add('reservation-highlight');
+      setTimeout(() => reservation.classList.remove('reservation-highlight'), 1600);
+    }
+    const nameInput = document.getElementById('checkout-student-name');
+    if (nameInput) {
+      setTimeout(() => nameInput.focus(), 350);
+    }
   }
 
   const openModalBtns = document.querySelectorAll('.select-pack-btn, #open-booking-modal-hero, #open-booking-modal-escapade');
   openModalBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const packKey = btn.getAttribute('data-pack');
-      if (packKey && packPrices[packKey]) {
+      const addonKey = btn.getAttribute('data-addon');
+      if (addonKey && checkoutAddonSelect) {
+        checkoutAddonSelect.value = addonKey;
+        if (checkoutPackSelect && String(checkoutPackSelect.value).startsWith('escapade-')) {
+          checkoutPackSelect.value = 'teranga';
+        }
+      } else if (packKey && packPrices[packKey] && checkoutPackSelect) {
         checkoutPackSelect.value = packKey;
-        updateCheckoutPrice();
       }
-      bookingModal.classList.add('active');
+      updateCheckoutPrice();
+      goToReservation();
     });
   });
 
@@ -457,6 +494,14 @@ document.addEventListener('DOMContentLoaded', () => {
               el.textContent = s.general.email;
             });
           }
+
+          const ninea = (s.general.ninea || '').trim();
+          const rccm = (s.general.rccm || '').trim();
+          const legalLine = [ninea && `NINEA: ${ninea}`, rccm && `RCCM: ${rccm}`].filter(Boolean).join(' • ');
+          document.querySelectorAll('[data-legal-ids]').forEach(el => {
+            el.textContent = legalLine || 'Immatriculation : communiquée dès obtention du NINEA et du RCCM';
+          });
+          applyWhatsAppLinks();
         }
         if (s.banking) {
           const b = s.banking;
@@ -645,6 +690,7 @@ Merci de prendre en charge mon arrivée à Dakar !`;
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             packId,
+            addonId: checkoutAddonSelect ? checkoutAddonSelect.value : '',
             studentName,
             email,
             whatsapp,
