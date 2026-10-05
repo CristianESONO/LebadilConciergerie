@@ -14,3 +14,6 @@ documentation/_*.jpg
 documentation/_*.bin
 *.backup
 *.backup-*
+
+data/visits.json
+documentation/

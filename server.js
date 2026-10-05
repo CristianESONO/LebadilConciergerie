@@ -1,24 +1,25 @@
 require('dotenv').config();
-const express  = require('express');
-const cors     = require('cors');
-const path     = require('path');
-const crypto   = require('crypto');
-const fs       = require('fs');
-const session  = require('express-session');
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const crypto = require('crypto');
+const fs = require('fs');
+const session = require('express-session');
 const nodemailer = require('nodemailer');
 
-const app  = express();
+const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Root directory: on Vercel, __dirname is api/ so APP_ROOT is set by api/index.js
 const ROOT_DIR = process.env.APP_ROOT || __dirname;
 
 // Data file paths
-const SCHOOLS_FILE      = path.join(ROOT_DIR, 'data', 'schools.json');
+const SCHOOLS_FILE = path.join(ROOT_DIR, 'data', 'schools.json');
 const RESERVATIONS_FILE = path.join(ROOT_DIR, 'data', 'reservations.json');
-const USERS_FILE        = path.join(ROOT_DIR, 'data', 'users.json');
-const SETTINGS_FILE     = path.join(ROOT_DIR, 'data', 'settings.json');
-const LEADS_FILE        = path.join(ROOT_DIR, 'data', 'corporate_leads.json');
+const USERS_FILE = path.join(ROOT_DIR, 'data', 'users.json');
+const SETTINGS_FILE = path.join(ROOT_DIR, 'data', 'settings.json');
+const LEADS_FILE = path.join(ROOT_DIR, 'data', 'corporate_leads.json');
+const VISITS_FILE = path.join(ROOT_DIR, 'data', 'visits.json');
 
 // Helper: Get merged settings
 function getSettings() {
@@ -99,7 +100,7 @@ function writeData(filePath, data) {
     const tmpPath = path.join('/tmp', fileName);
     try {
       fs.writeFileSync(tmpPath, JSON.stringify(data, null, 2), 'utf8');
-    } catch {}
+    } catch { }
   }
 }
 
@@ -174,7 +175,7 @@ app.post('/admin/login', (req, res) => {
     req.session.isAdmin = true;
     const roleCode = foundUser.roleCode || (
       foundUser.login === 'admin' ? 'admin' :
-      (foundUser.role && (foundUser.role.toLowerCase().includes('gérant') || foundUser.role.toLowerCase().includes('direct')) ? 'gerante' : 'staff')
+        (foundUser.role && (foundUser.role.toLowerCase().includes('gérant') || foundUser.role.toLowerCase().includes('direct')) ? 'gerante' : 'staff')
     );
     req.session.user = {
       id: foundUser.id,
@@ -188,7 +189,7 @@ app.post('/admin/login', (req, res) => {
   }
 
   // 2. Fallback .env pour le superadmin de secours
-  const validLogin    = process.env.ADMIN_LOGIN    || 'admin';
+  const validLogin = process.env.ADMIN_LOGIN || 'admin';
   const validPassword = process.env.ADMIN_PASSWORD || 'LeBadil2026!';
   if (login.trim() === validLogin && password === validPassword) {
     req.session.isAdmin = true;
@@ -217,6 +218,26 @@ app.get('/api/admin/me', requireAdmin, (req, res) => {
   res.json({
     success: true,
     user: req.session.user || { name: 'Administrateur', role: 'Superviseur', roleCode: 'admin' }
+  });
+});
+
+// Visites de la page d'accueil — statistiques agrégées sans données personnelles
+app.get('/api/admin/visits', requireAdmin, (req, res) => {
+  const data = readData(VISITS_FILE);
+  const days = Number.parseInt(req.query.days, 10);
+  const range = Number.isFinite(days) ? Math.min(Math.max(days, 1), 90) : 14;
+  const byDay = data.byDay || {};
+  const today = new Date();
+  const visitsByDay = Array.from({ length: range }, (_, index) => {
+    const date = new Date(today);
+    date.setUTCDate(today.getUTCDate() - (range - index - 1));
+    const key = date.toISOString().slice(0, 10);
+    return { date: key, visits: Number(byDay[key]) || 0 };
+  });
+
+  res.json({
+    total: Number(data.total) || 0,
+    visitsByDay
   });
 });
 
@@ -337,7 +358,7 @@ app.post('/api/admin/schools', requireRole(['admin']), (req, res) => {
 
   const data = readData(SCHOOLS_FILE);
   const newSchool = {
-    id:   `school-${Date.now()}`,
+    id: `school-${Date.now()}`,
     name: name.trim(),
     city: (city || 'Dakar').trim()
   };
@@ -458,10 +479,16 @@ app.post('/api/admin/reservations/:ref/confirm-virement', requireRole(['admin', 
 });
 
 // Serve static frontend files (après les routes admin pour ne pas intercepter)
-app.use(express.static(path.join(ROOT_DIR)));
+app.use(express.static(path.join(ROOT_DIR), { index: false }));
 
-// Route racine explicite
+// Route racine explicite — compte chaque chargement de la page d'accueil
 app.get('/', (req, res) => {
+  const data = readData(VISITS_FILE);
+  const today = new Date().toISOString().slice(0, 10);
+  data.total = (Number(data.total) || 0) + 1;
+  data.byDay = data.byDay || {};
+  data.byDay[today] = (Number(data.byDay[today]) || 0) + 1;
+  writeData(VISITS_FILE, data);
   res.sendFile(path.join(ROOT_DIR, 'index.html'));
 });
 app.get('/mentions-legales.html', (req, res) => res.sendFile(path.join(ROOT_DIR, 'mentions-legales.html')));
@@ -472,15 +499,15 @@ app.get('/confidentialite.html', (req, res) => res.sendFile(path.join(ROOT_DIR, 
 // PACK PRICES (FCFA)
 // =========================================================================
 const PACK_PRICES = {
-  'teranga':                { name: 'Pack Teranga (Accueil AIBD & Transfert)',          price: 75000  },
-  'logement':               { name: 'Pack Logement Serein (Chasse & Abonnements)',      price: 150000 },
-  'integration':            { name: 'Pack Intégration (Transport & Santé)',             price: 60000  },
-  'vip':                    { name: 'Pack VIP All-Inclusive (Clé en Main)',             price: 250000 },
-  'escapade-dakar':         { name: 'Escapade Dakar Vivant & Arty',                     price: 25000  },
-  'escapade-goree':         { name: 'Journée Île de Gorée Mémoire & Histoire',          price: 40000  },
-  'escapade-saly':          { name: 'Journée Détente & Sports Nautiques Saly',          price: 55000  },
-  'escapade-saloum':        { name: 'Aventure Bolongs & Pêche Saloum',                  price: 75000  },
-  'escapade-saloum-safari': { name: 'Safari Ornithologique & Bivouac Saloum',           price: 95000  }
+  'teranga': { name: 'Pack Teranga (Accueil AIBD & Transfert)', price: 75000 },
+  'logement': { name: 'Pack Logement Serein (Chasse & Abonnements)', price: 150000 },
+  'integration': { name: 'Pack Intégration (Transport & Santé)', price: 60000 },
+  'vip': { name: 'Pack VIP All-Inclusive (Clé en Main)', price: 250000 },
+  'escapade-dakar': { name: 'Escapade Dakar Vivant & Arty', price: 25000 },
+  'escapade-goree': { name: 'Journée Île de Gorée Mémoire & Histoire', price: 40000 },
+  'escapade-saly': { name: 'Journée Détente & Sports Nautiques Saly', price: 55000 },
+  'escapade-saloum': { name: 'Aventure Bolongs & Pêche Saloum', price: 75000 },
+  'escapade-saloum-safari': { name: 'Safari Ornithologique & Bivouac Saloum', price: 95000 }
 };
 
 // =========================================================================
@@ -1047,13 +1074,13 @@ app.post('/api/create-payment', async (req, res) => {
 
     // Auto-détection URL Vercel ou locale
     const vercelHost = process.env.VERCEL_URL ? (process.env.VERCEL_URL.startsWith('http') ? process.env.VERCEL_URL : `https://${process.env.VERCEL_URL}`) : null;
-    const siteUrl    = process.env.SITE_URL || vercelHost || `http://localhost:${PORT}`;
-    const publicUrl  = process.env.PUBLIC_URL || siteUrl;
+    const siteUrl = process.env.SITE_URL || vercelHost || `http://localhost:${PORT}`;
+    const publicUrl = process.env.PUBLIC_URL || siteUrl;
 
     const settings = getSettings();
-    const paytechApiKey    = (settings.gateways && settings.gateways.paytechApiKey)    ? settings.gateways.paytechApiKey.trim()    : (process.env.PAYTECH_API_KEY || '').trim();
+    const paytechApiKey = (settings.gateways && settings.gateways.paytechApiKey) ? settings.gateways.paytechApiKey.trim() : (process.env.PAYTECH_API_KEY || '').trim();
     const paytechApiSecret = (settings.gateways && settings.gateways.paytechApiSecret) ? settings.gateways.paytechApiSecret.trim() : (process.env.PAYTECH_API_SECRET || '').trim();
-    const paytechEnv       = (settings.gateways && settings.gateways.paytechEnv)       ? settings.gateways.paytechEnv              : (process.env.PAYTECH_ENV || 'test');
+    const paytechEnv = (settings.gateways && settings.gateways.paytechEnv) ? settings.gateways.paytechEnv : (process.env.PAYTECH_ENV || 'test');
 
     // PayTech EXIGE HTTPS pour callback_url — bloquer si encore en localhost
     if (!publicUrl.startsWith('https://')) {
@@ -1072,16 +1099,16 @@ app.post('/api/create-payment', async (req, res) => {
     const cleanCommandName = `Reservation Etudiante - ${studentName} (${school || 'Ecole non precisee'})`.replace(/[^a-zA-Z0-9 \-_().,']/g, '');
 
     const paytechBody = {
-      item_name:    cleanItemName,
-      item_price:   pack.price,           // integer requis par PayTech
-      currency:     'xof',                // IMPORTANT: minuscules obligatoires
-      ref_command:  refCommand,
+      item_name: cleanItemName,
+      item_price: pack.price,           // integer requis par PayTech
+      currency: 'xof',                // IMPORTANT: minuscules obligatoires
+      ref_command: refCommand,
       command_name: cleanCommandName,
-      env:          paytechEnv,
-      ipn_url:      `${publicUrl}/api/paytech-ipn`,
+      env: paytechEnv,
+      ipn_url: `${publicUrl}/api/paytech-ipn`,
       callback_url: `${publicUrl}/api/paytech-ipn`,
-      success_url:  `${publicUrl}/?payment=success&pack=${packId}&name=${encodeURIComponent(studentName)}&ref=${refCommand}`,
-      cancel_url:   `${publicUrl}/?payment=cancel&ref=${refCommand}`,
+      success_url: `${publicUrl}/?payment=success&pack=${packId}&name=${encodeURIComponent(studentName)}&ref=${refCommand}`,
+      cancel_url: `${publicUrl}/?payment=cancel&ref=${refCommand}`,
       custom_field: JSON.stringify({
         studentName,
         email,
@@ -1100,7 +1127,7 @@ app.post('/api/create-payment', async (req, res) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'API_KEY':    paytechApiKey,
+        'API_KEY': paytechApiKey,
         'API_SECRET': paytechApiSecret
       },
       body: JSON.stringify(paytechBody)
@@ -1152,7 +1179,7 @@ app.post('/api/paytech-ipn', async (req, res) => {
     console.log(`🔔 [PayTech IPN] Event: ${type_event} | Ref: ${ref_command} | Item: ${item_name} | Montant: ${item_price} FCFA`);
 
     // Vérification de la signature SHA256
-    const expectedKeyHash    = crypto.createHash('sha256').update(process.env.PAYTECH_API_KEY).digest('hex');
+    const expectedKeyHash = crypto.createHash('sha256').update(process.env.PAYTECH_API_KEY).digest('hex');
     const expectedSecretHash = crypto.createHash('sha256').update(process.env.PAYTECH_API_SECRET).digest('hex');
 
     const signatureOk = (api_key_sha256 === expectedKeyHash && api_secret_sha256 === expectedSecretHash);
@@ -1210,17 +1237,17 @@ app.post('/api/paytech-ipn', async (req, res) => {
       try {
         const htmlContent = buildConfirmationEmail({
           studentName: studentName || 'Étudiant',
-          packName:    packName    || item_name,
-          school:      school,
+          packName: packName || item_name,
+          school: school,
           arrivalDate: arrivalDate,
-          refCommand:  ref_command,
+          refCommand: ref_command,
           whatsappNumber: (getSettings().general && getSettings().general.whatsappDisplay) || '+221 71 092 33 33'
         });
 
         await sendEmail({
-          to:          email,
-          toName:      studentName || 'Étudiant',
-          subject:     `✅ Confirmation de réservation — ${packName || item_name} | Le BADIL Conciergerie`,
+          to: email,
+          toName: studentName || 'Étudiant',
+          subject: `✅ Confirmation de réservation — ${packName || item_name} | Le BADIL Conciergerie`,
           htmlContent
         });
 
@@ -1242,9 +1269,9 @@ app.post('/api/paytech-ipn', async (req, res) => {
         `;
 
         await sendEmail({
-          to:          process.env.SMTP_USER || 'contact@lebadilconciergerie.com',
-          toName:      'Équipe Le BADIL',
-          subject:     `🔔 Nouvelle réservation PayTech : ${studentName || 'Client'} — ${packName || item_name}`,
+          to: process.env.SMTP_USER || 'contact@lebadilconciergerie.com',
+          toName: 'Équipe Le BADIL',
+          subject: `🔔 Nouvelle réservation PayTech : ${studentName || 'Client'} — ${packName || item_name}`,
           htmlContent: internalHtml
         });
 
@@ -1278,9 +1305,9 @@ app.post('/api/send-document-reminder', async (req, res) => {
     const htmlContent = buildDocumentReminderEmail({ studentName, packName, refCommand });
 
     await sendEmail({
-      to:          email,
-      toName:      studentName,
-      subject:     `📄 Documents requis pour votre dossier (Réf: ${refCommand}) — Le BADIL Conciergerie`,
+      to: email,
+      toName: studentName,
+      subject: `📄 Documents requis pour votre dossier (Réf: ${refCommand}) — Le BADIL Conciergerie`,
       htmlContent
     });
 
@@ -1447,8 +1474,8 @@ app.get('/api/test-email', requireRole(['admin']), async (req, res) => {
   try {
     const result = await sendEmail({
       to,
-      toName:      'Test Le BADIL',
-      subject:     '🧪 Test Email — Le BADIL Conciergerie Dakar',
+      toName: 'Test Le BADIL',
+      subject: '🧪 Test Email — Le BADIL Conciergerie Dakar',
       htmlContent: `
         <div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:30px;background:#0F2C59;border-radius:12px;color:#DAC0A3;text-align:center;">
           <h2 style="color:#DAC0A3;margin-bottom:8px;">✅ Configuration SMTP OVH Active !</h2>
@@ -1479,8 +1506,8 @@ app.post('/api/test-email', requireRole(['admin']), async (req, res) => {
   try {
     const result = await sendEmail({
       to,
-      toName:      'Test Le BADIL',
-      subject:     '🧪 Test Email — Le BADIL Conciergerie Dakar',
+      toName: 'Test Le BADIL',
+      subject: '🧪 Test Email — Le BADIL Conciergerie Dakar',
       htmlContent: `
         <div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:30px;background:#0F2C59;border-radius:12px;color:#DAC0A3;text-align:center;">
           <h2 style="color:#DAC0A3;margin-bottom:8px;">✅ Configuration SMTP OVH Active !</h2>

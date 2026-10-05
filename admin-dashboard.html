@@ -1234,6 +1234,8 @@
     .ov-kpi.navy  .ov-kpi-icon { background: var(--navy-100);    color: var(--navy-800); }
     .ov-kpi.green .ov-kpi-icon { background: var(--emerald-100); color: var(--emerald-600); }
     .ov-kpi.rose  .ov-kpi-icon { background: var(--rose-100);    color: var(--rose-600); }
+    .ov-kpi.purple::before { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+    .ov-kpi.purple .ov-kpi-icon { background: #F3E8FF; color: #7C3AED; }
     .ov-kpi-body { flex: 1; min-width: 0; }
     .ov-kpi-label {
       font-size: 0.75rem; font-weight: 700;
@@ -1514,6 +1516,17 @@
               <div class="ov-kpi-sub">Collaborateurs actifs</div>
             </div>
           </div>
+
+          <div class="ov-kpi purple">
+            <div class="ov-kpi-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.25 12s3.75-7.5 9.75-7.5 9.75 7.5 9.75 7.5-3.75 7.5-9.75 7.5S2.25 12 2.25 12z"/><circle cx="12" cy="12" r="3" stroke-width="2"/></svg>
+            </div>
+            <div class="ov-kpi-body">
+              <div class="ov-kpi-label">Visites</div>
+              <div class="ov-kpi-value" id="ovKpiVisits">—</div>
+              <div class="ov-kpi-sub">Chargements de la page d'accueil</div>
+            </div>
+          </div>
         </div>
 
         <!-- Charts Row 1: Bar + Donut -->
@@ -1540,6 +1553,22 @@
             </div>
             <div class="chart-canvas-wrap" style="min-height:240px;">
               <canvas id="chartPackDonut"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trafic du site -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div>
+                <div class="chart-card-title">👁️ Visites du site</div>
+                <div class="chart-card-sub">Chargements de la page d'accueil par jour</div>
+              </div>
+              <span class="chart-badge">14 derniers jours</span>
+            </div>
+            <div class="chart-canvas-wrap" style="min-height:220px;">
+              <canvas id="chartVisits"></canvas>
             </div>
           </div>
         </div>
@@ -3300,7 +3329,7 @@ Statut : Proposition technique et financière sous 24 heures.
     goree:'#EC4899', saloum:'#8B5CF6'
   };
   const MONTHS_FR = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
-  let chartRevenue=null, chartDonut=null, chartTrend=null;
+  let chartRevenue=null, chartDonut=null, chartTrend=null, chartVisits=null;
 
   function fmtFcfa(n){
     if(n>=1000000) return (n/1000000).toFixed(1).replace('.0','')+'M FCFA';
@@ -3449,23 +3478,64 @@ Statut : Proposition technique et financière sous 24 heures.
     }
   }
 
+  function renderVisitsChart(visitsData){
+    const total = Number(visitsData?.total) || 0;
+    const days = Array.isArray(visitsData?.visitsByDay) ? visitsData.visitsByDay : [];
+    const totalElement = document.getElementById('ovKpiVisits');
+    if(totalElement) totalElement.textContent = total.toLocaleString('fr-FR');
+
+    const labels = days.map(day => new Date(`${day.date}T12:00:00`).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' }));
+    if(chartVisits) chartVisits.destroy();
+    chartVisits = new Chart(document.getElementById('chartVisits').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Visites',
+          data: days.map(day => Number(day.visits) || 0),
+          backgroundColor: 'rgba(124,58,237,.72)',
+          borderColor: '#7C3AED',
+          borderWidth: 1,
+          borderRadius: 6,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: context => ` ${context.parsed.y.toLocaleString('fr-FR')} visite(s)` } }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#64748B', maxRotation: 45, minRotation: 0 } },
+          y: { beginAtZero: true, ticks: { precision: 0, stepSize: 1, font: { size: 11 }, color: '#94A3B8' }, grid: { color: 'rgba(226,232,240,.6)' } }
+        }
+      }
+    });
+  }
+
   async function loadOverviewDashboard(){
     try{
-      const [bRes,sRes,tRes]=await Promise.all([
+      const [bRes,sRes,tRes,vRes]=await Promise.all([
         fetch('/api/admin/reservations').catch(()=>null),
         fetch('/api/admin/schools').catch(()=>null),
-        fetch('/api/admin/users').catch(()=>null)
+        fetch('/api/admin/users').catch(()=>null),
+        fetch('/api/admin/visits?days=14').catch(()=>null)
       ]);
-      // All three endpoints return plain arrays
+      // Les trois premières API renvoient des tableaux.
       const bookings   = bRes&&bRes.ok ? await bRes.json() : [];
       const schoolsArr = sRes&&sRes.ok ? await sRes.json() : [];
       const usersArr   = tRes&&tRes.ok ? await tRes.json() : [];
+      const visitsData = vRes&&vRes.ok ? await vRes.json() : { total: 0, visitsByDay: [] };
       const schoolCount = Array.isArray(schoolsArr) ? schoolsArr.length : 0;
       const teamCount   = Array.isArray(usersArr)   ? usersArr.filter(u=>u.status!=='suspended').length : 0;
       buildOverviewCharts(Array.isArray(bookings)?bookings:[],schoolCount,teamCount);
+      renderVisitsChart(visitsData);
     }catch(err){
       console.warn('Overview dashboard error:',err);
       buildOverviewCharts([],0,0);
+      renderVisitsChart({ total: 0, visitsByDay: [] });
     }
   }
 
