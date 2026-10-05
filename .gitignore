@@ -17,3 +17,5 @@ documentation/_*.bin
 
 data/visits.json
 documentation/
+*.bak*
+data/*.json
