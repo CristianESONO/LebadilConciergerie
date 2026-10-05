@@ -440,7 +440,7 @@ app.post('/api/admin/reservations/:ref/confirm-virement', requireRole(['admin', 
     booking.status = 'CONFIRMED';
     booking.confirmedAt = new Date().toISOString();
     booking.confirmedBy = (req.session.user && req.session.user.name) ? req.session.user.name : 'Administrateur';
-    booking.paymentMethod = 'Virement Bancaire (Validé CBAO)';
+    booking.paymentMethod = 'Virement Bancaire (Validé)';
     resData.reservations[idx] = booking;
     writeData(RESERVATIONS_FILE, resData);
 
@@ -572,6 +572,7 @@ async function sendEmail({ to, toName, subject, htmlContent }) {
  * Email 1.1 : Confirmation de réservation & bienvenue (envoyé immédiatement après paiement)
  */
 function buildVirementEmail({ studentName, packName, school, arrivalDate, refCommand, amount, whatsappNumber }) {
+  const bk = getSettings().banking || {};
   const waLink = `https://wa.me/${whatsappNumber ? whatsappNumber.replace(/[^0-9]/g, '') : '221710923333'}?text=${encodeURIComponent(
     `Bonjour Le BADIL Conciergerie, j'ai sélectionné le paiement par virement bancaire pour le ${packName} (Réf: ${refCommand}). Étudiant: ${studentName}.`
   )}`;
@@ -612,12 +613,12 @@ function buildVirementEmail({ studentName, packName, school, arrivalDate, refCom
       <h3 style="color:#0F2C59;margin:0 0 12px;font-size:15px;border-bottom:1px solid #DAC0A3;padding-bottom:6px;">Coordonnées Bancaires Officielles Le BADIL</h3>
       <table width="100%" style="font-size:13px;color:#333;">
         <tr><td style="padding:4px 0;color:#666;">Montant Total :</td><td style="font-weight:bold;color:#0F2C59;text-align:right;">${amount.toLocaleString('fr-FR')} FCFA</td></tr>
-        <tr><td style="padding:4px 0;color:#666;">Bénéficiaire :</td><td style="font-weight:bold;text-align:right;">LE BADIL CONCIERGERIE SUARL</td></tr>
-        <tr><td style="padding:4px 0;color:#666;">Établissement :</td><td style="font-weight:bold;text-align:right;">CBAO Groupe Attijariwafa Bank</td></tr>
-        <tr><td style="padding:4px 0;color:#666;">Code Banque / Guichet :</td><td style="font-family:monospace;text-align:right;">SN012 / 01234</td></tr>
-        <tr><td style="padding:4px 0;color:#666;">Numéro de Compte :</td><td style="font-family:monospace;text-align:right;">012345678901 (Clé 45)</td></tr>
-        <tr><td style="padding:4px 0;color:#666;">IBAN Sénégal :</td><td style="font-family:monospace;font-weight:bold;color:#0F2C59;text-align:right;">SN12 SN01 2012 3412 3456 7890 145</td></tr>
-        <tr><td style="padding:4px 0;color:#666;">Code SWIFT / BIC :</td><td style="font-family:monospace;text-align:right;">CBAOSNDA</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">Bénéficiaire :</td><td style="font-weight:bold;text-align:right;">${bk.beneficiary || ""}</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">Établissement :</td><td style="font-weight:bold;text-align:right;">${bk.bankName || ""}</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">Code Banque / Guichet :</td><td style="font-family:monospace;text-align:right;">${bk.bankCode || ""} / ${bk.branchCode || ""}</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">Numéro de Compte :</td><td style="font-family:monospace;text-align:right;">${bk.accountNumber || ""} (Clé ${bk.ribKey || ""})</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">IBAN Sénégal :</td><td style="font-family:monospace;font-weight:bold;color:#0F2C59;text-align:right;">${bk.iban || ""}</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">Code SWIFT / BIC :</td><td style="font-family:monospace;text-align:right;">${bk.swift || ""}</td></tr>
       </table>
     </div>
 
@@ -1056,14 +1057,22 @@ app.post('/api/create-payment', async (req, res) => {
         packName: pack.name,
         amount: pack.price,
         studentName,
-        bankDetails: {
-          beneficiary: "LE BADIL CONCIERGERIE SUARL",
-          bank: "CBAO Groupe Attijariwafa Bank (Dakar, Sénégal)",
-          rib: "SN012 01234 012345678901 45",
-          iban: "SN12 SN01 2012 3412 3456 7890 145",
-          swift: "CBAOSNDA",
-          ref: refCommand
-        }
+        bankDetails: (() => {
+          const bk = getSettings().banking || {};
+          return {
+            beneficiary: bk.beneficiary,
+            bank: bk.bankName,
+            bankName: bk.bankName,
+            bankCode: bk.bankCode,
+            branchCode: bk.branchCode,
+            accountNumber: bk.accountNumber,
+            ribKey: bk.ribKey,
+            rib: `${bk.bankCode} ${bk.branchCode} ${bk.accountNumber} ${bk.ribKey}`,
+            iban: bk.iban,
+            swift: bk.swift,
+            ref: refCommand
+          };
+        })()
       });
     }
 

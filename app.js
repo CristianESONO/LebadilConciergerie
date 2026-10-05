@@ -574,8 +574,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Confirmation view inside modal for Virement Bancaire
   function showVirementSuccessModal(data, clientInfo) {
-    const modalBody = document.querySelector('#booking-modal .modal-body');
+    const modalBody = document.querySelector('#booking-modal');
     if (!modalBody) return;
+    const b = data.bankDetails || {};
 
     const waMsg = `Bonjour Le BADIL Conciergerie, j'ai validé ma réservation avec option Virement Bancaire :
 - Réf Dossier : ${data.refCommand}
@@ -603,32 +604,32 @@ Merci de prendre en charge mon arrivée à Dakar !`;
         <div class="bank-details-box" style="text-align: left; margin: 0 0 1.25rem 0;">
           <div class="bank-header">
             <strong>📋 Coordonnées de Virement Le BADIL</strong>
-            <span class="bank-currency">${formatFCFA(data.amount)} (~${formatEUR(data.amount)})</span>
+            <span class="bank-currency">${formatFCFA(data.amount)} (${formatEUR(data.amount)})</span>
           </div>
           <div class="bank-grid">
             <div class="bank-field">
               <span class="bank-label">Bénéficiaire :</span>
-              <span class="bank-val">LE BADIL CONCIERGERIE SUARL</span>
+              <span class="bank-val">${b.beneficiary || ""}</span>
             </div>
             <div class="bank-field">
               <span class="bank-label">Banque :</span>
-              <span class="bank-val">CBAO Groupe Attijariwafa Bank (Dakar)</span>
+              <span class="bank-val">${b.bankName || ""}</span>
             </div>
             <div class="bank-field">
               <span class="bank-label">Code Banque / Guichet :</span>
-              <span class="bank-val font-mono">SN012 / 01234</span>
+              <span class="bank-val font-mono">${b.bankCode || ""} / ${b.branchCode || ""}</span>
             </div>
             <div class="bank-field">
               <span class="bank-label">Compte / Clé :</span>
-              <span class="bank-val font-mono">012345678901 (Clé 45)</span>
+              <span class="bank-val font-mono">${b.accountNumber || ""} (Clé ${b.ribKey || ""})</span>
             </div>
             <div class="bank-field">
               <span class="bank-label">IBAN Sénégal :</span>
-              <span class="bank-val font-mono">${data.bankDetails ? data.bankDetails.iban : 'SN12 SN01 2012 3412 3456 7890 145'}</span>
+              <span class="bank-val font-mono">${b.iban || ""}</span>
             </div>
             <div class="bank-field">
               <span class="bank-label">Code SWIFT / BIC :</span>
-              <span class="bank-val font-mono">${data.bankDetails ? data.bankDetails.swift : 'CBAOSNDA'}</span>
+              <span class="bank-val font-mono">${b.swift || ""}</span>
             </div>
             <div class="bank-field">
               <span class="bank-label">Motif Obligatoire :</span>
