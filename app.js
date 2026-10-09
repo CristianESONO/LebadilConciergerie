@@ -4,7 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  let WHATSAPP_NUMBER = '221710923333';
+  let WHATSAPP_NUMBER = '221711794949';
   const FCFA_PER_EUR = 655.957;
 
   function formatFCFA(amount) {

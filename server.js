@@ -25,8 +25,8 @@ const VISITS_FILE = path.join(ROOT_DIR, 'data', 'visits.json');
 function getSettings() {
   const defaultSettings = {
     general: {
-      whatsapp: "221710923333",
-      whatsappDisplay: "+221 71 092 33 33",
+      whatsapp: "221711794949",
+      whatsappDisplay: "+221 71 179 49 49",
       email: "contact@lebadilconciergerie.com",
       companyName: "LE BADIL",
       address: "Hann Maristes 1/E, Villa n° 116, Hann, Dakar",
@@ -199,7 +199,7 @@ app.post('/admin/login', (req, res) => {
       login: validLogin,
       role: 'Développeur (Super Admin)',
       roleCode: 'admin',
-      phone: '+221 71 092 33 33'
+      phone: '+221 71 179 49 49'
     };
     return res.json({ success: true, redirect: '/admin/dashboard', user: req.session.user });
   }
@@ -573,7 +573,7 @@ async function sendEmail({ to, toName, subject, htmlContent }) {
  */
 function buildVirementEmail({ studentName, packName, school, arrivalDate, refCommand, amount, whatsappNumber }) {
   const bk = getSettings().banking || {};
-  const waLink = `https://wa.me/${whatsappNumber ? whatsappNumber.replace(/[^0-9]/g, '') : '221710923333'}?text=${encodeURIComponent(
+  const waLink = `https://wa.me/${whatsappNumber ? whatsappNumber.replace(/[^0-9]/g, '') : '221711794949'}?text=${encodeURIComponent(
     `Bonjour Le BADIL Conciergerie, j'ai sélectionné le paiement par virement bancaire pour le ${packName} (Réf: ${refCommand}). Étudiant: ${studentName}.`
   )}`;
 
@@ -638,7 +638,7 @@ function buildVirementEmail({ studentName, packName, school, arrivalDate, refCom
 }
 
 function buildConfirmationEmail({ studentName, packName, school, arrivalDate, refCommand, whatsappNumber }) {
-  const waLink = `https://wa.me/${whatsappNumber || '221710923333'}?text=${encodeURIComponent(
+  const waLink = `https://wa.me/${whatsappNumber || '221711794949'}?text=${encodeURIComponent(
     `Bonjour Le BADIL Conciergerie, mon paiement pour le ${packName} a été validé (Réf: ${refCommand}). Étudiant: ${studentName}. Merci de prendre en charge mon dossier !`
   )}`;
 
@@ -769,7 +769,7 @@ function buildConfirmationEmail({ studentName, packName, school, arrivalDate, re
     <tr>
       <td align="center" style="padding:24px 20px;">
         <p style="color:#a0b4cc;margin:0 0 6px;font-size:12px;">Le BADIL Conciergerie Dakar — Excellence & Service Teranga</p>
-        <p style="color:#6a8099;margin:0;font-size:11px;">📞 WhatsApp Pro : ${whatsappNumber || '+221 71 092 33 33'} · ✉️ ${process.env.SMTP_USER || 'contact@lebadilconciergerie.com'}</p>
+        <p style="color:#6a8099;margin:0;font-size:11px;">📞 WhatsApp Pro : ${whatsappNumber || '+221 71 179 49 49'} · ✉️ ${process.env.SMTP_USER || 'contact@lebadilconciergerie.com'}</p>
         <p style="color:#6a8099;margin:8px 0 0;font-size:10px;">${formatLegalIds() || 'Le BADIL · Dakar'}</p>
       </td>
     </tr>
@@ -833,7 +833,7 @@ function buildDocumentReminderEmail({ studentName, packName, refCommand }) {
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center">
-                    <a href="https://wa.me/221710923333?text=${encodeURIComponent(`Bonjour Le BADIL, je vous envoie mes documents pour le dossier ${refCommand}`)}"
+                    <a href="https://wa.me/221711794949?text=${encodeURIComponent(`Bonjour Le BADIL, je vous envoie mes documents pour le dossier ${refCommand}`)}"
                        style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:13px 28px;border-radius:50px;font-weight:700;font-size:14px;">
                       📎 Envoyer mes documents par WhatsApp
                     </a>
@@ -863,7 +863,7 @@ function buildDocumentReminderEmail({ studentName, packName, refCommand }) {
  * Email 2.1 : Accusé de réception officiel de devis séminaire & corporate (immédiat)
  */
 function buildCorporateLeadEmail({ companyName, contactName, contactTitle, email, phone, eventType, participants, days, destination, budget, services, totalEstimate, refLead, notes }) {
-  const waPhone = ((getSettings().general && getSettings().general.whatsapp) || '221710923333').replace(/[^0-9]/g, '');
+  const waPhone = ((getSettings().general && getSettings().general.whatsapp) || '221711794949').replace(/[^0-9]/g, '');
   const waLink = `https://wa.me/${waPhone}?text=${encodeURIComponent(
     `Bonjour Le BADIL, je vous contacte au sujet de notre demande de devis séminaire corporate (${refLead}) pour l'entreprise ${companyName}.`
   )}`;
@@ -1250,7 +1250,7 @@ app.post('/api/paytech-ipn', async (req, res) => {
           school: school,
           arrivalDate: arrivalDate,
           refCommand: ref_command,
-          whatsappNumber: (getSettings().general && getSettings().general.whatsappDisplay) || '+221 71 092 33 33'
+          whatsappNumber: (getSettings().general && getSettings().general.whatsappDisplay) || '+221 71 179 49 49'
         });
 
         await sendEmail({
