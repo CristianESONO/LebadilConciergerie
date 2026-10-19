@@ -49,26 +49,77 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 3. TAB NAVIGATION SYSTEM
+  // 3. TAB NAVIGATION SYSTEM & SMOOTH SCROLL
   // ==========================================
   const navBtns = document.querySelectorAll('.nav-tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
 
-  navBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetTabId = btn.getAttribute('data-tab');
+  function getHeaderOffset() {
+    const header = document.querySelector('.header-main');
+    return (header ? header.getBoundingClientRect().height : 80) + 16;
+  }
 
-      navBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      tabContents.forEach(content => {
-        content.classList.remove('active');
-        if (content.id === targetTabId) {
-          content.classList.add('active');
-        }
+  function scrollToElementWithOffset(element) {
+    if (!element) return;
+    requestAnimationFrame(() => {
+      const headerOffset = getHeaderOffset();
+      const elementRect = element.getBoundingClientRect();
+      const targetY = window.pageYOffset + elementRect.top - headerOffset;
+      window.scrollTo({
+        top: Math.max(0, targetY),
+        behavior: 'smooth'
       });
     });
+  }
+
+  function activateTab(targetTabId, shouldScroll = true) {
+    if (!targetTabId) return;
+    const targetContent = document.getElementById(targetTabId);
+    if (!targetContent) return;
+
+    const targetBtn = document.querySelector(`.nav-tab-btn[data-tab="${targetTabId}"]`);
+
+    navBtns.forEach(b => b.classList.remove('active'));
+    if (targetBtn) {
+      targetBtn.classList.add('active');
+      try {
+        targetBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      } catch (e) {}
+    }
+
+    tabContents.forEach(content => {
+      content.classList.remove('active');
+    });
+    targetContent.classList.add('active');
+
+    if (shouldScroll) {
+      scrollToElementWithOffset(targetContent);
+    }
+  }
+
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetTabId = btn.getAttribute('data-tab');
+      activateTab(targetTabId, true);
+      if (history.replaceState) {
+        history.replaceState(null, '', '#' + targetTabId);
+      }
+    });
   });
+
+  function checkUrlHash() {
+    const hash = window.location.hash.replace('#', '');
+    if (!hash) return;
+    if (document.getElementById(hash) && document.querySelector(`.nav-tab-btn[data-tab="${hash}"]`)) {
+      activateTab(hash, true);
+    } else if (hash === 'reservation') {
+      goToReservation();
+    }
+  }
+
+  window.addEventListener('hashchange', checkUrlHash);
+  setTimeout(checkUrlHash, 250);
 
   // ==========================================
   // 4. JOUR-J LOGISTICS TIMELINE SIMULATOR
@@ -226,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const quoteSection = document.getElementById('corporate-quote-section');
       if (quoteSection) {
-        quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scrollToElementWithOffset(quoteSection);
       }
     });
   });
@@ -395,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function goToReservation() {
     const reservation = document.getElementById('reservation');
     if (reservation) {
-      reservation.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollToElementWithOffset(reservation);
       reservation.classList.add('reservation-highlight');
       setTimeout(() => reservation.classList.remove('reservation-highlight'), 1600);
     }
@@ -427,10 +478,9 @@ document.addEventListener('DOMContentLoaded', () => {
   footerEscapadeLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      const tabBtn = document.querySelector('.nav-tab-btn[data-tab="tab-escapades"]');
-      if (tabBtn) {
-        tabBtn.click();
-        window.scrollTo({ top: 350, behavior: 'smooth' });
+      activateTab('tab-escapades', true);
+      if (history.replaceState) {
+        history.replaceState(null, '', '#tab-escapades');
       }
     });
   });
@@ -438,8 +488,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const openSeminarCalcHero = document.getElementById('open-seminar-calc-hero');
   if (openSeminarCalcHero) {
     openSeminarCalcHero.addEventListener('click', () => {
-      const corpTabBtn = document.querySelector('[data-tab="tab-entreprises"]');
-      if (corpTabBtn) corpTabBtn.click();
+      activateTab('tab-entreprises', false);
+      const quoteSection = document.getElementById('corporate-quote-section');
+      if (quoteSection) {
+        scrollToElementWithOffset(quoteSection);
+      } else {
+        activateTab('tab-entreprises', true);
+      }
+      if (history.replaceState) {
+        history.replaceState(null, '', '#corporate-quote-section');
+      }
     });
   }
 
