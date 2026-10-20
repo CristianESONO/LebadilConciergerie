@@ -16,42 +16,31 @@
       --font-heading: 'Outfit', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
 
-      /* Palette Officielle Le BADIL */
-      --vert-profond: #0C3830;
-      --vert-titres: #0F3029;
-      --vert-moyen: #3E5C52;
-      --cuivre: #B77A51;
-      --or-mat: #B99142;
-      --filet-1: #D5E1D9;
-      --filet-2: #D9E2E4;
-      --fond: #F0F5F1;
-      --blanc: #FFFFFF;
+      --navy-950: #061124;
+      --navy-900: #0A1D3C;
+      --navy-800: #0F2C59;
+      --navy-700: #183B70;
+      --navy-600: #234E91;
+      --navy-100: #E9EFF8;
+      --navy-50:  #F4F7FC;
 
-      --navy-950: #08201B;
-      --navy-900: #0C3830; /* Vert profond */
-      --navy-800: #0F3029; /* Vert titres/accents */
-      --navy-700: #18463C;
-      --navy-600: #3E5C52; /* Vert moyen */
-      --navy-100: #E6EFEA;
-      --navy-50:  #F0F5F1; /* Fond */
+      --gold-600: #A88656;
+      --gold-500: #C5A880;
+      --gold-400: #DAC0A3;
+      --gold-200: #F3E9DD;
+      --gold-100: #FAF5EF;
+      --gold-50:  #FCFAF7;
 
-      --gold-600: #9E643E;
-      --gold-500: #B77A51; /* Cuivre */
-      --gold-400: #B99142; /* Or mat */
-      --gold-200: #D5E1D9; /* Filet */
-      --gold-100: #EBF2ED;
-      --gold-50:  #F0F5F1; /* Fond */
-
-      --slate-900: #0C3830;
-      --slate-800: #0F3029;
-      --slate-700: #18463C;
-      --slate-600: #3E5C52; /* Vert moyen */
-      --slate-500: #6B8579;
-      --slate-400: #8DA69B;
-      --slate-300: #D9E2E4; /* Filet 2 */
-      --slate-200: #D5E1D9; /* Filet 1 */
-      --slate-100: #E8EFEA;
-      --slate-50:  #F0F5F1; /* Fond */
+      --slate-900: #0F172A;
+      --slate-800: #1E293B;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748B;
+      --slate-400: #94A3B8;
+      --slate-300: #CBD5E1;
+      --slate-200: #E2E8F0;
+      --slate-100: #F1F5F9;
+      --slate-50:  #F8FAFC;
 
       --white: #FFFFFF;
       --emerald-600: #059669;
@@ -70,10 +59,10 @@
       --radius-md: 10px;
       --radius-sm: 6px;
 
-      --shadow-subtle: 0 1px 3px rgba(12, 56, 48, 0.05), 0 1px 2px rgba(12, 56, 48, 0.03);
-      --shadow-card: 0 4px 20px -2px rgba(12, 56, 48, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
-      --shadow-hover: 0 12px 28px -4px rgba(12, 56, 48, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
-      --shadow-gold: 0 4px 16px rgba(183, 122, 81, 0.25);
+      --shadow-subtle: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+      --shadow-card: 0 4px 20px -2px rgba(15, 44, 89, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+      --shadow-hover: 0 12px 28px -4px rgba(15, 44, 89, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+      --shadow-gold: 0 4px 16px rgba(197, 168, 128, 0.25);
     }
 
     *, *::before, *::after {
@@ -84,7 +73,7 @@
 
     body {
       font-family: var(--font-body);
-      background-color: var(--fond);
+      background-color: #F8FAFC;
       color: var(--slate-800);
       min-height: 100vh;
       display: flex;
@@ -107,7 +96,7 @@
       bottom: 0;
       left: 0;
       z-index: 50;
-      border-right: 1px solid rgba(183, 122, 81, 0.2);
+      border-right: 1px solid rgba(218, 192, 163, 0.15);
     }
 
     .sidebar-header {
@@ -3335,8 +3324,8 @@ Statut : Proposition technique et financière sous 24 heures.
     goree:'Excursion Gorée', saloum:'Sine Saloum'
   };
   const PACK_COLORS = {
-    teranga:'#10B981', logement:'#12483F', integration:'#4F46E5',
-    vip:'#B77A51', journee:'#B99142', saly:'#50685E',
+    teranga:'#10B981', logement:'#0F2C59', integration:'#4F46E5',
+    vip:'#C5A880', journee:'#F59E0B', saly:'#06B6D4',
     goree:'#EC4899', saloum:'#8B5CF6'
   };
   const MONTHS_FR = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
@@ -3458,8 +3447,8 @@ Statut : Proposition technique et financière sous 24 heures.
     chartTrend=new Chart(document.getElementById('chartMonthlyTrend').getContext('2d'),{
       type:'line',
       data:{labels:MONTHS_FR,datasets:[{label:'Réservations',data:monthCounts,
-        borderColor:'#12483F',backgroundColor:'rgba(18,72,63,.08)',tension:0.4,fill:true,
-        pointBackgroundColor:'#B77A51',pointBorderColor:'#173D35',pointRadius:5,pointHoverRadius:7,borderWidth:2.5}]},
+        borderColor:'#0F2C59',backgroundColor:'rgba(15,44,89,.08)',tension:0.4,fill:true,
+        pointBackgroundColor:'#C5A880',pointBorderColor:'#0F2C59',pointRadius:5,pointHoverRadius:7,borderWidth:2.5}]},
       options:{responsive:true,maintainAspectRatio:false,
         plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y} réservation(s)`}}},
         scales:{

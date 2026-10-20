@@ -1,4 +1,4 @@
-﻿require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -585,39 +585,39 @@ function buildVirementEmail({ studentName, packName, school, arrivalDate, refCom
   <title>Ordre de Réservation par Virement Bancaire - Le BADIL</title>
 </head>
 <body style="margin:0;padding:0;background:#f4f4f4;font-family:'Helvetica Neue',Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0C3830;padding:25px 20px;text-align:center;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0F2C59;padding:25px 20px;text-align:center;">
     <tr><td>
-      <h1 style="color:#B77A51;margin:0;font-size:22px;letter-spacing:2px;text-transform:uppercase;">LE BADIL CONCIERGERIE</h1>
-      <p style="color:#D5E1D9;margin:6px 0 0;font-size:12px;letter-spacing:1px;">DAKAR · SÉNÉGAL</p>
+      <h1 style="color:#DAC0A3;margin:0;font-size:22px;letter-spacing:2px;text-transform:uppercase;">LE BADIL CONCIERGERIE</h1>
+      <p style="color:#a0b4cc;margin:6px 0 0;font-size:12px;letter-spacing:1px;">DAKAR · SÉNÉGAL</p>
     </td></tr>
   </table>
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#B77A51;padding:12px 20px;text-align:center;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#DAC0A3;padding:12px 20px;text-align:center;">
     <tr><td>
-      <strong style="color:#ffffff;font-size:13px;letter-spacing:1px;text-transform:uppercase;">
+      <strong style="color:#0F2C59;font-size:13px;letter-spacing:1px;text-transform:uppercase;">
         📋 RÉSERVATION ENREGISTRÉE — PAIEMENT PAR VIREMENT BANCAIRE
       </strong>
     </td></tr>
   </table>
-  <div style="max-width:600px;margin:25px auto;background:#fff;padding:30px;border-radius:8px;border:1px solid #D5E1D9;box-shadow:0 4px 15px rgba(12,56,48,0.06);">
-    <h2 style="color:#0F3029;font-size:18px;margin-top:0;">Bonjour ${studentName},</h2>
+  <div style="max-width:600px;margin:25px auto;background:#fff;padding:30px;border-radius:8px;border:1px solid #e0e0e0;box-shadow:0 4px 15px rgba(0,0,0,0.05);">
+    <h2 style="color:#0F2C59;font-size:18px;margin-top:0;">Bonjour ${studentName},</h2>
     <p style="color:#444;font-size:14px;line-height:1.6;">
       Votre réservation pour le <strong>${packName}</strong> (${school || 'Établissement Dakar'}) a bien été pré-enregistrée. Votre concierge Le BADIL prendra en charge votre dossier dès réception de votre virement.
     </p>
 
-    <div style="background:#0C3830;color:#B77A51;padding:12px 20px;border-radius:6px;text-align:center;margin:20px 0;">
-      <span style="font-size:11px;color:#D5E1D9;text-transform:uppercase;letter-spacing:1px;display:block;">Référence Obligatoire du Virement</span>
-      <strong style="font-family:monospace;font-size:20px;letter-spacing:2px;color:#ffffff;">${refCommand}</strong>
+    <div style="background:#0F2C59;color:#DAC0A3;padding:12px 20px;border-radius:6px;text-align:center;margin:20px 0;">
+      <span style="font-size:11px;color:#a0b4cc;text-transform:uppercase;letter-spacing:1px;display:block;">Référence Obligatoire du Virement</span>
+      <strong style="font-family:monospace;font-size:20px;letter-spacing:2px;">${refCommand}</strong>
     </div>
 
-    <div style="background:#F0F5F1;border:1.5px solid #B77A51;border-radius:8px;padding:18px;margin:20px 0;">
-      <h3 style="color:#0F3029;margin:0 0 12px;font-size:15px;border-bottom:1px solid #D5E1D9;padding-bottom:6px;">Coordonnées Bancaires Officielles Le BADIL</h3>
+    <div style="background:#fdfbf7;border:1.5px solid #DAC0A3;border-radius:8px;padding:18px;margin:20px 0;">
+      <h3 style="color:#0F2C59;margin:0 0 12px;font-size:15px;border-bottom:1px solid #DAC0A3;padding-bottom:6px;">Coordonnées Bancaires Officielles Le BADIL</h3>
       <table width="100%" style="font-size:13px;color:#333;">
-        <tr><td style="padding:4px 0;color:#666;">Montant Total :</td><td style="font-weight:bold;color:#0F3029;text-align:right;">${amount.toLocaleString('fr-FR')} FCFA</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">Montant Total :</td><td style="font-weight:bold;color:#0F2C59;text-align:right;">${amount.toLocaleString('fr-FR')} FCFA</td></tr>
         <tr><td style="padding:4px 0;color:#666;">Bénéficiaire :</td><td style="font-weight:bold;text-align:right;">${bk.beneficiary || ""}</td></tr>
         <tr><td style="padding:4px 0;color:#666;">Établissement :</td><td style="font-weight:bold;text-align:right;">${bk.bankName || ""}</td></tr>
         <tr><td style="padding:4px 0;color:#666;">Code Banque / Guichet :</td><td style="font-family:monospace;text-align:right;">${bk.bankCode || ""} / ${bk.branchCode || ""}</td></tr>
         <tr><td style="padding:4px 0;color:#666;">Numéro de Compte :</td><td style="font-family:monospace;text-align:right;">${bk.accountNumber || ""} (Clé ${bk.ribKey || ""})</td></tr>
-        <tr><td style="padding:4px 0;color:#666;">IBAN Sénégal :</td><td style="font-family:monospace;font-weight:bold;color:#0F3029;text-align:right;">${bk.iban || ""}</td></tr>
+        <tr><td style="padding:4px 0;color:#666;">IBAN Sénégal :</td><td style="font-family:monospace;font-weight:bold;color:#0F2C59;text-align:right;">${bk.iban || ""}</td></tr>
         <tr><td style="padding:4px 0;color:#666;">Code SWIFT / BIC :</td><td style="font-family:monospace;text-align:right;">${bk.swift || ""}</td></tr>
       </table>
     </div>
@@ -652,15 +652,15 @@ function buildConfirmationEmail({ studentName, packName, school, arrivalDate, re
 <body style="margin:0;padding:0;background:#f4f4f4;font-family:'Helvetica Neue',Arial,sans-serif;">
 
   <!-- Header -->
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0C3830;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0F2C59;">
     <tr>
       <td align="center" style="padding:30px 20px;">
         <table width="600" cellpadding="0" cellspacing="0">
           <tr>
             <td align="center">
-              <div style="width:56px;height:56px;background:#B77A51;border-radius:50%;display:inline-block;line-height:56px;text-align:center;font-size:24px;font-weight:900;color:#ffffff;margin-bottom:12px;">B</div>
-              <h1 style="color:#B77A51;margin:8px 0 4px;font-size:22px;letter-spacing:2px;text-transform:uppercase;">LE BADIL CONCIERGERIE</h1>
-              <p style="color:#D5E1D9;margin:0;font-size:13px;letter-spacing:1px;">DAKAR · SÉNÉGAL</p>
+              <div style="width:56px;height:56px;background:#DAC0A3;border-radius:50%;display:inline-block;line-height:56px;text-align:center;font-size:24px;font-weight:900;color:#0F2C59;margin-bottom:12px;">B</div>
+              <h1 style="color:#DAC0A3;margin:8px 0 4px;font-size:22px;letter-spacing:2px;text-transform:uppercase;">LE BADIL CONCIERGERIE</h1>
+              <p style="color:#a0b4cc;margin:0;font-size:13px;letter-spacing:1px;">DAKAR · SÉNÉGAL</p>
             </td>
           </tr>
         </table>
@@ -669,10 +669,10 @@ function buildConfirmationEmail({ studentName, packName, school, arrivalDate, re
   </table>
 
   <!-- Gold Banner -->
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#B77A51;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#DAC0A3;">
     <tr>
       <td align="center" style="padding:14px 20px;">
-        <p style="margin:0;color:#ffffff;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">
+        <p style="margin:0;color:#0F2C59;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">
           ✅ PAIEMENT CONFIRMÉ — RÉSERVATION VALIDÉE
         </p>
       </td>
@@ -683,14 +683,14 @@ function buildConfirmationEmail({ studentName, packName, school, arrivalDate, re
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f4;">
     <tr>
       <td align="center" style="padding:30px 20px;">
-        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(12,56,48,0.08);">
+        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
 
           <!-- Greeting -->
           <tr>
             <td style="padding:36px 40px 20px;">
-              <h2 style="color:#0F3029;margin:0 0 16px;font-size:20px;">Bienvenue, ${studentName} ! 🎉</h2>
+              <h2 style="color:#0F2C59;margin:0 0 16px;font-size:20px;">Bienvenue, ${studentName} ! 🎉</h2>
               <p style="color:#444;line-height:1.7;margin:0 0 16px;">
-                Nous avons le plaisir de vous confirmer la validation de votre réservation pour le <strong style="color:#0F3029;">${packName}</strong>. Bienvenue au sein de la famille <strong>Le BADIL Conciergerie</strong> !
+                Nous avons le plaisir de vous confirmer la validation de votre réservation pour le <strong style="color:#0F2C59;">${packName}</strong>. Bienvenue au sein de la famille <strong>Le BADIL Conciergerie</strong> !
               </p>
               <p style="color:#444;line-height:1.7;margin:0;">
                 Dès aujourd'hui, vous n'êtes plus seul pour préparer votre arrivée à Dakar. Notre équipe est déjà mobilisée pour faire de votre installation au Sénégal un moment serein et mémorable.
@@ -701,15 +701,15 @@ function buildConfirmationEmail({ studentName, packName, school, arrivalDate, re
           <!-- Recap Box -->
           <tr>
             <td style="padding:0 40px 28px;">
-              <table width="100%" cellpadding="0" cellspacing="0" style="background:#F0F5F1;border-left:4px solid #B77A51;border-radius:8px;padding:20px;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8f5f0;border-left:4px solid #DAC0A3;border-radius:8px;padding:20px;">
                 <tr>
                   <td style="padding:20px;">
-                    <p style="margin:0 0 10px;font-size:13px;color:#0F3029;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Récapitulatif de votre dossier</p>
+                    <p style="margin:0 0 10px;font-size:13px;color:#0F2C59;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Récapitulatif de votre dossier</p>
                     <table width="100%" cellpadding="6" cellspacing="0">
-                      <tr><td style="color:#666;font-size:14px;">📦 Pack souscrit :</td><td style="color:#0F3029;font-weight:600;font-size:14px;">${packName}</td></tr>
-                      <tr><td style="color:#666;font-size:14px;">🎓 Établissement :</td><td style="color:#0F3029;font-weight:600;font-size:14px;">${school || 'À préciser'}</td></tr>
-                      <tr><td style="color:#666;font-size:14px;">✈️ Date d'arrivée AIBD :</td><td style="color:#0F3029;font-weight:600;font-size:14px;">${arrivalDate || 'À confirmer'}</td></tr>
-                      <tr><td style="color:#666;font-size:14px;">🔖 Référence dossier :</td><td style="color:#0F3029;font-weight:600;font-size:14px;font-family:monospace;">${refCommand}</td></tr>
+                      <tr><td style="color:#666;font-size:14px;">📦 Pack souscrit :</td><td style="color:#0F2C59;font-weight:600;font-size:14px;">${packName}</td></tr>
+                      <tr><td style="color:#666;font-size:14px;">🎓 Établissement :</td><td style="color:#0F2C59;font-weight:600;font-size:14px;">${school || 'À préciser'}</td></tr>
+                      <tr><td style="color:#666;font-size:14px;">✈️ Date d'arrivée AIBD :</td><td style="color:#0F2C59;font-weight:600;font-size:14px;">${arrivalDate || 'À confirmer'}</td></tr>
+                      <tr><td style="color:#666;font-size:14px;">🔖 Référence dossier :</td><td style="color:#0F2C59;font-weight:600;font-size:14px;font-family:monospace;">${refCommand}</td></tr>
                     </table>
                   </td>
                 </tr>
@@ -720,12 +720,12 @@ function buildConfirmationEmail({ studentName, packName, school, arrivalDate, re
           <!-- Next Steps -->
           <tr>
             <td style="padding:0 40px 28px;">
-              <p style="color:#0F3029;font-weight:700;margin:0 0 14px;font-size:15px;">📋 Vos prochaines étapes :</p>
+              <p style="color:#0F2C59;font-weight:700;margin:0 0 14px;font-size:15px;">📋 Vos prochaines étapes :</p>
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="padding:8px 0;border-bottom:1px solid #eee;">
                     <p style="margin:0;color:#444;font-size:14px;">
-                      <span style="display:inline-block;width:24px;height:24px;background:#B77A51;border-radius:50%;text-align:center;line-height:24px;font-weight:700;color:#ffffff;margin-right:10px;font-size:12px;">1</span>
+                      <span style="display:inline-block;width:24px;height:24px;background:#DAC0A3;border-radius:50%;text-align:center;line-height:24px;font-weight:700;color:#0F2C59;margin-right:10px;font-size:12px;">1</span>
                       Un <strong>concierge dédié</strong> vous contacte par WhatsApp sous 24h.
                     </p>
                   </td>
@@ -733,7 +733,7 @@ function buildConfirmationEmail({ studentName, packName, school, arrivalDate, re
                 <tr>
                   <td style="padding:8px 0;border-bottom:1px solid #eee;">
                     <p style="margin:0;color:#444;font-size:14px;">
-                      <span style="display:inline-block;width:24px;height:24px;background:#B77A51;border-radius:50%;text-align:center;line-height:24px;font-weight:700;color:#ffffff;margin-right:10px;font-size:12px;">2</span>
+                      <span style="display:inline-block;width:24px;height:24px;background:#DAC0A3;border-radius:50%;text-align:center;line-height:24px;font-weight:700;color:#0F2C59;margin-right:10px;font-size:12px;">2</span>
                       Nous recueillons vos <strong>détails de vol</strong> (compagnie, heure d'arrivée AIBD).
                     </p>
                   </td>
@@ -741,7 +741,7 @@ function buildConfirmationEmail({ studentName, packName, school, arrivalDate, re
                 <tr>
                   <td style="padding:8px 0;">
                     <p style="margin:0;color:#444;font-size:14px;">
-                      <span style="display:inline-block;width:24px;height:24px;background:#B77A51;border-radius:50%;text-align:center;line-height:24px;font-weight:700;color:#ffffff;margin-right:10px;font-size:12px;">3</span>
+                      <span style="display:inline-block;width:24px;height:24px;background:#DAC0A3;border-radius:50%;text-align:center;line-height:24px;font-weight:700;color:#0F2C59;margin-right:10px;font-size:12px;">3</span>
                       Notre équipe prépare votre <strong>accueil Teranga</strong> et votre logement.
                     </p>
                   </td>
@@ -765,7 +765,7 @@ function buildConfirmationEmail({ studentName, packName, school, arrivalDate, re
   </table>
 
   <!-- Footer -->
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0C3830;border-bottom:4px solid #B99142;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0F2C59;">
     <tr>
       <td align="center" style="padding:24px 20px;">
         <p style="color:#a0b4cc;margin:0 0 6px;font-size:12px;">Le BADIL Conciergerie Dakar — Excellence & Service Teranga</p>
@@ -876,25 +876,25 @@ function buildCorporateLeadEmail({ companyName, contactName, contactTitle, email
   <title>Accusé de réception Devis Séminaire — Le BADIL Conciergerie</title>
 </head>
 <body style="margin:0;padding:0;background:#f4f6f9;font-family:'Helvetica Neue',Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0C3830;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0F2C59;">
     <tr>
       <td align="center" style="padding:32px 20px;">
         <table width="600" cellpadding="0" cellspacing="0">
           <tr>
             <td align="center">
-              <div style="width:54px;height:54px;background:#B77A51;border-radius:12px;display:inline-block;line-height:54px;text-align:center;font-size:24px;font-weight:900;color:#ffffff;margin-bottom:12px;">B</div>
-              <h1 style="color:#B77A51;margin:8px 0 4px;font-size:22px;letter-spacing:2px;text-transform:uppercase;">LE BADIL CONCIERGERIE</h1>
-              <p style="color:#D5E1D9;margin:0;font-size:12px;letter-spacing:2px;text-transform:uppercase;">DÉPARTEMENT CORPORATE & BUSINESS EVENTS · DAKAR</p>
+              <div style="width:54px;height:54px;background:#DAC0A3;border-radius:12px;display:inline-block;line-height:54px;text-align:center;font-size:24px;font-weight:900;color:#0F2C59;margin-bottom:12px;">B</div>
+              <h1 style="color:#DAC0A3;margin:8px 0 4px;font-size:22px;letter-spacing:2px;text-transform:uppercase;">LE BADIL CONCIERGERIE</h1>
+              <p style="color:#a0b4cc;margin:0;font-size:12px;letter-spacing:2px;text-transform:uppercase;">DÉPARTEMENT CORPORATE & BUSINESS EVENTS · DAKAR</p>
             </td>
           </tr>
         </table>
       </td>
     </tr>
   </table>
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#B77A51;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#DAC0A3;">
     <tr>
       <td align="center" style="padding:10px 20px;">
-        <strong style="color:#ffffff;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;">
+        <strong style="color:#0F2C59;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;">
           💼 ACCUSÉ DE RÉCEPTION — PROJET SÉMINAIRE & ÉVÉNEMENT CORPORATE
         </strong>
       </td>
@@ -903,37 +903,37 @@ function buildCorporateLeadEmail({ companyName, contactName, contactTitle, email
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:30px 20px;">
     <tr>
       <td align="center">
-        <table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:12px;box-shadow:0 4px 20px rgba(12,56,48,0.08);border:1px solid #D5E1D9;overflow:hidden;">
+        <table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:12px;box-shadow:0 4px 20px rgba(15,44,89,0.08);border:1px solid #e2e8f0;overflow:hidden;">
           <tr>
             <td style="padding:36px;">
-              <h2 style="color:#0F3029;font-size:20px;margin-top:0;margin-bottom:12px;">Bonjour ${contactName}${contactTitle ? ' (' + contactTitle + ')' : ''},</h2>
+              <h2 style="color:#0F2C59;font-size:20px;margin-top:0;margin-bottom:12px;">Bonjour ${contactName}${contactTitle ? ' (' + contactTitle + ')' : ''},</h2>
               <p style="color:#475569;font-size:14px;line-height:1.6;margin-bottom:20px;">
                 Nous vous remercions pour l'intérêt que vous portez à <strong>Le BADIL Conciergerie Dakar</strong>. Nous avons le plaisir de vous confirmer la bonne prise en charge de votre projet d'événement professionnel pour le compte de l'entreprise <strong>${companyName}</strong>.
               </p>
-              <div style="background:#0C3830;color:#B77A51;padding:14px 20px;border-radius:8px;text-align:center;margin:24px 0;">
-                <span style="font-size:11px;color:#D5E1D9;text-transform:uppercase;letter-spacing:1px;display:block;">Numéro de Dossier Corporate</span>
-                <strong style="font-family:monospace;font-size:20px;letter-spacing:2px;color:#ffffff;">${refLead}</strong>
+              <div style="background:#0F2C59;color:#DAC0A3;padding:14px 20px;border-radius:8px;text-align:center;margin:24px 0;">
+                <span style="font-size:11px;color:#a0b4cc;text-transform:uppercase;letter-spacing:1px;display:block;">Numéro de Dossier Corporate</span>
+                <strong style="font-family:monospace;font-size:20px;letter-spacing:2px;">${refLead}</strong>
               </div>
-              <div style="background:#F0F5F1;border:1px solid #D5E1D9;border-radius:8px;padding:20px;margin:24px 0;">
-                <h3 style="color:#0F3029;margin:0 0 14px;font-size:15px;border-bottom:1px solid #D5E1D9;padding-bottom:8px;">
+              <div style="background:#F8FAFC;border:1px solid #CBD5E1;border-radius:8px;padding:20px;margin:24px 0;">
+                <h3 style="color:#0F2C59;margin:0 0 14px;font-size:15px;border-bottom:1px solid #E2E8F0;padding-bottom:8px;">
                   📋 Synthèse de votre Cahier des Charges
                 </h3>
                 <table width="100%" style="font-size:13px;color:#334155;border-collapse:collapse;">
-                  <tr><td style="padding:6px 0;color:#64748B;width:40%;">Entreprise :</td><td style="font-weight:700;color:#0F3029;">${companyName}</td></tr>
+                  <tr><td style="padding:6px 0;color:#64748B;width:40%;">Entreprise :</td><td style="font-weight:700;color:#0F2C59;">${companyName}</td></tr>
                   <tr><td style="padding:6px 0;color:#64748B;">Contact Décideur :</td><td>${contactName} ${contactTitle ? '— ' + contactTitle : ''}</td></tr>
                   <tr><td style="padding:6px 0;color:#64748B;">Téléphone / WhatsApp :</td><td>${phone}</td></tr>
-                  <tr><td style="padding:6px 0;color:#64748B;">Format d'Événement :</td><td style="font-weight:600;color:#0F3029;">${eventType}</td></tr>
+                  <tr><td style="padding:6px 0;color:#64748B;">Format d'Événement :</td><td style="font-weight:600;color:#0F2C59;">${eventType}</td></tr>
                   <tr><td style="padding:6px 0;color:#64748B;">Effectif prévu :</td><td><strong>${participants} participants</strong></td></tr>
                   <tr><td style="padding:6px 0;color:#64748B;">Durée envisagée :</td><td><strong>${days} jour(s)</strong></td></tr>
                   <tr><td style="padding:6px 0;color:#64748B;">Cadre / Destination :</td><td>${destination || 'À affiner avec le chef de projet'}</td></tr>
                   <tr><td style="padding:6px 0;color:#64748B;">Enveloppe Budgétaire :</td><td>${budget || 'Non spécifiée'}</td></tr>
                   ${services ? `<tr><td style="padding:6px 0;color:#64748B;">Prestations ciblées :</td><td style="color:#059669;font-weight:600;">${services}</td></tr>` : ''}
-                  ${totalEstimate ? `<tr><td style="padding:6px 0;color:#64748B;">Estimation Indicative HT :</td><td style="font-weight:800;color:#B99142;font-size:15px;">${totalEstimate}</td></tr>` : ''}
+                  ${totalEstimate ? `<tr><td style="padding:6px 0;color:#64748B;">Estimation Indicative HT :</td><td style="font-weight:800;color:#D4AF37;font-size:15px;">${totalEstimate}</td></tr>` : ''}
                   ${notes ? `<tr><td style="padding:6px 0;color:#64748B;vertical-align:top;">Notes & Attentes :</td><td style="font-style:italic;">${notes}</td></tr>` : ''}
                 </table>
               </div>
-              <div style="background:#FFFBF0;border-left:4px solid #B77A51;padding:16px 20px;margin:24px 0;border-radius:0 8px 8px 0;">
-                <h4 style="color:#B99142;margin:0 0 6px;font-size:14px;">⏱️ Notre Engagement Sous 24 Heures :</h4>
+              <div style="background:#FFFBF0;border-left:4px solid #D4AF37;padding:16px 20px;margin:24px 0;border-radius:0 8px 8px 0;">
+                <h4 style="color:#996515;margin:0 0 6px;font-size:14px;">⏱️ Notre Engagement Sous 24 Heures :</h4>
                 <p style="color:#78350F;margin:0;font-size:13px;line-height:1.5;">
                   Un chef de projet événementiel dédié chez Le BADIL étudie la disponibilité des réceptifs hôteliers (Dakar Plateau, Almadies, Saly, Gorée ou Saloum) et coordonne la régie logistique. Il prendra contact directement avec vous pour affiner le budget et vous soumettre un devis exécutif complet.
                 </p>
@@ -949,11 +949,11 @@ function buildCorporateLeadEmail({ companyName, contactName, contactTitle, email
       </td>
     </tr>
   </table>
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0C3830;border-bottom:4px solid #B99142;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0F2C59;">
     <tr>
       <td align="center" style="padding:22px;text-align:center;">
-        <p style="color:#D5E1D9;margin:0;font-size:11px;">Le BADIL · Dakar, Sénégal${formatLegalIds() ? ' · ' + formatLegalIds() : ''}</p>
-        <p style="color:#a0b4cc;margin:6px 0 0;font-size:11px;">Contact Corporate : ${process.env.SMTP_USER || 'contact@lebadilconciergerie.com'}</p>
+        <p style="color:#a0b4cc;margin:0;font-size:11px;">Le BADIL · Dakar, Sénégal${formatLegalIds() ? ' · ' + formatLegalIds() : ''}</p>
+        <p style="color:#6a8099;margin:6px 0 0;font-size:11px;">Contact Corporate : ${process.env.SMTP_USER || 'contact@lebadilconciergerie.com'}</p>
       </td>
     </tr>
   </table>
@@ -963,11 +963,11 @@ function buildCorporateLeadEmail({ companyName, contactName, contactTitle, email
 
 function buildCorporateLeadInternalNotification({ companyName, contactName, contactTitle, email, phone, eventType, participants, days, destination, budget, services, totalEstimate, refLead, notes }) {
   return `
-    <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#fff;border:1px solid #D5E1D9;border-radius:8px;padding:24px;">
-      <h2 style="color:#0F3029;border-bottom:2px solid #B77A51;padding-bottom:10px;margin-top:0;">🔔 Nouvelle Demande de Devis Séminaire Corporate !</h2>
+    <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#fff;border:1px solid #ddd;border-radius:8px;padding:24px;">
+      <h2 style="color:#0F2C59;border-bottom:2px solid #DAC0A3;padding-bottom:10px;margin-top:0;">🔔 Nouvelle Demande de Devis Séminaire Corporate !</h2>
       <p style="color:#333;font-size:14px;">Une entreprise vient de soumettre une demande officielle de devis via le portail en ligne :</p>
       <table width="100%" style="font-size:13px;border-collapse:collapse;margin:15px 0;">
-        <tr style="background:#F0F5F1;"><td style="padding:8px;font-weight:bold;width:35%;">Réf Dossier :</td><td style="padding:8px;color:#0F3029;font-weight:bold;">${refLead}</td></tr>
+        <tr style="background:#f4f6f9;"><td style="padding:8px;font-weight:bold;width:35%;">Réf Dossier :</td><td style="padding:8px;color:#0F2C59;font-weight:bold;">${refLead}</td></tr>
         <tr><td style="padding:8px;font-weight:bold;">Entreprise :</td><td style="padding:8px;">${companyName}</td></tr>
         <tr style="background:#f4f6f9;"><td style="padding:8px;font-weight:bold;">Contact :</td><td style="padding:8px;">${contactName} (${contactTitle || 'Non renseigné'})</td></tr>
         <tr><td style="padding:8px;font-weight:bold;">Email :</td><td style="padding:8px;"><a href="mailto:${email}">${email}</a></td></tr>
@@ -1486,10 +1486,10 @@ app.get('/api/test-email', requireRole(['admin']), async (req, res) => {
       toName: 'Test Le BADIL',
       subject: '🧪 Test Email — Le BADIL Conciergerie Dakar',
       htmlContent: `
-        <div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:30px;background:#0C3830;border-radius:12px;color:#B77A51;text-align:center;border-bottom:4px solid #B99142;">
-          <h2 style="color:#B77A51;margin-bottom:8px;">✅ Configuration SMTP OVH Active !</h2>
-          <p style="color:#D5E1D9;">Le module email <strong>Le BADIL Conciergerie</strong> fonctionne correctement.</p>
-          <p style="color:#a0b4cc;font-size:12px;margin-top:20px;">Envoyé le ${new Date().toLocaleString('fr-FR')}</p>
+        <div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:30px;background:#0F2C59;border-radius:12px;color:#DAC0A3;text-align:center;">
+          <h2 style="color:#DAC0A3;margin-bottom:8px;">✅ Configuration SMTP OVH Active !</h2>
+          <p style="color:#a0b4cc;">Le module email <strong>Le BADIL Conciergerie</strong> fonctionne correctement.</p>
+          <p style="color:#6a8099;font-size:12px;margin-top:20px;">Envoyé le ${new Date().toLocaleString('fr-FR')}</p>
         </div>
       `
     });
@@ -1518,9 +1518,9 @@ app.post('/api/test-email', requireRole(['admin']), async (req, res) => {
       toName: 'Test Le BADIL',
       subject: '🧪 Test Email — Le BADIL Conciergerie Dakar',
       htmlContent: `
-        <div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:30px;background:#0C3830;border-radius:12px;color:#B77A51;text-align:center;border-bottom:4px solid #B99142;">
-          <h2 style="color:#B77A51;margin-bottom:8px;">✅ Configuration SMTP OVH Active !</h2>
-          <p style="color:#D5E1D9;">Le module email <strong>Le BADIL Conciergerie</strong> fonctionne correctement.</p>
+        <div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:30px;background:#0F2C59;border-radius:12px;color:#DAC0A3;text-align:center;">
+          <h2 style="color:#DAC0A3;margin-bottom:8px;">✅ Configuration SMTP OVH Active !</h2>
+          <p style="color:#a0b4cc;">Le module email <strong>Le BADIL Conciergerie</strong> fonctionne correctement.</p>
           <p style="color:#6a8099;font-size:12px;margin-top:20px;">Envoyé le ${new Date().toLocaleString('fr-FR')}</p>
         </div>
       `
