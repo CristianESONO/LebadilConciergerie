@@ -35,15 +35,15 @@ function getSettings() {
       rccm: "SN.DKR.2021.A.36293"
     },
     banking: {
-      beneficiary: "LE BADIL CONCIERGERIE SUARL",
+      beneficiary: "LE BADIL",
       bankName: "CBAO Groupe Attijariwafa Bank",
       bankBranch: "Dakar Almadies / Plateau",
-      bankCode: "SN012",
-      branchCode: "01234",
-      accountNumber: "012345678901",
-      ribKey: "45",
-      iban: "SN12 SN01 2012 3412 3456 7890 145",
-      swift: "CBAOSNDA"
+      bankCode: "SN094",
+      branchCode: "01018",
+      accountNumber: "101609746001",
+      ribKey: "88",
+      iban: "SN0940101810160974600188",
+      swift: "ECOCSNDA"
     },
     pricing: {
       teranga: 75000,
