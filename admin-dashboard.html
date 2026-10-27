@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Direction & Exploitation — Le BADIL Conciergerie Dakar</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1183,6 +1184,42 @@
       }
       .add-school-card-form {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .app-sidebar {
+        width: 60px;
+      }
+      .app-main {
+        margin-left: 60px;
+      }
+      .content-area {
+        padding: 1rem 0.75rem;
+      }
+      .top-header {
+        padding: 0.75rem 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      .header-breadcrumb {
+        font-size: 0.825rem;
+      }
+      .content-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .table-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-input-box {
+        width: 100%;
+      }
+      .table-container {
+        -webkit-overflow-scrolling: touch;
       }
     }
 

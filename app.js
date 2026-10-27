@@ -7,6 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
   let WHATSAPP_NUMBER = '221711794949';
   const FCFA_PER_EUR = 655.957;
 
+  function refreshIcons() {
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      try {
+        window.lucide.createIcons();
+      } catch (e) {
+        console.warn('Lucide icon refresh:', e);
+      }
+    }
+  }
+  refreshIcons();
+
   function formatFCFA(amount) {
     return new Intl.NumberFormat('fr-FR').format(Math.round(amount)) + ' FCFA';
   }
@@ -142,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Positionnement zone arrivées avec pancarte Gold Le BADIL',
         'Préparation puce SIM 4G locale & kit d\'accueil Teranga'
       ],
-      icon: '🛫',
+      icon: '<i data-lucide="plane-takeoff" style="width:2.5rem;height:2.5rem;" class="icon-gold"></i>',
       badge: 'Statut : Prêt & Planifié',
       loc: 'Localisation : Aéroport Blaise Diagne (Diass)'
     },
@@ -155,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Insertion de la puce SIM locale & activation du forfait 20 Go',
         'Message vocal de confirmation envoyé instantanément aux parents'
       ],
-      icon: '🤝',
+      icon: '<i data-lucide="handshake" style="width:2.5rem;height:2.5rem;" class="icon-gold"></i>',
       badge: 'Statut : Prise en charge effectuée',
       loc: 'Localisation : Terminal Arrivées AIBD'
     },
@@ -168,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Remise de la pochette d\'accueil (guide des transports, contacts santé)',
         'Premier échange d\'orientation sur la vie dakaroise'
       ],
-      icon: '🚗',
+      icon: '<i data-lucide="car" style="width:2.5rem;height:2.5rem;" class="icon-gold"></i>',
       badge: 'Statut : En cours de transfert',
       loc: 'Localisation : Autoroute AIBD ➔ Dakar'
     },
@@ -181,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Livraison des premières courses dans le réfrigérateur (Pack VIP)',
         'Signature du PV de remise des clés & Hotline assistance activée'
       ],
-      icon: '🔑',
+      icon: '<i data-lucide="key" style="width:2.5rem;height:2.5rem;" class="icon-gold"></i>',
       badge: 'Statut : Installation Réussie !',
       loc: 'Localisation : Logement Étudiant à Dakar'
     }
@@ -198,7 +209,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data) {
         stepTitle.textContent = data.title;
         stepDesc.textContent = data.desc;
-        stepIcon.textContent = data.icon;
+        stepIcon.innerHTML = data.icon;
+        refreshIcons();
         stepBadge.textContent = data.badge;
         stepLoc.textContent = data.loc;
 

@@ -56,7 +56,8 @@
   }
   </script>
 
-  <link rel="stylesheet" href="styles.css?v=2.4">
+  <link rel="stylesheet" href="styles.css?v=2.5">
+  <script src="assets/lucide.min.js"></script>
 </head>
 
 <body>
@@ -64,9 +65,9 @@
   <!-- Top Informational Bar -->
   <div class="top-bar">
     <div class="top-bar-left">
-      <span class="badge-flag">🇸🇳 Dakar, Sénégal</span>
-      <span>📞 WhatsApp : <strong data-contact-whatsapp>+221 71 179 49 49</strong></span>
-      <span>✉️ <span data-contact-email>contact@lebadilconciergerie.com</span></span>
+      <span class="badge-flag"><i data-lucide="map-pin" class="icon-gold"></i> Dakar, Sénégal</span>
+      <span><i data-lucide="phone" class="icon-gold"></i> WhatsApp : <strong data-contact-whatsapp>+221 71 179 49 49</strong></span>
+      <span><i data-lucide="mail" class="icon-gold"></i> <span data-contact-email>contact@lebadilconciergerie.com</span></span>
     </div>
     <div class="top-bar-right">
       <span data-legal-ids>NINEA: 008964365 • RCCM: SN.DKR.2021.A.36293</span>
@@ -85,19 +86,19 @@
 
     <nav class="main-nav">
       <button class="nav-tab-btn active" data-tab="tab-etudiants">
-        🎓 Pôle Étudiants
+        <i data-lucide="graduation-cap"></i> Pôle Étudiants
       </button>
       <button class="nav-tab-btn" data-tab="tab-entreprises">
-        💼 Pôle Entreprises
+        <i data-lucide="briefcase"></i> Pôle Entreprises
       </button>
       <button class="nav-tab-btn" data-tab="tab-escapades">
-        🌍 Escapades
+        <i data-lucide="compass"></i> Escapades
       </button>
       <button class="nav-tab-btn" data-tab="tab-logistique">
-        ✈️ Jour-J AIBD
+        <i data-lucide="plane"></i> Jour-J AIBD
       </button>
       <button class="nav-tab-btn" data-tab="tab-tarifs">
-        📊 Grille FCFA
+        <i data-lucide="receipt"></i> Grille Tarifs
       </button>
     </nav>
   </header>
@@ -106,7 +107,7 @@
   <section class="hero-section">
     <div class="hero-container">
       <div class="hero-text">
-        <div class="hero-badge">🇸🇳 Conciergerie à Dakar, depuis 2021</div>
+        <div class="hero-badge"><i data-lucide="shield-check" class="icon-gold"></i> Conciergerie à Dakar, depuis 2021</div>
         <h2 class="hero-title">Votre arrivée à Dakar, <span>sans les galères.</span></h2>
         <p class="hero-subtitle">
           Le BADIL aide les étudiants à s'installer tranquillement et organise les événements d'entreprise au Sénégal.
@@ -114,17 +115,17 @@
         </p>
         <div class="hero-cta-group">
           <a class="btn-primary" id="open-booking-modal-hero" href="#reservation">
-            💳 Réserver un Pack Étudiant en Ligne
+            <i data-lucide="calendar-check"></i> Réserver un Pack Étudiant en Ligne
           </a>
           <button class="btn-outline-light" id="open-seminar-calc-hero">
-            📊 Simuler un Devis Séminaire Business
+            <i data-lucide="calculator"></i> Simuler un Devis Séminaire Business
           </button>
         </div>
       </div>
 
       <div class="hero-stats-card">
         <div class="stat-item">
-          <div class="stat-icon">🎓</div>
+          <div class="stat-icon"><i data-lucide="graduation-cap"></i></div>
           <div class="stat-text">
             <h4>Pôle Étudiants Key-in-Hand</h4>
             <p>Accueil AIBD, recherche ciblée selon vos besoins, démarches Senelec/Sen'Eau/Internet et suivi
@@ -132,14 +133,14 @@
           </div>
         </div>
         <div class="stat-item">
-          <div class="stat-icon">💼</div>
+          <div class="stat-icon"><i data-lucide="briefcase"></i></div>
           <div class="stat-text">
             <h4>Pour les entreprises</h4>
             <p>Séminaires, team buildings et événements à Dakar, Saly ou Gorée — devis sous 24h, régie le Jour-J.</p>
           </div>
         </div>
         <div class="stat-item">
-          <div class="stat-icon">🏦</div>
+          <div class="stat-icon"><i data-lucide="landmark"></i></div>
           <div class="stat-text">
             <h4>Paiement en FCFA</h4>
             <p>Intégration directe Wave Sénégal, Orange Money & Virement Bancaire en FCFA et Euros.</p>
@@ -264,7 +265,7 @@
           <!-- Pack Teranga -->
           <div class="pack-card">
             <div>
-              <div class="pack-icon">✈️</div>
+              <div class="pack-icon-wrapper"><i data-lucide="plane"></i></div>
               <h3 class="pack-name">Pack Teranga</h3>
               <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Accueil AIBD & Transfert
               </p>
@@ -286,7 +287,7 @@
           <!-- Pack Logement Serein -->
           <div class="pack-card">
             <div>
-              <div class="pack-icon">🏠</div>
+              <div class="pack-icon-wrapper"><i data-lucide="home"></i></div>
               <h3 class="pack-name">Pack Logement</h3>
               <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Chasse & Abonnements</p>
               <div class="pack-price-box">
@@ -308,7 +309,7 @@
           <div class="pack-card popular card-gold-featured">
             <div class="popular-badge badge-signature-gold">Pack Complet • Tout Inclus</div>
             <div>
-              <div class="pack-icon">⭐</div>
+              <div class="pack-icon-wrapper"><i data-lucide="crown"></i></div>
               <h3 class="pack-name gold-text-metallic">Pack VIP All-Inclusive</h3>
               <p style="font-size:0.85rem; color:var(--color-gold-dark); font-weight:700; margin-bottom:0.75rem;">
                 Logement + Accueil + Intégration</p>
@@ -330,7 +331,7 @@
           <!-- Pack Intégration -->
           <div class="pack-card">
             <div>
-              <div class="pack-icon">🧭</div>
+              <div class="pack-icon-wrapper"><i data-lucide="compass"></i></div>
               <h3 class="pack-name">Pack Intégration</h3>
               <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Vie Locale & Santé</p>
               <div class="pack-price-box">
@@ -351,7 +352,7 @@
 
         <!-- === ADD-ON ESCAPADES ÉTUDIANTS === -->
         <div class="section-header" style="margin-top:2.5rem;">
-          <span class="section-tag">Bonus Découverte 🌍</span>
+          <span class="section-tag">Bonus Découverte <i data-lucide="sparkles" class="icon-gold"></i></span>
           <h2 class="section-title" style="font-size:1.5rem;">Découvrir le Sénégal pendant vos études</h2>
           <p class="section-desc">Des escapades organisées pour sortir du quotidien, découvrir le pays et tisser des
             liens. Ajoutez-en une à n'importe quel pack.</p>
@@ -361,7 +362,7 @@
           <!-- Escapade Dakar Vivant -->
           <div class="pack-card" style="border-top: 3px solid #e67e22;">
             <div>
-              <div class="pack-icon">🏙️</div>
+              <div class="pack-icon-wrapper" style="border-color:rgba(230,126,34,0.35);"><i data-lucide="building" style="color:#e67e22;"></i></div>
               <h3 class="pack-name">Dakar Vivant</h3>
               <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Immersion Urbaine &amp;
                 Culture</p>
@@ -372,10 +373,10 @@
                 <div class="price-eur">~ 38 € / pers.</div>
               </div>
               <ul class="pack-features">
-                <li>🎨 Village des Arts de Dakar (Médina)</li>
-                <li>🥁 Atelier percussions Sabar en groupe</li>
-                <li>🍴 Street food tour Sandaga &amp; Marché Kermel</li>
-                <li>🌅 Coucher de soleil aux Mamelles &amp; Phare</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Village des Arts de Dakar (Médina)</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Atelier percussions Sabar en groupe</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Street food tour Sandaga &amp; Marché Kermel</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Coucher de soleil aux Mamelles &amp; Phare</li>
               </ul>
             </div>
             <a class="btn-primary select-pack-btn add-addon-btn" href="#reservation" data-addon="escapade-dakar"
@@ -386,7 +387,7 @@
           <!-- Escapade Gorée -->
           <div class="pack-card" style="border-top: 3px solid #8e44ad;">
             <div>
-              <div class="pack-icon">🏝️</div>
+              <div class="pack-icon-wrapper" style="border-color:rgba(142,68,173,0.35);"><i data-lucide="waves" style="color:#8e44ad;"></i></div>
               <h3 class="pack-name">Journée Gorée</h3>
               <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Patrimoine UNESCO &amp;
                 Mémoire</p>
@@ -397,10 +398,10 @@
                 <div class="price-eur">~ 61 € / pers.</div>
               </div>
               <ul class="pack-features">
-                <li>⛵ Traversée officielle vers Gorée (selon horaires et places)</li>
-                <li>🏛️ Maison des Esclaves &amp; Porte du Voyage sans Retour</li>
-                <li>🎨 Ruelles colorées &amp; artisans locaux</li>
-                <li>🍽️ Déjeuner spécialités sénégalaises sur l'île</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Traversée officielle vers Gorée (selon horaires et places)</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Maison des Esclaves &amp; Porte du Voyage sans Retour</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Ruelles colorées &amp; artisans locaux</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Déjeuner spécialités sénégalaises sur l'île</li>
               </ul>
             </div>
             <a class="btn-primary select-pack-btn add-addon-btn" href="#reservation" data-addon="escapade-goree"
@@ -411,7 +412,7 @@
           <!-- Escapade Saly -->
           <div class="pack-card" style="border-top: 3px solid #27ae60;">
             <div>
-              <div class="pack-icon">🏄</div>
+              <div class="pack-icon-wrapper" style="border-color:rgba(39,174,96,0.35);"><i data-lucide="activity" style="color:#27ae60;"></i></div>
               <h3 class="pack-name">Week-end Saly</h3>
               <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Plage &amp; Sports
                 Petite Côte</p>
@@ -422,10 +423,10 @@
                 <div class="price-eur">~ 84 € / pers.</div>
               </div>
               <ul class="pack-features">
-                <li>🚐 Transport aller-retour Dakar ↔ Saly</li>
-                <li>🏄 Session initiation surf ou stand-up paddle</li>
-                <li>🏋️ Beach volley + yoga au lever de soleil</li>
-                <li>🌴 Accès spa &amp; piscine lodge partenaire</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Transport aller-retour Dakar ↔ Saly</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Session initiation surf ou stand-up paddle</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Beach volley + yoga au lever de soleil</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Accès spa &amp; piscine lodge partenaire</li>
               </ul>
             </div>
             <a class="btn-primary select-pack-btn add-addon-btn" href="#reservation" data-addon="escapade-saly"
@@ -436,7 +437,7 @@
           <!-- Escapade Saloum -->
           <div class="pack-card" style="border-top: 3px solid #2980b9;">
             <div>
-              <div class="pack-icon">🛶</div>
+              <div class="pack-icon-wrapper" style="border-color:rgba(41,128,185,0.35);"><i data-lucide="sailboat" style="color:#2980b9;"></i></div>
               <h3 class="pack-name">Aventure Saloum</h3>
               <p style="font-size:0.85rem; color:var(--color-gray-600); margin-bottom:0.75rem;">Delta &amp; Bolongs en
                 Pirogue</p>
@@ -447,10 +448,10 @@
                 <div class="price-eur">~ 115 € / pers.</div>
               </div>
               <ul class="pack-features">
-                <li>🚐 Transport climatisé Dakar ↔ Sine Saloum</li>
-                <li>🛶 Pirogue mangrove avec opérateur local, sous réserve météo</li>
-                <li>🦅 Observation oiseaux &amp; pêche traditionnelle</li>
-                <li>🏕️ Déjeuner grillades fraîches en éco-lodge</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Transport climatisé Dakar ↔ Sine Saloum</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Pirogue mangrove avec opérateur local, sous réserve météo</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Observation oiseaux &amp; pêche traditionnelle</li>
+                <li><i data-lucide="check" class="icon-gold"></i> Déjeuner grillades fraîches en éco-lodge</li>
               </ul>
             </div>
             <a class="btn-primary select-pack-btn add-addon-btn" href="#reservation" data-addon="escapade-saloum"
@@ -478,7 +479,7 @@
         <div class="escapade-destination-block">
           <div class="escapade-dest-header" style="border-left: 4px solid #e67e22;">
             <div style="display:flex; align-items:center; gap:1rem;">
-              <span style="font-size:2.5rem;">🏙️</span>
+              <i data-lucide="building" style="width:2.2rem;height:2.2rem;color:#e67e22;"></i>
               <div>
                 <h3 style="font-size:1.4rem; color:var(--color-navy-primary); margin:0;">Dakar — La Ville Vibrante</h3>
                 <p style="color:var(--color-gray-600); font-size:0.9rem; margin:0;">Culture urbaine, gastronomie de rue
@@ -489,25 +490,25 @@
           </div>
           <div class="grid-4" style="margin-top:1rem;">
             <div class="activity-card">
-              <div class="activity-icon">🎨</div>
+              <div class="activity-icon"><i data-lucide="palette"></i></div>
               <h4>Village des Arts</h4>
               <p>Ateliers d'artistes contemporains sénégalais, œuvres uniques, rencontres culturelles en Médina.</p>
               <span class="activity-tag">Culture</span>
             </div>
             <div class="activity-card">
-              <div class="activity-icon">🥁</div>
+              <div class="activity-icon"><i data-lucide="music"></i></div>
               <h4>Atelier Sabar</h4>
               <p>Cours de percussion Sabar en groupe animé par un maître griot. Idéal team building ou découverte.</p>
               <span class="activity-tag">Musique &amp; Cohésion</span>
             </div>
             <div class="activity-card">
-              <div class="activity-icon">🍴</div>
+              <div class="activity-icon"><i data-lucide="utensils"></i></div>
               <h4>Street Food Tour</h4>
               <p>Dégustation guidée : thieboudienne, yassa poulet, bissap glacé au marché Kermel &amp; Sandaga.</p>
               <span class="activity-tag">Gastronomie</span>
             </div>
             <div class="activity-card">
-              <div class="activity-icon">🌅</div>
+              <div class="activity-icon"><i data-lucide="sun"></i></div>
               <h4>Les Mamelles &amp; Phare</h4>
               <p>Vue panoramique sur l'Atlantique depuis le promontoire volcanique. Coucher de soleil inoubliable.</p>
               <span class="activity-tag">Panorama</span>
@@ -519,7 +520,7 @@
         <div class="escapade-destination-block">
           <div class="escapade-dest-header" style="border-left: 4px solid #8e44ad;">
             <div style="display:flex; align-items:center; gap:1rem;">
-              <span style="font-size:2.5rem;">🏝️</span>
+              <i data-lucide="waves" style="width:2.2rem;height:2.2rem;color:#8e44ad;"></i>
               <div>
                 <h3 style="font-size:1.4rem; color:var(--color-navy-primary); margin:0;">Île de Gorée — Mémoire &amp;
                   Sérénité</h3>
@@ -531,26 +532,26 @@
           </div>
           <div class="grid-4" style="margin-top:1rem;">
             <div class="activity-card">
-              <div class="activity-icon">🏛️</div>
+              <div class="activity-icon"><i data-lucide="landmark"></i></div>
               <h4>Maison des Esclaves</h4>
               <p>Visite guidée émouvante : cachots, salle de pesée et la célèbre Porte du Voyage sans Retour.</p>
               <span class="activity-tag">Histoire &amp; Mémoire</span>
             </div>
             <div class="activity-card">
-              <div class="activity-icon">🚶</div>
+              <div class="activity-icon"><i data-lucide="footprints"></i></div>
               <h4>Tour des Ruelles</h4>
               <p>Promenade dans les ruelles colorées, montée au Castel, vue 360° sur l'océan Atlantique et Dakar.</p>
               <span class="activity-tag">Patrimoine</span>
             </div>
             <div class="activity-card">
-              <div class="activity-icon">🎭</div>
+              <div class="activity-icon"><i data-lucide="brush"></i></div>
               <h4>Rencontre Artistique</h4>
               <p>Échanges avec les artistes locaux, visites de galeries nichées dans les vieilles demeures coloniales.
               </p>
               <span class="activity-tag">Art &amp; Culture</span>
             </div>
             <div class="activity-card">
-              <div class="activity-icon">🍽️</div>
+              <div class="activity-icon"><i data-lucide="utensils"></i></div>
               <h4>Déjeuner Insulaire</h4>
               <p>Repas gastronomique dans un restaurant face à l'océan. Fraîcheur, brise marine et saveurs locales.</p>
               <span class="activity-tag">Gastronomie</span>
@@ -562,7 +563,7 @@
         <div class="escapade-destination-block">
           <div class="escapade-dest-header" style="border-left: 4px solid #27ae60;">
             <div style="display:flex; align-items:center; gap:1rem;">
-              <span style="font-size:2.5rem;">🏄</span>
+              <i data-lucide="activity" style="width:2.2rem;height:2.2rem;color:#27ae60;"></i>
               <div>
                 <h3 style="font-size:1.4rem; color:var(--color-navy-primary); margin:0;">Saly &amp; Petite Côte —
                   Détente &amp; Sport</h3>
@@ -574,26 +575,26 @@
           </div>
           <div class="grid-4" style="margin-top:1rem;">
             <div class="activity-card">
-              <div class="activity-icon">🏄</div>
+              <div class="activity-icon"><i data-lucide="activity"></i></div>
               <h4>Surf &amp; Paddle</h4>
               <p>Initiation surf ou stand-up paddle avec moniteur certifié sur les vagues de la Petite Côte.</p>
               <span class="activity-tag">Sport Nautique</span>
             </div>
             <div class="activity-card">
-              <div class="activity-icon">🤿</div>
+              <div class="activity-icon"><i data-lucide="compass"></i></div>
               <h4>Snorkeling &amp; Plongée</h4>
               <p>Exploration sous-marine possible avec un club partenaire, si un moniteur certifié est disponible à la
                 date retenue.</p>
               <span class="activity-tag">Plongée</span>
             </div>
             <div class="activity-card">
-              <div class="activity-icon">🏋️</div>
+              <div class="activity-icon"><i data-lucide="trophy"></i></div>
               <h4>Beach Volley &amp; Sports</h4>
               <p>Tournoi de beach volley organisé, pétanque sur sable, yoga au lever du soleil face à l'Atlantique.</p>
               <span class="activity-tag">Sport &amp; Bien-être</span>
             </div>
             <div class="activity-card">
-              <div class="activity-icon">🌴</div>
+              <div class="activity-icon"><i data-lucide="sparkles"></i></div>
               <h4>Spa &amp; Détente Lodge</h4>
               <p>Accès spa &amp; hammam dans nos lodges partenaires, massages traditionnels et piscine à débordement.
               </p>
@@ -606,7 +607,7 @@
         <div class="escapade-destination-block">
           <div class="escapade-dest-header" style="border-left: 4px solid #2980b9;">
             <div style="display:flex; align-items:center; gap:1rem;">
-              <span style="font-size:2.5rem;">🛶</span>
+              <i data-lucide="sailboat" style="width:2.2rem;height:2.2rem;color:#2980b9;"></i>
               <div>
                 <h3 style="font-size:1.4rem; color:var(--color-navy-primary); margin:0;">Îles du Saloum — Nature &amp;
                   Aventure</h3>
@@ -618,26 +619,26 @@
           </div>
           <div class="grid-4" style="margin-top:1rem;">
             <div class="activity-card">
-              <div class="activity-icon">🛶</div>
+              <div class="activity-icon"><i data-lucide="sailboat"></i></div>
               <h4>Pirogue dans les Bolongs</h4>
               <p>Navigation silencieuse dans les bras de mer entre mangroves, marigots et villages de pêcheurs.</p>
               <span class="activity-tag">Nature</span>
             </div>
             <div class="activity-card">
-              <div class="activity-icon">🦅</div>
+              <div class="activity-icon"><i data-lucide="binoculars"></i></div>
               <h4>Safari Ornithologique</h4>
               <p>Observation d’oiseaux avec un guide local, selon la saison et les conditions du delta.</p>
               <span class="activity-tag">Écotourisme</span>
             </div>
             <div class="activity-card">
-              <div class="activity-icon">🎣</div>
+              <div class="activity-icon"><i data-lucide="fish"></i></div>
               <h4>Pêche Sportive</h4>
               <p>Sortie de pêche traditionnelle avec les pêcheurs locaux. Retour avec votre prise grillée au feu de
                 bois.</p>
               <span class="activity-tag">Sport &amp; Tradition</span>
             </div>
             <div class="activity-card">
-              <div class="activity-icon">🏕️</div>
+              <div class="activity-icon"><i data-lucide="tent"></i></div>
               <h4>Nuit en Éco-lodge</h4>
               <p>Hébergement en lodge ou case partenaire, selon disponibilités. Cadre nature, sans garantie météo.</p>
               <span class="activity-tag">Éco-hébergement</span>
@@ -648,17 +649,17 @@
         <!-- CTA Escapades -->
         <div
           style="text-align:center; margin-top:2.5rem; padding:2rem; background:linear-gradient(135deg, var(--color-navy-dark), var(--color-navy-primary)); border-radius:var(--radius-md); border:1px solid var(--color-gold-primary);">
-          <div style="font-size:2rem; margin-bottom:0.75rem;">✨</div>
+          <div style="font-size:2rem; margin-bottom:0.75rem;"><i data-lucide="sparkles" class="icon-gold"></i></div>
           <h3 style="color:var(--color-gold-primary); margin-bottom:0.5rem; font-size:1.3rem;">Votre escapade sur-mesure
           </h3>
           <p style="color:rgba(255,255,255,0.8); font-size:0.95rem; max-width:550px; margin:0 auto 1.5rem;">Combinez
             plusieurs destinations ou ajoutez une escapade à votre pack étudiant ou séminaire. Notre équipe crée
             l'itinéraire parfait pour vous.</p>
           <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-            <a class="btn-primary" id="open-booking-modal-escapade" href="#reservation">💳 Réserver une Escapade</a>
+            <a class="btn-primary" id="open-booking-modal-escapade" href="#reservation"><i data-lucide="calendar-check"></i> Réserver une Escapade</a>
             <a href="https://wa.me/221711794949" target="_blank" rel="noopener" data-whatsapp-link
               data-whatsapp-message="Bonjour Le BADIL Conciergerie, je souhaite échanger avec un concierge."
-              style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.5rem; border:2px solid var(--color-gold-primary); color:var(--color-gold-primary); border-radius:var(--radius-sm); font-weight:600; text-decoration:none; font-size:0.95rem;">💬
+              style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.5rem; border:2px solid var(--color-gold-primary); color:var(--color-gold-primary); border-radius:var(--radius-sm); font-weight:600; text-decoration:none; font-size:0.95rem;"><i data-lucide="message-circle" class="icon-gold"></i>
               WhatsApp Concierge</a>
           </div>
         </div>
@@ -686,19 +687,19 @@
         <!-- 3 Piliers Corporate -->
         <div class="corp-pillars-grid">
           <div class="corp-pillar-card">
-            <div class="corp-pillar-icon">👤</div>
+            <div class="corp-pillar-icon"><i data-lucide="user-check"></i></div>
             <h4>Un interlocuteur unique</h4>
             <p>Une seule personne coordonne votre projet de bout en bout : repérages, prestataires, régie le Jour J et
               facturation claire.</p>
           </div>
           <div class="corp-pillar-card">
-            <div class="corp-pillar-icon">⏱️</div>
+            <div class="corp-pillar-icon"><i data-lucide="timer"></i></div>
             <h4>Réactivité &amp; Rigueur</h4>
             <p>Proposition budgétaire détaillée sous 24h ouvrées, respect des timings et des standards internationaux
               pour assurer la réussite de votre événement.</p>
           </div>
           <div class="corp-pillar-card">
-            <div class="corp-pillar-icon">🤝</div>
+            <div class="corp-pillar-icon"><i data-lucide="handshake"></i></div>
             <h4>Réseau Local de Partenaires</h4>
             <p>Sélection de prestataires et partenaires reconnus pour leur qualité de service et leur fiabilité, avec
               une flotte de véhicules climatisés et confortables.</p>
@@ -718,7 +719,7 @@
             <!-- Pack CODIR VIP -->
             <div class="corp-pack-card">
               <div class="corp-pack-badge">Exclusif &amp; Confidentiel</div>
-              <div class="corp-pack-icon">🏛️</div>
+              <div class="corp-pack-icon"><i data-lucide="landmark"></i></div>
               <h4 class="corp-pack-title">Comité Exécutif &amp; CODIR VIP</h4>
               <p class="corp-pack-subtitle">Dakar Plateau &amp; Almadies Corniche</p>
               <div class="corp-pack-price-box">
@@ -743,7 +744,7 @@
             <div class="corp-pack-card popular">
               <div class="corp-pack-badge" style="background:var(--color-gold-primary); color:var(--color-navy-dark);">
                 Le Plus Plébiscité</div>
-              <div class="corp-pack-icon">🏖️</div>
+              <div class="corp-pack-icon"><i data-lucide="palmtree"></i></div>
               <h4 class="corp-pack-title">Séminaire Résidentiel &amp; Stratégie</h4>
               <p class="corp-pack-subtitle">Petite Côte · Saly &amp; Somone</p>
               <div class="corp-pack-price-box">
@@ -770,7 +771,7 @@
             <!-- Pack Team Building Gorée / Saloum -->
             <div class="corp-pack-card">
               <div class="corp-pack-badge">Cohésion &amp; Sens</div>
-              <div class="corp-pack-icon">🛶</div>
+              <div class="corp-pack-icon"><i data-lucide="sailboat"></i></div>
               <h4 class="corp-pack-title">Team Building Immersion &amp; RSE</h4>
               <p class="corp-pack-subtitle">Île de Gorée ou Delta du Sine Saloum</p>
               <div class="corp-pack-price-box">
@@ -808,7 +809,7 @@
             <div class="corp-estimator-box">
               <h4
                 style="color:var(--color-gold-primary); font-size:1.2rem; margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;">
-                <span>📊</span> Estimateur Budgétaire en Direct
+                <i data-lucide="calculator" class="icon-gold"></i> Estimateur Budgétaire en Direct
               </h4>
 
               <div class="form-group">
@@ -850,19 +851,19 @@
                 <div class="corp-options-list">
                   <label class="corp-checkbox-item">
                     <input type="checkbox" id="opt-transport-vip" class="corp-opt-cb" data-cost-pers="15000" checked>
-                    <span>🚗 Flotte de transport climatisée (Navettes AIBD &amp; Berlines)</span>
+                    <span><i data-lucide="car"></i> Flotte de transport climatisée (Navettes AIBD &amp; Berlines)</span>
                   </label>
                   <label class="corp-checkbox-item">
                     <input type="checkbox" id="opt-gala-dinner" class="corp-opt-cb" data-cost-pers="20000" checked>
-                    <span>🍽️ Dîner de Gala &amp; Soirée d'Exception Teranga</span>
+                    <span><i data-lucide="utensils"></i> Dîner de Gala &amp; Soirée d'Exception Teranga</span>
                   </label>
                   <label class="corp-checkbox-item">
                     <input type="checkbox" id="opt-media-drone" class="corp-opt-cb" data-cost-fixed="250000">
-                    <span>📸 Couverture Photo &amp; Vidéo par Drone professionnelle</span>
+                    <span><i data-lucide="camera"></i> Couverture Photo &amp; Vidéo par Drone professionnelle</span>
                   </label>
                   <label class="corp-checkbox-item">
                     <input type="checkbox" id="opt-welcome-gift" class="corp-opt-cb" data-cost-pers="10000">
-                    <span>🎁 Coffrets cadeaux d'accueil Teranga aux couleurs de l'entreprise</span>
+                    <span><i data-lucide="gift"></i> Coffrets cadeaux d'accueil Teranga aux couleurs de l'entreprise</span>
                   </label>
                 </div>
               </div>
@@ -889,7 +890,7 @@
             <div class="corp-lead-form-box">
               <h4
                 style="color:var(--color-navy-primary); font-size:1.2rem; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.5rem;">
-                <span>💼</span> Formulaire de Qualification Corporate
+                <i data-lucide="building-2" class="icon-navy"></i> Formulaire de Qualification Corporate
               </h4>
               <p style="color:var(--color-gray-600); font-size:0.85rem; margin-bottom:1.25rem;">
                 Recevez votre proposition personnalisée avec notre calendrier de régie sous 24 heures.
@@ -974,7 +975,7 @@
                 <!-- Submit Button & Feedback -->
                 <button type="submit" id="btn-submit-corporate-lead" class="btn-primary"
                   style="width:100%; padding:0.9rem; font-size:1rem; font-weight:700; background:linear-gradient(135deg, var(--color-navy-primary), var(--color-navy-dark)); border:1px solid var(--color-gold-primary); color:#ffffff;">
-                  💼 Transmettre ma Demande de Devis (Réponse 24h)
+                  <i data-lucide="send"></i> Transmettre ma Demande de Devis (Réponse 24h)
                 </button>
 
                 <div id="corp-form-alert"
@@ -986,8 +987,8 @@
                   <span style="font-size:0.825rem; color:var(--color-gray-600);">Besoin d'un échange immédiat ?</span>
                   <a href="https://wa.me/221711794949?text=Bonjour%20Le%20BADIL%20Conciergerie%2C%20je%20souhaite%20%C3%A9changer%20avec%20un%20chef%20de%20projet%20corporate%20pour%20un%20s%C3%A9minaire%20d%27entreprise."
                     target="_blank"
-                    style="font-size:0.825rem; color:#25D366; font-weight:700; text-decoration:underline;">
-                    💬 WhatsApp Événements Pro
+                    style="font-size:0.825rem; color:#25D366; font-weight:700; text-decoration:underline; display:inline-flex; align-items:center; gap:0.35rem;">
+                    <i data-lucide="message-circle"></i> WhatsApp Événements Pro
                   </a>
                 </div>
               </form>
@@ -1052,7 +1053,7 @@
           </div>
           <div
             style="text-align:center; background:rgba(255,255,255,0.06); padding:1.5rem; border-radius:var(--radius-md); border:1px stroke var(--color-gold-primary);">
-            <div style="font-size:3rem; margin-bottom:0.5rem;" id="step-icon">🛫</div>
+            <div style="margin-bottom:0.5rem;" id="step-icon"><i data-lucide="plane-takeoff" style="width:2.5rem;height:2.5rem;" class="icon-gold"></i></div>
             <div style="font-weight:700; color:var(--color-gold-primary);" id="step-badge">Statut : Prêt & Planifié
             </div>
             <div style="font-size:0.8rem; color:rgba(255,255,255,0.7); margin-top:0.5rem;" id="step-loc">Localisation :
@@ -1263,7 +1264,7 @@
         <div class="form-group">
           <label class="form-label">Pack Sélectionné</label>
           <select class="form-control" id="checkout-pack-select">
-            <optgroup label="🎓 Packs Étudiants &amp; Installation">
+            <optgroup label="Packs Étudiants &amp; Installation">
               <option value="teranga" data-price="75000">Pack Teranga (Accueil AIBD &amp; Transfert) — 75 000 FCFA (~115
                 €)</option>
               <option value="logement" data-price="150000">Pack Logement Serein (Chasse &amp; Abonnements) — 150 000
@@ -1273,7 +1274,7 @@
               <option value="vip" data-price="250000" selected>Pack VIP All-Inclusive (Logement + Accueil + Intégration)
                 — 250 000 FCFA (~380 €)</option>
             </optgroup>
-            <optgroup label="🌍 Escapades &amp; Découverte">
+            <optgroup label="Escapades &amp; Découverte">
               <option value="escapade-dakar" data-price="25000">Escapade Dakar Vivant &amp; Arty — 25 000 FCFA (~38 €)
               </option>
               <option value="escapade-goree" data-price="40000">Journée Île de Gorée Mémoire &amp; Histoire — 40 000
@@ -1345,17 +1346,17 @@
             <label class="payment-method-card active" id="card-choice-paytech">
               <input type="radio" name="payment_method_choice" value="paytech" checked>
               <div class="payment-method-info">
-                <span class="payment-badge">⚡ Immédiat</span>
-                <div class="payment-title">📱 Wave / Orange Money</div>
+                <span class="payment-badge"><i data-lucide="zap"></i> Immédiat</span>
+                <div class="payment-title"><i data-lucide="smartphone"></i> Wave / Orange Money</div>
                 <div class="payment-desc">Paiement mobile instantané via PayTech Sénégal</div>
               </div>
             </label>
             <label class="payment-method-card" id="card-choice-virement">
               <input type="radio" name="payment_method_choice" value="virement">
               <div class="payment-method-info">
-                <span class="payment-badge-alt">🏛️ Entreprises & Parents</span>
-                <div class="payment-title">🏦 Virement Bancaire</div>
-                <div class="payment-desc">RIB / IBAN Le BADIL (Sénégal & International)</div>
+                <span class="payment-badge-alt"><i data-lucide="building"></i> Entreprises &amp; Parents</span>
+                <div class="payment-title"><i data-lucide="landmark"></i> Virement Bancaire</div>
+                <div class="payment-desc">RIB / IBAN Le BADIL (Sénégal &amp; International)</div>
               </div>
             </label>
           </div>
@@ -1364,7 +1365,7 @@
         <!-- Détails Virement Bancaire (dynamique) -->
         <div id="virement-details-box" class="bank-details-box" style="display:none;">
           <div class="bank-header">
-            <strong>📋 Coordonnées Bancaires Officielles</strong>
+            <strong><i data-lucide="receipt-text"></i> Coordonnées Bancaires Officielles</strong>
             <span class="bank-currency">Compte Pro XOF / EUR</span>
           </div>
           <div class="bank-grid">
@@ -1394,7 +1395,7 @@
             </div>
           </div>
           <div class="bank-notice">
-            💡 <strong>Consigne :</strong> Dès validation du formulaire, vous obtiendrez une référence unique à inscrire
+            <i data-lucide="info"></i> <strong>Consigne :</strong> Dès validation du formulaire, vous obtiendrez une référence unique à inscrire
             comme libellé de virement. Un concierge prendra ensuite contact avec vous sur WhatsApp.
           </div>
         </div>
@@ -1418,7 +1419,7 @@
         </label>
         <button type="submit" class="btn-primary" id="btn-pay-online"
           style="width: 100%; font-size: 1rem; padding: 1rem; justify-content: center;">
-          🔒 Valider et Payer le Pack
+          <i data-lucide="lock"></i> Valider et Payer le Pack
         </button>
       </form>
     </div>
@@ -1467,10 +1468,10 @@
 
       <div class="footer-col">
         <h4>Siège Social Dakar</h4>
-        <p>📍 Hann Maristes 1/E, Villa n° 116, Hann, Dakar</p>
-        <p style="margin-top:0.4rem;">📞 WhatsApp Pro : <span data-contact-whatsapp>+221 71 179 49 49</span></p>
-        <p style="margin-top:0.4rem;">✉️ <span data-contact-email>contact@lebadilconciergerie.com</span></p>
-        <p style="margin-top:0.4rem;">🌐 www.lebadilconciergerie.com</p>
+        <p><i data-lucide="map-pin" class="icon-gold"></i> Hann Maristes 1/E, Villa n° 116, Hann, Dakar</p>
+        <p style="margin-top:0.4rem;"><i data-lucide="phone" class="icon-gold"></i> WhatsApp Pro : <span data-contact-whatsapp>+221 71 179 49 49</span></p>
+        <p style="margin-top:0.4rem;"><i data-lucide="mail" class="icon-gold"></i> <span data-contact-email>contact@lebadilconciergerie.com</span></p>
+        <p style="margin-top:0.4rem;"><i data-lucide="globe" class="icon-gold"></i> www.lebadilconciergerie.com</p>
       </div>
     </div>
 
