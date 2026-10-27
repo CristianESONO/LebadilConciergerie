@@ -1187,9 +1187,13 @@ app.post('/api/paytech-ipn', async (req, res) => {
 
     console.log(`🔔 [PayTech IPN] Event: ${type_event} | Ref: ${ref_command} | Item: ${item_name} | Montant: ${item_price} FCFA`);
 
-    // Vérification de la signature SHA256
-    const expectedKeyHash = crypto.createHash('sha256').update(process.env.PAYTECH_API_KEY).digest('hex');
-    const expectedSecretHash = crypto.createHash('sha256').update(process.env.PAYTECH_API_SECRET).digest('hex');
+    // Vérification de la signature SHA256 avec la clé active (settings.json ou .env)
+    const settings = getSettings();
+    const activeApiKey = (settings.gateways && settings.gateways.paytechApiKey) ? settings.gateways.paytechApiKey.trim() : (process.env.PAYTECH_API_KEY || '').trim();
+    const activeApiSecret = (settings.gateways && settings.gateways.paytechApiSecret) ? settings.gateways.paytechApiSecret.trim() : (process.env.PAYTECH_API_SECRET || '').trim();
+
+    const expectedKeyHash = crypto.createHash('sha256').update(activeApiKey).digest('hex');
+    const expectedSecretHash = crypto.createHash('sha256').update(activeApiSecret).digest('hex');
 
     const signatureOk = (api_key_sha256 === expectedKeyHash && api_secret_sha256 === expectedSecretHash);
 
