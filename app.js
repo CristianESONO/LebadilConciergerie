@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     '4': {
       title: 'Étape 4 : Installation & Remise des Clés (H+1h30 à H+2h30)',
-      desc: 'Arrivée au logement préalablement inspecté et nettoyé (Mermoz, Fann, Almadies, Sacré-Cœur). Remise officielle des clés.',
+      desc: 'Arriv\u00e9e au logement pr\u00e9alablement inspect\u00e9 et nettoy\u00e9, dans le quartier choisi selon vos crit\u00e8res. Remise officielle des cl\u00e9s.',
       list: [
         'Présentation de l\'appartement & installation des valises',
         'Test des équipements : Eau (Sen\'Eau), Électricité (Senelec) & Box Wi-Fi',
@@ -815,7 +815,7 @@ Merci de prendre en charge mon arrivée à Dakar !`;
 
       const opts = [];
       if (document.getElementById('q-opt-transports').checked) opts.push("Transferts VIP Flotte / Berlines AIBD");
-      if (document.getElementById('q-opt-hebergement').checked) opts.push("Hébergement Hôtel 4-5★ / Lodge");
+      if (document.getElementById('q-opt-hebergement').checked) opts.push("H\u00e9bergement chez partenaire s\u00e9lectionn\u00e9 / Lodge d'exception");
       if (document.getElementById('q-opt-traiteur').checked) opts.push("Pauses Gourmandes & Traiteur Gastronomique");
       if (document.getElementById('q-opt-teambuilding').checked) opts.push("Animation Team Building & Atelier RSE");
 
