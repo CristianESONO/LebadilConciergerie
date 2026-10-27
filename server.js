@@ -768,7 +768,7 @@ function buildConfirmationEmail({ studentName, packName, school, arrivalDate, re
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#0F2C59;">
     <tr>
       <td align="center" style="padding:24px 20px;">
-        <p style="color:#a0b4cc;margin:0 0 6px;font-size:12px;">Le BADIL Conciergerie Dakar — Excellence & Service Teranga</p>
+        <p style="color:#a0b4cc;margin:0 0 6px;font-size:12px;">Le BADIL Conciergerie Dakar — Installation Étudiants & Événements au Sénégal</p>
         <p style="color:#6a8099;margin:0;font-size:11px;">📞 WhatsApp Pro : ${whatsappNumber || '+221 71 179 49 49'} · ✉️ ${process.env.SMTP_USER || 'contact@lebadilconciergerie.com'}</p>
         <p style="color:#6a8099;margin:8px 0 0;font-size:10px;">${formatLegalIds() || 'Le BADIL · Dakar'}</p>
       </td>
