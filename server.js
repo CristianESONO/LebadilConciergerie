@@ -36,8 +36,8 @@ function getSettings() {
     },
     banking: {
       beneficiary: "LE BADIL",
-      bankName: "CBAO Groupe Attijariwafa Bank",
-      bankBranch: "Dakar Almadies / Plateau",
+      bankName: "ECOBANK",
+      bankBranch: "Dakar",
       bankCode: "SN094",
       branchCode: "01018",
       accountNumber: "101609746001",
